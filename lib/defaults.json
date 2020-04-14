@@ -1,0 +1,8 @@
+{
+  "cache": {
+    "enabled": true,
+    "type": "mem",
+    "max": 500,
+    "maxAge": 3600000
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "strapi-middleware-cache",
+  "version": "1.0.0",
+  "description": "Cache strapi requests",
+  "main": "./lib",
+  "keywords": [
+    "cache",
+    "strapi",
+    "requests",
+    "redis",
+    "memcache"
+  ],
+  "directories": {
+    "lib": "./lib"
+  },
+  "author": "Patrick R",
+  "license": "MIT",
+  "dependencies": {
+    "koa-router": "^8.0.8",
+    "lodash": "^4.17.15",
+    "lru-cache": "^5.1.1",
+    "redis": "^3.0.2",
+    "redis-lru": "^0.6.0"
+  }
+}
