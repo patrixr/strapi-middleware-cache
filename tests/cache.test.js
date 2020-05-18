@@ -15,6 +15,7 @@ describe('Caching', () => {
       middleware: {
         settings: {
           cache: {
+            type: 'redis',
             enabled: true,
             models: ['posts']
           }
@@ -90,6 +91,4 @@ describe('Caching', () => {
       expect(requests).to.have.lengthOf(3);
     });
   });
-
-
 });

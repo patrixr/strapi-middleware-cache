@@ -1,10 +1,10 @@
 {
   "name": "strapi-middleware-cache",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Cache strapi requests",
   "main": "./lib",
   "scripts": {
-    "test": "mocha ./tests/*.test.js"
+    "test": "mocha ./tests/*.test.js --exit"
   },
   "keywords": [
     "cache",
@@ -23,10 +23,10 @@
   "author": "Patrick R",
   "license": "MIT",
   "dependencies": {
+    "ioredis": "^4.17.1",
     "koa-router": "^8.0.8",
     "lodash": "^4.17.15",
     "lru-cache": "^5.1.1",
-    "redis": "^3.0.2",
     "redis-lru": "^0.6.0"
   },
   "devDependencies": {
