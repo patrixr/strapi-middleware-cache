@@ -91,11 +91,7 @@ The module's configuration object supports the following properties
 | type                            | mem       | The type of storage engine to use (`mem` or `redis`)          |
 | max                             | 500       | Max number of entries in the cache                            |
 | maxAge                          | 3600000   | Time in milliseconds after which a cache entry is invalidated |
-| host _(redis only)_             | localhost | IP address of the Redis server                                |
-| port _(redis only)_             | 6379      | Port of the Redis server                                      |
-| url _(redis only)_              | null      | The URL of the Redis server. Format: `[redis[s]:]//[[user][:password@]][host][:port][/db-number][?db=db-number[&password=bar[&option=value]]]` (More info avaliable at [IANA](http://www.iana.org/assignments/uri-schemes/prov/redis)).                                       |
-| password _(redis only)_         | null      | If set, client will run Redis auth command on connect.|
-| db _(redis only)_               | null      | If set, client will run Redis `select` command on connect. |
+| redisConfig _(redis only)_      | {}        | The redis config object passed on to [ioredis](https://www.npmjs.com/package/ioredis) |
 
 
 ### Example
@@ -107,7 +103,15 @@ The module's configuration object supports the following properties
     "enabled": true,
     "type": "redis",
     "maxAge": 3600000,
-    "models": ["posts"]
+    "models": ["posts"],
+    "redisConfig": {
+      "sentinels": [
+          { "host": "192.168.10.41", "port": 26379 },
+          { "host": "192.168.10.42", "port": 26379 },
+          { "host": "192.168.10.43", "port": 26379 }
+      ],
+      "name": "redis-primary"
+    }
   }
 }
 ```
