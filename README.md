@@ -51,8 +51,8 @@ Starting the CMS should now log the following
 
 ```
 $ strapi develop
-[2020-04-14T11:12:41.648Z] info [Cache] Mounting LRU cache middleware
-[2020-04-14T11:12:41.648Z] info [Cache] Storage engine: mem
+[2020-04-14T11:12:41.648Z] debug [Cache] Mounting LRU cache middleware
+[2020-04-14T11:12:41.648Z] debug [Cache] Storage engine: mem
 ```
 
 ## Configure models
@@ -77,9 +77,9 @@ Starting the CMS should now log the following
 
 ```
 $ strapi develop
-[2020-04-14T11:12:41.648Z] info [Cache] Mounting LRU cache middleware
-[2020-04-14T11:12:41.648Z] info [Cache] Storage engine: mem
-[2020-04-14T11:12:41.653Z] info [Cache] Caching route /posts/:id* [maxAge=3600000]
+[2020-04-14T11:12:41.648Z] debug [Cache] Mounting LRU cache middleware
+[2020-04-14T11:12:41.648Z] debug [Cache] Storage engine: mem
+[2020-04-14T11:12:41.653Z] debug [Cache] Caching route /posts/:id* [maxAge=3600000]
 ```
 
 ## Configure the storage engine
@@ -91,6 +91,7 @@ The module's configuration object supports the following properties
 | type                            | mem       | The type of storage engine to use (`mem` or `redis`)          |
 | max                             | 500       | Max number of entries in the cache                            |
 | maxAge                          | 3600000   | Time in milliseconds after which a cache entry is invalidated |
+| logs                            | true      | Setting it to false will disable any console output           |
 | redisConfig _(redis only)_      | {}        | The redis config object passed on to [ioredis](https://www.npmjs.com/package/ioredis) |
 
 
@@ -120,10 +121,10 @@ Running the CMS will output the following
 
 ```
 $ strapi develop
-[2020-04-14T11:31:05.751Z] info [Cache] Mounting LRU cache middleware
-[2020-04-14T11:31:05.752Z] info [Cache] Storage engine: redis
-[2020-04-14T11:31:05.784Z] info [Cache] Caching route /listings/:id* [maxAge=3600000]
-[2020-04-14T11:31:06.076Z] info [Cache] Redis connection established
+[2020-04-14T11:31:05.751Z] debug [Cache] Mounting LRU cache middleware
+[2020-04-14T11:31:05.752Z] debug [Cache] Storage engine: redis
+[2020-04-14T11:31:05.784Z] debug [Cache] Caching route /listings/:id* [maxAge=3600000]
+[2020-04-14T11:31:06.076Z] debug [Cache] Redis connection established
 ```
 
 ## Per-Model Configuration
@@ -152,8 +153,8 @@ Running the CMS should now show the following
 
 ```
 $ strapi develop
-[2020-04-14T11:37:16.510Z] info [Cache] Mounting LRU cache middleware
-[2020-04-14T11:37:16.511Z] info [Cache] Storage engine: redis
-[2020-04-14T11:37:16.600Z] info [Cache] Caching route /listings/:id* [maxAge=1000000]
-[2020-04-14T11:37:16.946Z] info [Cache] Redis connection established
+[2020-04-14T11:37:16.510Z] debug [Cache] Mounting LRU cache middleware
+[2020-04-14T11:37:16.511Z] debug [Cache] Storage engine: redis
+[2020-04-14T11:37:16.600Z] debug [Cache] Caching route /listings/:id* [maxAge=1000000]
+[2020-04-14T11:37:16.946Z] debug [Cache] Redis connection established
 ```
