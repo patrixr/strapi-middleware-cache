@@ -9,7 +9,8 @@ let UID = 1
 const strapi = {
   app: new Koa(),
   log: {
-    info() {}
+    info() {},
+    debug() {}
   },
   start() {
     this.app.use(ctx => {
