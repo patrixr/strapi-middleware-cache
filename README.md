@@ -8,8 +8,9 @@ This middleware caches incoming `GET` requests on the strapi API, based on query
 The cache is automatically busted everytime a `PUT`, `POST`, or `DELETE` request comes in.
 
 Supported storage engines
-* Memory _(default)_
-* Redis
+
+- Memory _(default)_
+- Redis
 
 Important: Caching must be explicitely enabled **per model**
 
@@ -29,22 +30,28 @@ yarn add strapi-middleware-cache
 
 ## Setup
 
-For each environment (aka production/staging/development), add a `middleware.json` file within their config folder
+For Strapi stable versions, add a `middleware.js` file within your config folder
 
 e.g
 
 ```bash
-touch config/development/middlewares.json
+touch config/middleware.js
 ```
 
-Enable the cache middleware by adding the following snippet:
+To use different settings per environment, see the [Strapi docs for environments](https://strapi.io/documentation/v3.x/concepts/configurations.html#environments).
+
+You can parse environment variables for the config here as well if you wish to, please see the [Strapi docs for environment variables](https://strapi.io/documentation/v3.x/concepts/configurations.html#environment-variables).
+
+Enable the cache middleware by adding the following snippet to an empty middleware file or simply add in the settings from the below example:
 
 ```javascript
-{
-  "cache": {
-    "enabled": true
-  }
-}
+module.exports = ({ env }) => ({
+  settings: {
+    cache: {
+      enabled: true,
+    },
+  },
+});
 ```
 
 Starting the CMS should now log the following
@@ -60,17 +67,18 @@ $ strapi develop
 The middleware will only cache models which have been explicitely enabled.
 Add a list of models to enable to the module's configuration object.
 
-
 e.g
 
 ```javascript
-// config/development/middlewares.json
-{
-  "cache": {
-    "enabled": true,
-    "models": ["posts"]
-  }
-}
+// config/middleware.js
+module.exports = ({ env }) => ({
+  settings: {
+    cache: {
+      enabled: true,
+      models: ['posts'],
+    },
+  },
+});
 ```
 
 Starting the CMS should now log the following
@@ -86,35 +94,36 @@ $ strapi develop
 
 The module's configuration object supports the following properties
 
-| Property                        | Default   | Description                                                   |
-| ------------------------------- | --------- | --------------------------------------------------------------|
-| type                            | mem       | The type of storage engine to use (`mem` or `redis`)          |
-| max                             | 500       | Max number of entries in the cache                            |
-| maxAge                          | 3600000   | Time in milliseconds after which a cache entry is invalidated |
-| logs                            | true      | Setting it to false will disable any console output           |
-| redisConfig _(redis only)_      | {}        | The redis config object passed on to [ioredis](https://www.npmjs.com/package/ioredis) |
-
+| Property                   | Default | Description                                                                           |
+| -------------------------- | ------- | ------------------------------------------------------------------------------------- |
+| type                       | mem     | The type of storage engine to use (`mem` or `redis`)                                  |
+| max                        | 500     | Max number of entries in the cache                                                    |
+| maxAge                     | 3600000 | Time in milliseconds after which a cache entry is invalidated                         |
+| logs                       | true    | Setting it to false will disable any console output                                   |
+| redisConfig _(redis only)_ | {}      | The redis config object passed on to [ioredis](https://www.npmjs.com/package/ioredis) |
 
 ### Example
 
 ```javascript
-// config/development/middlewares.json
-{
-  "cache": {
-    "enabled": true,
-    "type": "redis",
-    "maxAge": 3600000,
-    "models": ["posts"],
-    "redisConfig": {
-      "sentinels": [
-          { "host": "192.168.10.41", "port": 26379 },
-          { "host": "192.168.10.42", "port": 26379 },
-          { "host": "192.168.10.43", "port": 26379 }
-      ],
-      "name": "redis-primary"
-    }
-  }
-}
+// config/middleware.js
+module.exports = ({ env }) => ({
+  settings: {
+    cache: {
+      enabled: true,
+      type: 'redis',
+      maxAge: 3600000,
+      models: ['posts'],
+      redisConfig: {
+        sentinels: [
+          { host: '192.168.10.41', port: 26379 },
+          { host: '192.168.10.42', port: 26379 },
+          { host: '192.168.10.43', port: 26379 },
+        ],
+        name: 'redis-primary',
+      },
+    },
+  },
+});
 ```
 
 Running the CMS will output the following
@@ -135,18 +144,22 @@ by replacing the model strings in the list by object.
 e.g
 
 ```javascript
-// config/development/middlewares.json
-{
-  "cache": {
-    "enabled": true,
-    "type": "redis",
-    "maxAge": 3600000,
-    "models": [{
-      "model": "listings",
-      "maxAge": 1000000
-    }]
-  }
-}
+// config/middleware.js
+module.exports = ({ env }) => ({
+  settings: {
+    cache: {
+      enabled: true,
+      type: 'redis',
+      maxAge: 3600000,
+      models: [
+        {
+          model: 'listings',
+          maxAge: 1000000,
+        },
+      ],
+    },
+  },
+});
 ```
 
 Running the CMS should now show the following
