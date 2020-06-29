@@ -1,6 +1,6 @@
 {
   "name": "strapi-middleware-cache",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Cache strapi requests",
   "main": "./lib",
   "scripts": {
@@ -27,6 +27,7 @@
     "koa-router": "^8.0.8",
     "lodash": "^4.17.15",
     "lru-cache": "^5.1.1",
+    "pluralize": "^8.0.0",
     "redis-lru": "^0.6.0"
   },
   "devDependencies": {

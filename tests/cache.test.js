@@ -90,5 +90,21 @@ describe('Caching', () => {
       expect(res3.body.uid).to.equal(res2.body.uid + 1);
       expect(requests).to.have.lengthOf(3);
     });
+
+    it(`busts the cache on an admin panel ${method.toUpperCase()} resquest`, async () => {
+      const res1 = await agent(strapi.app).get('/posts').expect(200);
+
+      expect(requests).to.have.lengthOf(1);
+
+      const res2 = await agent(strapi.app)[method]('/content-manager/explorer/application::post.post').expect(200);
+
+      expect(res2.body.uid).to.equal(res1.body.uid + 1);
+      expect(requests).to.have.lengthOf(2);
+
+      const res3 = await agent(strapi.app).get('/posts').expect(200);
+
+      expect(res3.body.uid).to.equal(res2.body.uid + 1);
+      expect(requests).to.have.lengthOf(3);
+    });
   });
 });
