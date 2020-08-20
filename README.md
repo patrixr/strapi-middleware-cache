@@ -3,7 +3,7 @@
 A cache middleware for the headless CMS strapi.io
 
 ![](https://github.com/patrixr/strapi-middleware-cache/workflows/Tests/badge.svg) 
-![Maintenance](https://img.shields.io/badge/Maintenance%20-Actively%20Maintained-green.svg)]
+![Maintenance](https://img.shields.io/badge/Maintenance%20-Actively%20Maintained-green.svg)
 
 ## How it works
 
