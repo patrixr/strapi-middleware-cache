@@ -2,6 +2,9 @@
 
 A cache middleware for the headless CMS strapi.io
 
+![](https://github.com/patrixr/strapi-middleware-cache/workflows/Test%20and%20Publish/badge.svg) 
+![Maintenance](https://img.shields.io/badge/Maintenance%20-Actively%20Maintained-green.svg)]
+
 ## How it works
 
 This middleware caches incoming `GET` requests on the strapi API, based on query params and model ID.
