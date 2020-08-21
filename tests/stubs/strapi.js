@@ -9,6 +9,8 @@ let UID = 1
 const strapi = {
   app: new Koa(),
   log: {
+    error() {},
+    warn() {},
     info() {},
     debug() {}
   },

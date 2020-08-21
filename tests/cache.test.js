@@ -15,7 +15,7 @@ describe('Caching', () => {
       middleware: {
         settings: {
           cache: {
-            type: 'redis',
+            type: 'mem',
             enabled: true,
             models: ['posts']
           }
