@@ -102,6 +102,7 @@ The module's configuration object supports the following properties
 | type                       | mem     | The type of storage engine to use (`mem` or `redis`)                                  |
 | max                        | 500     | Max number of entries in the cache                                                    |
 | maxAge                     | 3600000 | Time in milliseconds after which a cache entry is invalidated                         |
+| cacheTimeout               | 500     | Time in milliseconds after which a cache request is timed out                         |
 | logs                       | true    | Setting it to false will disable any console output                                   |
 | redisConfig _(redis only)_ | {}      | The redis config object passed on to [ioredis](https://www.npmjs.com/package/ioredis) |
 
