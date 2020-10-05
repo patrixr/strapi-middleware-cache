@@ -52,8 +52,8 @@ module.exports = ({ env }) => ({
   settings: {
     cache: {
       enabled: true,
-    },
-  },
+    }
+  }
 });
 ```
 
@@ -79,8 +79,8 @@ module.exports = ({ env }) => ({
     cache: {
       enabled: true,
       models: ['posts'],
-    },
-  },
+    }
+  }
 });
 ```
 
@@ -124,9 +124,9 @@ module.exports = ({ env }) => ({
           { host: '192.168.10.43', port: 26379 },
         ],
         name: 'redis-primary',
-      },
-    },
-  },
+      }
+    }
+  }
 });
 ```
 
@@ -159,10 +159,10 @@ module.exports = ({ env }) => ({
         {
           model: 'listings',
           maxAge: 1000000,
-        },
-      ],
-    },
-  },
+        }
+      ]
+    }
+  }
 });
 ```
 
@@ -175,3 +175,34 @@ $ strapi develop
 [2020-04-14T11:37:16.600Z] debug [Cache] Caching route /listings/:id* [maxAge=1000000]
 [2020-04-14T11:37:16.946Z] debug [Cache] Redis connection established
 ```
+
+## Pluralization and Single types
+
+By default, the middleware assumes that the specified models are collections. Meaning that having `'post'` or `'posts'` in your configuration will result in the `/posts/*` being cached. Pluralization is applied in order to match the Strapi generated endpoints.
+
+That behaviour is however not desired for [single types](https://strapi.io/blog/beta-19-single-types-uid-field) such as `homepage` which should remain singular in the endpoint (`/homepage`)
+
+You can mark a specific model as being a single type by using the `singleType` boolean field on model configurations
+
+e.g
+
+```javascript
+// config/middleware.js
+module.exports = ({ env }) => ({
+  settings: {
+    cache: {
+      enabled: true,
+      models: [
+        {
+          model: 'homepage',
+          singleType: true,
+        }
+      ]
+    }
+  }
+});
+```
+
+## Admin panel interactions
+
+The strapi admin panel uses a separate rest api to apply changes to records, e.g `/content-manager/explorer/application::post.post` the middleware will also watch for write operations on that endpoint and bust the cache accordingly
