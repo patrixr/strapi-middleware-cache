@@ -104,6 +104,7 @@ The module's configuration object supports the following properties
 | maxAge                     | 3600000 | Time in milliseconds after which a cache entry is invalidated                         |
 | cacheTimeout               | 500     | Time in milliseconds after which a cache request is timed out                         |
 | logs                       | true    | Setting it to false will disable any console output                                   |
+| populateContext            | false   | Setting it to true will inject a cache entry point into the Koa context               |
 | redisConfig _(redis only)_ | {}      | The redis config object passed on to [ioredis](https://www.npmjs.com/package/ioredis) |
 
 ### Example
@@ -202,6 +203,38 @@ module.exports = ({ env }) => ({
   }
 });
 ```
+
+## Cache entry point
+
+By setting the `populateContext` configuration to `true`, the middleware will extend the Koa Context with an entry point which can be used to clear the cache from within controllers
+
+```javascript
+// config/middleware.js
+module.exports = ({ env }) => ({
+  settings: {
+    cache: {
+      enabled: true,
+      populateContext: true
+      models: ['post']
+    }
+  }
+});
+
+// controller
+
+module.exports = {
+  async index(ctx) {
+    ctx.middleware.cache.store // A direct access to the cache engine
+    await ctx.middleware.cache.bust({ model: 'posts', id: '123' }); // Will bust the cache for this specific record
+    await ctx.middleware.cache.bust({ model: 'posts' }); // Will bust the cache for the entire model collection
+    await ctx.middleware.cache.bust({ model: 'homepage' }); // For single types, do not pluralize the model name 
+
+    // ...
+  }
+};
+```
+
+**IMPORTANT**: We do not recommend using this unless truly necessary. It is disabled by default as it goes against the non-intrusive/transparent nature of this middleware.
 
 ## Admin panel interactions
 
