@@ -17,6 +17,7 @@ describe('Caching', () => {
           cache: {
             type: 'mem',
             enabled: true,
+            populateContext: true,
             models: [
               'academy',
               {
@@ -31,6 +32,13 @@ describe('Caching', () => {
 
     middleware = initMiddleware(strapi);
     middleware.initialize();
+
+    strapi.app.use((ctx, next) => {
+      expect(ctx.middleware.cache).not.to.be.undefined
+      expect(ctx.middleware.cache.bust).to.be.a('function')
+      expect(ctx.middleware.cache.store).to.be.an('object')
+      next();
+    });
 
     strapi.start();
   });
@@ -97,6 +105,25 @@ describe('Caching', () => {
 
         expect(res3.body.uid).to.equal(res2.body.uid + 1);
         expect(requests).to.have.lengthOf(3);
+      });
+
+      context(`when an ID is specified on a ${method.toUpperCase()} request`, () => {
+        it(`doesn't bust the cache for other IDs`, async () => {
+          const res1 = await agent(strapi.app).get('/academies/1').expect(200);
+          const res2 = await agent(strapi.app).get('/academies/2').expect(200);
+
+          expect(requests).to.have.lengthOf(2);
+
+          const res3 = await agent(strapi.app)[method]('/academies/1').expect(200);
+
+          expect(res3.body.uid).to.equal(res2.body.uid + 1);
+          expect(requests).to.have.lengthOf(3);
+
+          const res4 = await agent(strapi.app).get('/academies/2').expect(200);
+
+          expect(res4.body.uid).to.equal(res2.body.uid);
+          expect(requests).to.have.lengthOf(3);
+        });
       });
 
       it(`busts the cache on an admin panel ${method.toUpperCase()} resquest`, async () => {
