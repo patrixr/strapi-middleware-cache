@@ -6,6 +6,7 @@
     "maxAge": 3600000,
     "cacheTimeout": 500,
     "logs": true,
-    "populateContext": false
+    "populateContext": false,
+    "populateStrapiMiddleware": false
   }
 }
