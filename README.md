@@ -206,6 +206,8 @@ module.exports = ({ env }) => ({
 
 ## Cache entry point
 
+### Koa Context
+
 By setting the `populateContext` configuration to `true`, the middleware will extend the Koa Context with an entry point which can be used to clear the cache from within controllers
 
 ```javascript
@@ -214,7 +216,7 @@ module.exports = ({ env }) => ({
   settings: {
     cache: {
       enabled: true,
-      populateContext: true
+      populateContext: true,
       models: ['post']
     }
   }
@@ -230,6 +232,38 @@ module.exports = {
     await ctx.middleware.cache.bust({ model: 'homepage' }); // For single types, do not pluralize the model name 
 
     // ...
+  }
+};
+```
+
+**IMPORTANT**: We do not recommend using this unless truly necessary. It is disabled by default as it goes against the non-intrusive/transparent nature of this middleware.
+
+### Strapi Middleware
+
+By setting the `populateStrapiMiddleware` configuration to `true`, the middleware will extend the Strapi middleware object with an entry point which can be used to clear the cache from anywhere (e.g., inside a Model's lifecycle hook where `ctx` is not available).
+
+```javascript
+// config/middleware.js
+module.exports = ({ env }) => ({
+  settings: {
+    cache: {
+      enabled: true,
+      populateStrapiMiddleware: true,
+      models: ['post']
+    }
+  }
+});
+
+// model
+
+module.exports = {
+  lifecycles: {
+    async beforeUpdate(params, data) {
+      strapi.middleware.cache.store // A direct access to the cache engine
+      await strapi.middleware.cache.bust({ model: 'posts', id: '123' }); // Will bust the cache for this specific record
+
+      // ...
+    }
   }
 };
 ```

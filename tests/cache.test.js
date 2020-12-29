@@ -18,6 +18,7 @@ describe('Caching', () => {
             type: 'mem',
             enabled: true,
             populateContext: true,
+            populateStrapiMiddleware: true,
             models: [
               'academy',
               {
@@ -39,6 +40,10 @@ describe('Caching', () => {
       expect(ctx.middleware.cache.store).to.be.an('object')
       next();
     });
+
+    expect(strapi.middleware.cache).not.to.be.undefined
+    expect(strapi.middleware.cache.bust).to.be.a('function')
+    expect(strapi.middleware.cache.store).to.be.an('object')
 
     strapi.start();
   });
