@@ -24,6 +24,10 @@ describe('Caching', () => {
               {
                 model: 'homepage',
                 singleType: true
+              },
+              {
+                model: 'account',
+                headers: ['Authorization'],
               }
             ]
           }
@@ -78,6 +82,22 @@ describe('Caching', () => {
 
       expect(res1.body.uid).to.equal(res2.body.uid);
       expect(requests).to.have.lengthOf(1);
+    });
+
+    it("caches based on headers ", async () => {
+      const res1 = await agent(strapi.app).get("/accounts/1").expect(200);
+
+      expect(requests).to.have.lengthOf(1);
+
+      const res2 = await agent(strapi.app).get("/accounts/1").expect(200);
+
+      expect(res1.body.uid).to.equal(res2.body.uid);
+      expect(requests).to.have.lengthOf(1);
+
+      const res3 = await agent(strapi.app).get("/accounts/1").set("Authorization", "some_token").expect(200);
+
+      expect(res1.body.uid).not.to.equal(res3.body.uid);
+      expect(requests).to.have.lengthOf(2);
     });
 
     it('doesnt cache models not present in the config', async () => {
