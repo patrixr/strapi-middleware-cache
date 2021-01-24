@@ -1,6 +1,7 @@
 const initMiddleware  = require('../lib/index');
 const { expect }      = require('chai');
 const agent           = require('supertest-koa-agent');
+const crypto          = require('crypto');
 const {
   strapi,
   requests,
@@ -19,6 +20,7 @@ describe('Caching', () => {
             enabled: true,
             populateContext: true,
             populateStrapiMiddleware: true,
+            enableEtagSupport: true,
             models: [
               'academy',
               {
@@ -55,11 +57,18 @@ describe('Caching', () => {
   })
 
   describe('Collection types', () => {
+    const expectedBody1 = { uid:1, method:'GET', url:'/academies', query: {} };
+    const expectedBody2 = { uid:2, method:'GET', url:'/academies', query: {} };
+    const expectedBody3 = { uid:3, method:'GET', url:'/academies', query: {} };
+    const etag1 = crypto.createHash('md5').update(JSON.stringify(expectedBody1)).digest('hex')
+    const etag2 = crypto.createHash('md5').update(JSON.stringify(expectedBody2)).digest('hex')
+    const etag3 = crypto.createHash('md5').update(JSON.stringify(expectedBody3)).digest('hex')
 
     it('should let uncached requests go through', async () => {
       await agent(strapi.app)
         .get('/academies')
         .expect('Content-Type', /json/)
+        .expect('ETag', `"${etag1}"`)
         .expect(200);
 
       expect(requests).to.have.lengthOf(1);
@@ -68,16 +77,33 @@ describe('Caching', () => {
     it('following request should be cached', async () => {
       const res1 = await agent(strapi.app)
         .get('/academies')
+        .expect('ETag', `"${etag2}"`)
         .expect(200);
 
       expect(requests).to.have.lengthOf(1);
 
       const res2 = await agent(strapi.app)
         .get('/academies')
+        .expect('ETag', `"${etag2}"`)
         .expect(200);
 
       expect(res1.body.uid).to.equal(res2.body.uid);
       expect(requests).to.have.lengthOf(1);
+    });
+
+    it('following request should have response status 304', async () => {
+      const res1 = await agent(strapi.app)
+        .get('/academies')
+        .expect('ETag', `"${etag3}"`)
+        .expect(200);
+
+        const res2 = await agent(strapi.app)
+        .get('/academies')
+        .set('If-None-Match', `"${etag3}"`)
+        .expect(304);
+
+      expect(requests).to.have.lengthOf(1);
+      expect(res2.body).to.be.an('object').that.is.empty;
     });
 
     it('doesnt cache models not present in the config', async () => {
@@ -170,13 +196,13 @@ describe('Caching', () => {
       const res1 = await agent(strapi.app)
         .get('/homepage')
         .expect(200);
-  
+
       expect(requests).to.have.lengthOf(1);
-  
+
       const res2 = await agent(strapi.app)
         .get('/homepage')
         .expect(200);
-  
+
       expect(res1.body.uid).to.equal(res2.body.uid);
       expect(requests).to.have.lengthOf(1);
     });
@@ -185,13 +211,13 @@ describe('Caching', () => {
       await agent(strapi.app)
         .get('/homepages')
         .expect(200);
-  
+
       expect(requests).to.have.lengthOf(1);
-  
+
       await agent(strapi.app)
         .get('/homepages')
         .expect(200);
-  
+
       expect(requests).to.have.lengthOf(2);
     });
 
