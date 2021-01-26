@@ -143,7 +143,7 @@ $ strapi develop
 
 ## Per-Model Configuration
 
-Each route can be configured with it's own unique `maxAge`. This can be done simply
+Each route can be configured with it's own unique `maxAge` or to enable caching based on headers. This can be done simply
 by replacing the model strings in the list by object.
 
 e.g
@@ -160,6 +160,10 @@ module.exports = ({ env }) => ({
         {
           model: 'listings',
           maxAge: 1000000,
+        },
+        {
+          model: 'account',
+          headers: ['Authorization']
         }
       ]
     }
