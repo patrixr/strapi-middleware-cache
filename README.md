@@ -103,6 +103,7 @@ The module's configuration object supports the following properties
 | max                        | 500     | Max number of entries in the cache                                                    |
 | maxAge                     | 3600000 | Time in milliseconds after which a cache entry is invalidated                         |
 | cacheTimeout               | 500     | Time in milliseconds after which a cache request is timed out                         |
+| enableEtagSupport.         | false   | If set to true, will support [etag](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag) in headers                                   |
 | logs                       | true    | Setting it to false will disable any console output                                   |
 | populateContext            | false   | Setting it to true will inject a cache entry point into the Koa context               |
 | redisConfig _(redis only)_ | {}      | The redis config object passed on to [ioredis](https://www.npmjs.com/package/ioredis) |
@@ -143,8 +144,12 @@ $ strapi develop
 
 ## Per-Model Configuration
 
-Each route can be configured with it's own unique `maxAge` or to enable caching based on headers. This can be done simply
+Each route can hold its own configuration object for more granular control. This can be done simply
 by replacing the model strings in the list by object.
+
+On which you can set:
+- Its own custom `maxAge`
+- Headers to include in the cache-key (e.g the body may differ depending on the language requested)
 
 e.g
 
@@ -163,7 +168,7 @@ module.exports = ({ env }) => ({
         },
         {
           model: 'account',
-          headers: ['Authorization']
+          headers: ['accept-language']
         }
       ]
     }
@@ -207,6 +212,13 @@ module.exports = ({ env }) => ({
   }
 });
 ```
+
+## Etag support
+
+By setting the `enableEtagSupport` to `true`, the middleware will automatically create an Etag for each payload it caches.
+
+Further requests sent with the `If-None-Match` header will be returned a `304 Not Modified` status if the content for that url has not changed
+
 
 ## Cache entry point
 
