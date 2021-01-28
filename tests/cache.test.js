@@ -21,8 +21,10 @@ describe('Caching', () => {
             populateContext: true,
             populateStrapiMiddleware: true,
             enableEtagSupport: true,
+            clearRelatedCache: true,
             models: [
               'academy',
+              'researcher',
               {
                 model: 'homepage',
                 singleType: true
@@ -136,6 +138,40 @@ describe('Caching', () => {
 
         expect(res3.body.uid).to.equal(res2.body.uid + 1);
         expect(requests).to.have.lengthOf(3);
+      });
+
+      it(`busts the cache of a related model (via direct relation) on a ${method.toUpperCase()} resquest`, async () => {
+        const res1 = await agent(strapi.app).get('/academies').expect(200);
+        const res2 = await agent(strapi.app).get('/researchers').expect(200);
+
+        expect(requests).to.have.lengthOf(2);
+
+        const res3 = await agent(strapi.app)[method]('/academies').expect(200);
+
+        expect(res3.body.uid).to.equal(res2.body.uid + 1);
+        expect(requests).to.have.lengthOf(3);
+
+        const res4 = await agent(strapi.app).get('/researchers').expect(200);
+
+        expect(res4.body.uid).to.equal(res3.body.uid + 1);
+        expect(requests).to.have.lengthOf(4);
+      });
+
+      it(`busts the cache of a related model (via relation in component) on a ${method.toUpperCase()} resquest`, async () => {
+        const res1 = await agent(strapi.app).get('/researchers').expect(200);
+        const res2 = await agent(strapi.app).get('/homepage').expect(200);
+
+        expect(requests).to.have.lengthOf(2);
+
+        const res3 = await agent(strapi.app)[method]('/researchers').expect(200);
+
+        expect(res3.body.uid).to.equal(res2.body.uid + 1);
+        expect(requests).to.have.lengthOf(3);
+
+        const res4 = await agent(strapi.app).get('/homepage').expect(200);
+
+        expect(res4.body.uid).to.equal(res3.body.uid + 1);
+        expect(requests).to.have.lengthOf(4);
       });
 
       context(`when an ID is specified on a ${method.toUpperCase()} request`, () => {
