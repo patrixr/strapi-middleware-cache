@@ -2,7 +2,7 @@
 
 A cache middleware for the headless CMS strapi.io
 
-![](https://github.com/patrixr/strapi-middleware-cache/workflows/Tests/badge.svg) 
+![](https://github.com/patrixr/strapi-middleware-cache/workflows/Tests/badge.svg)
 ![Maintenance](https://img.shields.io/badge/Maintenance%20-Actively%20Maintained-green.svg)
 
 ## How it works
@@ -217,8 +217,11 @@ module.exports = ({ env }) => ({
 
 By setting the `enableEtagSupport` to `true`, the middleware will automatically create an Etag for each payload it caches.
 
-Further requests sent with the `If-None-Match` header will be returned a `304 Not Modified` status if the content for that url has not changed
+Further requests sent with the `If-None-Match` header will be returned a `304 Not Modified` status if the content for that url has not changed.
 
+## Clearing related cache
+
+By setting the `clearRelatedCache` to `true`, the middleware will inspect the Strapi models before a cache clearing operation to locate models that have relations with the queried model so that their cache is also cleared (this clears the whole cache for the related models). The ispection is performed by looking for direct relations between models and also by doing a deep dive in components, looking for relations to the queried model there too.
 
 ## Cache entry point
 
@@ -245,7 +248,7 @@ module.exports = {
     ctx.middleware.cache.store // A direct access to the cache engine
     await ctx.middleware.cache.bust({ model: 'posts', id: '123' }); // Will bust the cache for this specific record
     await ctx.middleware.cache.bust({ model: 'posts' }); // Will bust the cache for the entire model collection
-    await ctx.middleware.cache.bust({ model: 'homepage' }); // For single types, do not pluralize the model name 
+    await ctx.middleware.cache.bust({ model: 'homepage' }); // For single types, do not pluralize the model name
 
     // ...
   }
