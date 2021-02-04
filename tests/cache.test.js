@@ -2,6 +2,7 @@ const initMiddleware  = require('../lib/index');
 const { expect }      = require('chai');
 const agent           = require('supertest-koa-agent');
 const crypto          = require('crypto');
+const sinon           = require('sinon');
 const {
   strapi,
   requests,
@@ -12,6 +13,7 @@ describe('Caching', () => {
   let middleware = null;
 
   before(() => {
+    sinon.stub(process, 'version').value('3.4.0');
     strapi.config = {
       middleware: {
         settings: {
@@ -55,6 +57,8 @@ describe('Caching', () => {
 
     strapi.start();
   });
+
+  after(() => sinon.restore());
 
   beforeEach(async () => {
     await middleware.cache.reset();
@@ -218,7 +222,7 @@ describe('Caching', () => {
 
         expect(requests).to.have.lengthOf(1);
 
-        const res2 = await agent(strapi.app)[method]('/content-manager/explorer/application::academy.academy').expect(200);
+        const res2 = await agent(strapi.app)[method]('/content-manager/collection-types/application::academy.academy').expect(200);
 
         expect(res2.body.uid).to.equal(res1.body.uid + 1);
         expect(requests).to.have.lengthOf(2);
@@ -234,7 +238,7 @@ describe('Caching', () => {
 
         expect(requests).to.have.lengthOf(1);
 
-        const res2 = await agent(strapi.app)[method]('/content-manager/explorer/application::academy.academy/publish/1').expect(200);
+        const res2 = await agent(strapi.app)[method]('/content-manager/collection-types/application::academy.academy/publish/1').expect(200);
 
         expect(res2.body.uid).to.equal(res1.body.uid + 1);
         expect(requests).to.have.lengthOf(2);
@@ -299,7 +303,7 @@ describe('Caching', () => {
 
         expect(requests).to.have.lengthOf(1);
 
-        const res2 = await agent(strapi.app)[method]('/content-manager/explorer/application::homepage.homepage').expect(200);
+        const res2 = await agent(strapi.app)[method]('/content-manager/single-types/application::homepage.homepage').expect(200);
 
         expect(res2.body.uid).to.equal(res1.body.uid + 1);
         expect(requests).to.have.lengthOf(2);
