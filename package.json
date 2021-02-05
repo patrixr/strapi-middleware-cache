@@ -4,7 +4,7 @@
   "description": "Cache strapi requests",
   "main": "./lib",
   "scripts": {
-    "test": "mocha ./tests/*.test.js --exit"
+    "test": "mocha ./tests/*.test.js --exit --bail"
   },
   "keywords": [
     "cache",

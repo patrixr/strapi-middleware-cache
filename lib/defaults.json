@@ -7,6 +7,7 @@
     "cacheTimeout": 500,
     "logs": true,
     "populateContext": false,
-    "populateStrapiMiddleware": false
+    "populateStrapiMiddleware": false,
+    "checkPermissions": true
   }
 }

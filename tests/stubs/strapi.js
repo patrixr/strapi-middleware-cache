@@ -1,10 +1,15 @@
 const Koa = require('koa');
+const sinon = require('sinon');
 
 const requests = [];
 
-const reset = () => requests.length = 0;
-
 let UID = 1
+
+const reset = () => {
+  requests.length = 0;
+  UID = 1;
+  strapi.plugins['users-permissions'].config.policies.permissions.resetHistory();
+}
 
 const strapi = {
   app: new Koa(),
@@ -50,6 +55,11 @@ const strapi = {
   },
   plugins: {
     'users-permissions': {
+      config: {
+        policies: {
+          permissions(_, next) { return next() }
+        }
+      },
       models: {
         user: {}
       }
@@ -94,5 +104,6 @@ const strapi = {
   }
 };
 
+sinon.stub(strapi.plugins['users-permissions'].config.policies, 'permissions').callsFake((_, next) => next());
 
 module.exports = { strapi, requests, reset };
