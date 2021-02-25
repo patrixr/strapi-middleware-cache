@@ -238,7 +238,7 @@ describe('Caching', () => {
 
         expect(requests).to.have.lengthOf(1);
 
-        const res2 = await agent(strapi.app)[method]('/content-manager/collection-types/application::academy.academy/publish/1').expect(200);
+        const res2 = await agent(strapi.app)[method]('/content-manager/collection-types/application::academy.academy/1/actions/publish').expect(200);
 
         expect(res2.body.uid).to.equal(res1.body.uid + 1);
         expect(requests).to.have.lengthOf(2);
