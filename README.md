@@ -1,5 +1,7 @@
 # Strapi LRU Caching middleware
 
+:warning: You are on beta branch
+
 A cache middleware for the headless CMS strapi.io
 
 ![](https://github.com/patrixr/strapi-middleware-cache/workflows/Tests/badge.svg)
@@ -22,13 +24,13 @@ Important: Caching must be explicitely enabled **per model**
 Using npm
 
 ```bash
-npm install --save strapi-middleware-cache
+npm install --save strapi-middleware-cache@beta
 ```
 
 Using yarn
 
 ```bash
-yarn add strapi-middleware-cache
+yarn add strapi-middleware-cache@beta
 ```
 
 ## Setup
