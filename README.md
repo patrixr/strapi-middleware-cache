@@ -10,7 +10,7 @@ A cache middleware for the headless CMS strapi.io
 ## How it works
 
 This middleware caches incoming `GET` requests on the strapi API, based on query params and model ID.
-The cache is automatically busted everytime a `PUT`, `POST`, or `DELETE` request comes in.
+The cache is automatically busted everytime a `PUT`, `PATCH`, `POST`, or `DELETE` request comes in.
 
 Supported storage engines
 
@@ -32,6 +32,14 @@ Using yarn
 ```bash
 yarn add strapi-middleware-cache@beta
 ```
+
+## Requirements
+
+Since `2.0.1`:
+- strapi `3.4.0` 
+- node `14`
+
+_See `1.5.0` for strapi < `3.4.0`_
 
 ## Setup
 
@@ -63,8 +71,8 @@ Starting the CMS should now log the following
 
 ```
 $ strapi develop
-[2020-04-14T11:12:41.648Z] debug [Cache] Mounting LRU cache middleware
-[2020-04-14T11:12:41.648Z] debug [Cache] Storage engine: mem
+[2021-02-26T07:03:18.981Z] info [cache] Mounting LRU cache middleware
+[2021-02-26T07:03:18.982Z] info [cache] Storage engine: mem
 ```
 
 ## Configure models
@@ -80,7 +88,7 @@ module.exports = ({ env }) => ({
   settings: {
     cache: {
       enabled: true,
-      models: ['posts'],
+      models: ['review'],
     }
   }
 });
@@ -90,25 +98,20 @@ Starting the CMS should now log the following
 
 ```
 $ strapi develop
-[2020-04-14T11:12:41.648Z] debug [Cache] Mounting LRU cache middleware
-[2020-04-14T11:12:41.648Z] debug [Cache] Storage engine: mem
-[2020-04-14T11:12:41.653Z] debug [Cache] Caching route /posts/:id* [maxAge=3600000]
+[2021-02-26T07:03:18.981Z] info [cache] Mounting LRU cache middleware
+[2021-02-26T07:03:18.982Z] info [cache] Storage engine: mem
+[2021-02-26T07:03:18.985Z] debug [cache] Register review routes middlewares
+[2021-02-26T07:03:18.986Z] debug [cache] POST /reviews purge
+[2021-02-26T07:03:18.987Z] debug [cache] DELETE /reviews/:id purge
+[2021-02-26T07:03:18.987Z] debug [cache] PUT /reviews/:id purge
+[2021-02-26T07:03:18.987Z] debug [cache] GET /reviews recv maxAge=3600000
+[2021-02-26T07:03:18.988Z] debug [cache] GET /reviews/:id recv maxAge=3600000
+[2021-02-26T07:03:18.988Z] debug [cache] GET /reviews/count recv maxAge=3600000
 ```
 
 ## Configure the storage engine
 
 The module's configuration object supports the following properties
-
-| Property                   | Default | Description                                                                           |
-| -------------------------- | ------- | ------------------------------------------------------------------------------------- |
-| type                       | mem     | The type of storage engine to use (`mem` or `redis`)                                  |
-| max                        | 500     | Max number of entries in the cache                                                    |
-| maxAge                     | 3600000 | Time in milliseconds after which a cache entry is invalidated                         |
-| cacheTimeout               | 500     | Time in milliseconds after which a cache request is timed out                         |
-| enableEtagSupport.         | false   | If set to true, will support [etag](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag) in headers                                   |
-| logs                       | true    | Setting it to false will disable any console output                                   |
-| populateContext            | false   | Setting it to true will inject a cache entry point into the Koa context               |
-| redisConfig _(redis only)_ | {}      | The redis config object passed on to [ioredis](https://www.npmjs.com/package/ioredis) |
 
 ### Example
 
@@ -116,11 +119,29 @@ The module's configuration object supports the following properties
 // config/middleware.js
 module.exports = ({ env }) => ({
   settings: {
+    /**
+     * @typedef {Object} UserMiddlewareCacheConfig
+     * @property {'mem'|'redis'=} type
+     * @property {boolean=} enabled
+     * @property {boolean=} logs
+     * @property {boolean=} populateContext
+     * @property {boolean=} populateStrapiMiddleware
+     * @property {boolean=} enableEtagSupport
+     * @property {boolean=} enableXCacheHeaders
+     * @property {boolean=} clearRelatedCache
+     * @property {boolean=} withKoaContext
+     * @property {boolean=} withStrapiMiddleware
+     * @property {string[]=} headers
+     * @property {number=} max
+     * @property {number=} maxAge
+     * @property {number=} cacheTimeout
+     * @property {(UserModelCacheConfig | string)[]=} models
+     * @property {Object=} redisConfig
+     */
     cache: {
       enabled: true,
       type: 'redis',
-      maxAge: 3600000,
-      models: ['posts'],
+      models: ['review'],
       redisConfig: {
         sentinels: [
           { host: '192.168.10.41', port: 26379 },
@@ -138,10 +159,15 @@ Running the CMS will output the following
 
 ```
 $ strapi develop
-[2020-04-14T11:31:05.751Z] debug [Cache] Mounting LRU cache middleware
-[2020-04-14T11:31:05.752Z] debug [Cache] Storage engine: redis
-[2020-04-14T11:31:05.784Z] debug [Cache] Caching route /listings/:id* [maxAge=3600000]
-[2020-04-14T11:31:06.076Z] debug [Cache] Redis connection established
+[2021-02-26T07:03:18.981Z] info [cache] Mounting LRU cache middleware
+[2021-02-26T07:03:18.982Z] info [cache] Storage engine: mem
+[2021-02-26T07:03:18.985Z] debug [cache] Register review routes middlewares
+[2021-02-26T07:03:18.986Z] debug [cache] POST /reviews purge
+[2021-02-26T07:03:18.987Z] debug [cache] DELETE /reviews/:id purge
+[2021-02-26T07:03:18.987Z] debug [cache] PUT /reviews/:id purge
+[2021-02-26T07:03:18.987Z] debug [cache] GET /reviews recv maxAge=3600000
+[2021-02-26T07:03:18.988Z] debug [cache] GET /reviews/:id recv maxAge=3600000
+[2021-02-26T07:03:18.988Z] debug [cache] GET /reviews/count recv maxAge=3600000
 ```
 
 ## Per-Model Configuration
@@ -164,14 +190,27 @@ module.exports = ({ env }) => ({
       type: 'redis',
       maxAge: 3600000,
       models: [
+        /**
+         * @typedef {Object} UserModelCacheConfig
+         * @property {string} model
+         * @property {string=} plugin
+         * @property {boolean=} singleType
+         * @property {Hitpass|boolean=} hitpass
+         * @property {boolean=} injectDefaultRoutes
+         * @property {string[]=} headers
+         * @property {number=} maxAge
+         * @property {(string | CustomRoute)[]=} routes
+         */
         {
-          model: 'listings',
-          maxAge: 1000000,
-        },
-        {
-          model: 'account',
+          model: 'reviews',
           headers: ['accept-language']
-        }
+          maxAge: 1000000,
+          routes: [
+            '/reviews/:slug',
+            '/reviews/:id/custom-route',
+            { path: '/reviews/:slug', method: 'DELETE' },
+          ]
+        },
       ]
     }
   }
@@ -182,13 +221,21 @@ Running the CMS should now show the following
 
 ```
 $ strapi develop
-[2020-04-14T11:37:16.510Z] debug [Cache] Mounting LRU cache middleware
-[2020-04-14T11:37:16.511Z] debug [Cache] Storage engine: redis
-[2020-04-14T11:37:16.600Z] debug [Cache] Caching route /listings/:id* [maxAge=1000000]
-[2020-04-14T11:37:16.946Z] debug [Cache] Redis connection established
+[2021-02-26T07:03:18.981Z] info [cache] Mounting LRU cache middleware
+[2021-02-26T07:03:18.982Z] info [cache] Storage engine: mem
+[2021-02-26T07:03:18.985Z] debug [cache] Register review routes middlewares
+[2021-02-26T07:03:18.986Z] debug [cache] POST /reviews purge
+[2021-02-26T07:03:18.987Z] debug [cache] DELETE /reviews/:id purge
+[2021-02-26T07:03:18.987Z] debug [cache] PUT /reviews/:id purge
+[2021-02-26T07:03:18.987Z] debug [cache] GET /reviews recv maxAge=1000000 vary=accept-language
+[2021-02-26T07:03:18.988Z] debug [cache] GET /reviews/:id recv maxAge=1000000 vary=accept-language
+[2021-02-26T07:03:18.988Z] debug [cache] GET /reviews/count recv maxAge=1000000 vary=accept-language
+[2021-02-26T07:03:18.990Z] debug [cache] GET /reviews/:slug maxAge=1000000 vary=accept-language
+[2021-02-26T07:03:18.990Z] debug [cache] GET /reviews/:id/custom-route maxAge=1000000 vary=accept-language
+[2021-02-26T07:03:18.990Z] debug [cache] DELETE /reviews/:slug purge
 ```
 
-## Pluralization and Single types
+## Single types
 
 By default, the middleware assumes that the specified models are collections. Meaning that having `'post'` or `'posts'` in your configuration will result in the `/posts/*` being cached. Pluralization is applied in order to match the Strapi generated endpoints.
 
@@ -206,7 +253,47 @@ module.exports = ({ env }) => ({
       enabled: true,
       models: [
         {
-          model: 'homepage',
+          model: 'footer',
+          singleType: true,
+        }
+      ]
+    }
+  }
+});
+```
+
+Running the CMS should now show the following
+
+```
+$ strapi develop
+[2021-02-26T07:03:18.981Z] info [cache] Mounting LRU cache middleware
+[2021-02-26T07:03:18.982Z] info [cache] Storage engine: mem
+[2021-02-26T07:03:18.985Z] debug [cache] Register review routes middlewares
+[2021-02-26T07:03:18.986Z] debug [cache] PUT /footer purge
+[2021-02-26T07:03:18.987Z] debug [cache] DELETE /footer purge
+[2021-02-26T07:03:18.987Z] debug [cache] GET /review recv maxAge=3600000
+```
+
+
+## Authentication
+
+By default, cache is not looked up if `Authorization` or `Cookie` header are present.
+To dissable this behaviour add `hitpass: false` to the model cache configuration
+
+You can customize event further with a function `hitpass: (ctx) => true` where `ctx` is the koa context of the request. Keep in mind that this function is executed before every `recv` requests.
+
+e.g
+
+```javascript
+// config/middleware.js
+module.exports = ({ env }) => ({
+  settings: {
+    cache: {
+      enabled: true,
+      models: [
+        {
+          model: 'footer',
+          hitpass: false,
           singleType: true,
         }
       ]
@@ -247,12 +334,7 @@ module.exports = ({ env }) => ({
 
 module.exports = {
   async index(ctx) {
-    ctx.middleware.cache.store // A direct access to the cache engine
-    await ctx.middleware.cache.bust({ model: 'posts', id: '123' }); // Will bust the cache for this specific record
-    await ctx.middleware.cache.bust({ model: 'posts' }); // Will bust the cache for the entire model collection
-    await ctx.middleware.cache.bust({ model: 'homepage' }); // For single types, do not pluralize the model name
-
-    // ...
+    ctx.middleware.cache // A direct access to the Cache API
   }
 };
 ```
@@ -280,16 +362,106 @@ module.exports = ({ env }) => ({
 module.exports = {
   lifecycles: {
     async beforeUpdate(params, data) {
-      strapi.middleware.cache.store // A direct access to the cache engine
-      await strapi.middleware.cache.bust({ model: 'posts', id: '123' }); // Will bust the cache for this specific record
-
-      // ...
+      strapi.middleware.cache // A direct access to the Cache API
     }
   }
 };
 ```
 
 **IMPORTANT**: We do not recommend using this unless truly necessary. It is disabled by default as it goes against the non-intrusive/transparent nature of this middleware.
+
+## Cache API
+
+```javascript 
+const cache = {
+ /**
+  * @typedef {Object} CacheStore
+  * @property {function(string): any} get
+  * @property {function(string): any} peek
+  * @property {function(string, any, number?): boolean} set
+  * @property {function(string): void} del
+  * @property {function(): any[]} keys
+  * @property {function(): void} reset
+  */
+  store,
+
+  /**
+   * @typedef {Object} MiddlewareCacheConfig
+   * @property {'mem'|'redis'} type
+   * @property {boolean} enabled
+   * @property {boolean} logs
+   * @property {boolean} populateContext
+   * @property {boolean} populateStrapiMiddleware
+   * @property {boolean} enableEtagSupport
+   * @property {boolean} enableXCacheHeaders
+   * @property {boolean} clearRelatedCache
+   * @property {boolean} withKoaContext
+   * @property {boolean} withStrapiMiddleware
+   * @property {number} max
+   * @property {number} maxAge
+   * @property {number} cacheTimeout
+   * @property {string[]} headers
+   * @property {ModelCacheConfig[]} models
+   * @property {Object=} redisConfig
+   */
+  options,
+
+  /**
+   * Clear cache with uri parameters
+   * 
+   * @param {ModelCacheConfig} cacheConf
+   * @param {{ [key: string]: string; }=} params
+   */
+  clearCache,
+
+  /**
+   * Get related ModelCacheConfig
+   *
+   * @param {string} model
+   * @param {string=} plugin
+   * @returns {ModelCacheConfig=}
+   */
+  getCacheConfig,
+
+  /**
+   * Get related ModelCacheConfig with an uid
+   * 
+   * uid:
+   * - application::sport.sport
+   * - plugins::users-permissions.user
+   *
+   * @param {string} uid
+   * @returns {ModelCacheConfig=}
+   */
+  getCacheConfigByUid,
+
+  /**
+   * Get models uid that is related to a ModelCacheConfig
+   *
+   * @param {ModelCacheConfig} cacheConf The model used to find related caches to purge
+   * @return {string[]} Array of related models uid
+   */
+  getRelatedModelsUid,
+
+  /**
+   * Get regexs to match all ModelCacheConfig keys with given params
+   * 
+   * @param {ModelCacheConfig} cacheConf
+   * @param {{ [key: string]: string; }=} params
+   * @returns {RegExp[]}
+   */
+  getCacheConfRegExp,
+
+  /**
+   * Get regexs to match CustomRoute keys with given params
+   *
+   * @param {CustomRoute} route
+   * @param {{ [key: string]: string; }=} params
+   * @returns {RegExp[]}
+   */
+  getRouteRegExp,
+};
+```
 
 ## Admin panel interactions
 
