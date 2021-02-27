@@ -448,6 +448,7 @@ const cache = {
    * 
    * @param {ModelCacheConfig} cacheConf
    * @param {{ [key: string]: string; }=} params
+   * @param {boolean=} wildcard
    * @returns {RegExp[]}
    */
   getCacheConfRegExp,
@@ -457,6 +458,7 @@ const cache = {
    *
    * @param {CustomRoute} route
    * @param {{ [key: string]: string; }=} params
+   * @param {boolean=} wildcard
    * @returns {RegExp[]}
    */
   getRouteRegExp,
