@@ -4,7 +4,14 @@
   "description": "Cache strapi requests",
   "main": "./lib",
   "scripts": {
-    "test": "mocha ./tests/*.test.js --exit"
+    "eslint": "eslint .",
+    "eslint:fix": "eslint . --fix",
+    "prettier": "prettier --check .",
+    "prettier:fix": "prettier --write .",
+    "lint": "run-s eslint:fix prettier:fix",
+    "test": "run-s test:*",
+    "test:lint": "run-s eslint prettier",
+    "test:mocha": "mocha ./tests/*.test.js --exit"
   },
   "keywords": [
     "cache",
@@ -40,6 +47,8 @@
     "eslint-config-prettier": "^8.3.0",
     "koa": "^2.11.0",
     "mocha": "^7.1.1",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.3.2",
     "sinon": "^9.2.4",
     "supertest": "^4.0.2",
     "supertest-koa-agent": "^0.3.2",

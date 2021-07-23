@@ -36,7 +36,8 @@ yarn add strapi-middleware-cache@beta
 ## Requirements
 
 Since `2.0.1`:
-- strapi `3.4.0` 
+
+- strapi `3.4.0`
 - node `14`
 
 _See `1.5.0` for strapi < `3.4.0`_
@@ -62,8 +63,8 @@ module.exports = ({ env }) => ({
   settings: {
     cache: {
       enabled: true,
-    }
-  }
+    },
+  },
 });
 ```
 
@@ -89,8 +90,8 @@ module.exports = ({ env }) => ({
     cache: {
       enabled: true,
       models: ['review'],
-    }
-  }
+    },
+  },
 });
 ```
 
@@ -149,9 +150,9 @@ module.exports = ({ env }) => ({
           { host: '192.168.10.43', port: 26379 },
         ],
         name: 'redis-primary',
-      }
-    }
-  }
+      },
+    },
+  },
 });
 ```
 
@@ -176,6 +177,7 @@ Each route can hold its own configuration object for more granular control. This
 by replacing the model strings in the list by object.
 
 On which you can set:
+
 - Its own custom `maxAge`
 - Headers to include in the cache-key (e.g the body may differ depending on the language requested)
 
@@ -255,10 +257,10 @@ module.exports = ({ env }) => ({
         {
           model: 'footer',
           singleType: true,
-        }
-      ]
-    }
-  }
+        },
+      ],
+    },
+  },
 });
 ```
 
@@ -273,7 +275,6 @@ $ strapi develop
 [2021-02-26T07:03:18.987Z] debug [cache] DELETE /footer purge
 [2021-02-26T07:03:18.987Z] debug [cache] GET /review recv maxAge=3600000
 ```
-
 
 ## Authentication
 
@@ -295,10 +296,10 @@ module.exports = ({ env }) => ({
           model: 'footer',
           hitpass: false,
           singleType: true,
-        }
-      ]
-    }
-  }
+        },
+      ],
+    },
+  },
 });
 ```
 
@@ -325,17 +326,17 @@ module.exports = ({ env }) => ({
     cache: {
       enabled: true,
       populateContext: true,
-      models: ['post']
-    }
-  }
+      models: ['post'],
+    },
+  },
 });
 
 // controller
 
 module.exports = {
   async index(ctx) {
-    ctx.middleware.cache // A direct access to the Cache API
-  }
+    ctx.middleware.cache; // A direct access to the Cache API
+  },
 };
 ```
 
@@ -352,9 +353,9 @@ module.exports = ({ env }) => ({
     cache: {
       enabled: true,
       populateStrapiMiddleware: true,
-      models: ['post']
-    }
-  }
+      models: ['post'],
+    },
+  },
 });
 
 // model
@@ -362,9 +363,9 @@ module.exports = ({ env }) => ({
 module.exports = {
   lifecycles: {
     async beforeUpdate(params, data) {
-      strapi.middleware.cache // A direct access to the Cache API
-    }
-  }
+      strapi.middleware.cache; // A direct access to the Cache API
+    },
+  },
 };
 ```
 
@@ -372,17 +373,17 @@ module.exports = {
 
 ## Cache API
 
-```javascript 
+```javascript
 const cache = {
- /**
-  * @typedef {Object} CacheStore
-  * @property {function(string): any} get
-  * @property {function(string): any} peek
-  * @property {function(string, any, number?): boolean} set
-  * @property {function(string): void} del
-  * @property {function(): any[]} keys
-  * @property {function(): void} reset
-  */
+  /**
+   * @typedef {Object} CacheStore
+   * @property {function(string): any} get
+   * @property {function(string): any} peek
+   * @property {function(string, any, number?): boolean} set
+   * @property {function(string): void} del
+   * @property {function(): any[]} keys
+   * @property {function(): void} reset
+   */
   store,
 
   /**
@@ -408,7 +409,7 @@ const cache = {
 
   /**
    * Clear cache with uri parameters
-   * 
+   *
    * @param {ModelCacheConfig} cacheConf
    * @param {{ [key: string]: string; }=} params
    */
@@ -425,7 +426,7 @@ const cache = {
 
   /**
    * Get related ModelCacheConfig with an uid
-   * 
+   *
    * uid:
    * - application::sport.sport
    * - plugins::users-permissions.user
@@ -445,7 +446,7 @@ const cache = {
 
   /**
    * Get regexs to match all ModelCacheConfig keys with given params
-   * 
+   *
    * @param {ModelCacheConfig} cacheConf
    * @param {{ [key: string]: string; }=} params
    * @param {boolean=} wildcard
