@@ -3,6 +3,15 @@ import { Context } from 'koa';
 declare global {
   export type Hitpass = (ctx: Context) => boolean;
 
+  export type CacheStore = {
+    get: (key: string) => Promise<any>;
+    peek: (key: string) => Promise<any>;
+    set: (key: string, value: any, ttl?: number) => Promise<boolean>;
+    del: (key: string) => Promise<void>;
+    keys: () => Promise<string[]>;
+    reset: () => Promise<void>;
+  }
+
   export type CustomRoute = {
     path: string;
     method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
