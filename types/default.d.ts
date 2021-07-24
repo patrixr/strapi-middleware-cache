@@ -18,9 +18,6 @@ declare global {
     model: string,
     plugin?: string
   ) => ModelCacheConfig | undefined;
-  export type GetCacheConfigByUidFn = (
-    uid: string
-  ) => ModelCacheConfig | undefined;
   export type PurgeFn = (cacheConf: ModelCacheConfig) => KoaRouteMiddleware;
   export type PurgeAdminFn = KoaRouteMiddleware;
   export type RecvFn = (cacheConf: ModelCacheConfig) => KoaRouteMiddleware;
