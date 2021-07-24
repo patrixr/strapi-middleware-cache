@@ -3,6 +3,34 @@ import { Context } from 'koa';
 declare global {
   export type Hitpass = (ctx: Context) => boolean;
 
+  export type ModelCacheParams = {
+    [key: string]: string;
+  };
+
+  export type ClearCacheFn = (
+    cacheConf: ModelCacheConfig,
+    params?: { [key: string]: string }
+  ) => Promise<void>;
+  export type GetCacheConfigByUidFn = (
+    uid: string
+  ) => ModelCacheConfig | undefined;
+  export type GetCacheConfigFn = (
+    model: string,
+    plugin?: string
+  ) => ModelCacheConfig | undefined;
+  export type GetCacheConfigByUidFn = (
+    uid: string
+  ) => ModelCacheConfig | undefined;
+  export type PurgeFn = (cacheConf: ModelCacheConfig) => KoaRouteMiddleware;
+  export type PurgeAdminFn = KoaRouteMiddleware;
+  export type RecvFn = (cacheConf: ModelCacheConfig) => KoaRouteMiddleware;
+
+  export type CacheMiddlewares = {
+    purge: PurgeFn;
+    purgeAdmin: PurgeAdminFn;
+    recv: RecvFn;
+  };
+
   export type CacheStore = {
     get: (key: string) => Promise<any>;
     peek: (key: string) => Promise<any>;
@@ -10,7 +38,16 @@ declare global {
     del: (key: string) => Promise<void>;
     keys: () => Promise<string[]>;
     reset: () => Promise<void>;
-  }
+  };
+  export type InternalCacheStore = {
+    get: (key: string) => Promise<any> | any;
+    peek: (key: string) => Promise<any> | any;
+    set: (key: string, value: any, ttl?: number) => Promise<boolean> | boolean;
+    del: (key: string) => Promise<void> | void;
+    keys: () => Promise<string[]> | string[];
+    reset: () => Promise<void> | void;
+    ready: boolean;
+  };
 
   export type CustomRoute = {
     path: string;
@@ -88,5 +125,10 @@ declare global {
     headers: string[];
     models: ModelCacheConfig[];
     redisConfig?: any;
+  };
+
+  export type MiddlewareCache = {
+    store: CacheStore;
+    initialize: () => void;
   };
 }
