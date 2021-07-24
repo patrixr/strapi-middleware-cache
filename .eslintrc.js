@@ -23,8 +23,5 @@ module.exports = {
     indent: ['error', 2, { SwitchCase: 1 }],
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'object-curly-spacing': 'off',
-    'valid-jsdoc': 'off',
-    'require-jsdoc': 'off',
   },
 };
