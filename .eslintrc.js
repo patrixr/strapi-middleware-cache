@@ -2,16 +2,12 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   extends: ['eslint:recommended', 'google', 'prettier'],
   env: {
-    commonjs: true,
-    es6: true,
     node: true,
-    browser: true,
     jest: true,
   },
   parserOptions: {
     ecmaFeatures: {
       experimentalObjectRestSpread: true,
-      jsx: true,
       impliedStrict: true,
     },
     sourceType: 'module',
