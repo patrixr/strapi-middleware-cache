@@ -1,11 +1,29 @@
 # Strapi LRU Caching middleware
 
-:warning: You are on beta branch
-
 A cache middleware for the headless CMS strapi.io
 
 ![](https://github.com/patrixr/strapi-middleware-cache/workflows/Tests/badge.svg)
 ![Maintenance](https://img.shields.io/badge/Maintenance%20-Actively%20Maintained-green.svg)
+
+- [Strapi LRU Caching middleware](#strapi-lru-caching-middleware)
+  * [How it works](#how-it-works)
+  * [Installing](#installing)
+  * [Version 1 compatibility](#version-1-compatibility)
+  * [Requirements](#requirements)
+  * [Setup](#setup)
+  * [Configure models](#configure-models)
+  * [Configure the storage engine](#configure-the-storage-engine)
+    + [Example](#example)
+  * [Per-Model Configuration](#per-model-configuration)
+  * [Single types](#single-types)
+  * [Authentication](#authentication)
+  * [Etag support](#etag-support)
+  * [Clearing related cache](#clearing-related-cache)
+  * [Cache entry point](#cache-entry-point)
+    + [Koa Context](#koa-context)
+    + [Strapi Middleware](#strapi-middleware)
+  * [Cache API](#cache-api)
+  * [Admin panel interactions](#admin-panel-interactions)
 
 ## How it works
 
@@ -32,6 +50,10 @@ Using yarn
 ```bash
 yarn add strapi-middleware-cache@beta
 ```
+
+## Version 1 compatibility
+
+:warning: Important: The middleware has gone through a full rewrite since version 1, and its configuration may not be fully compatible with the old v1. Make sure to (re)read the documentation below on how to use it 👇
 
 ## Requirements
 
