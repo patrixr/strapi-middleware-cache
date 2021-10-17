@@ -9,8 +9,6 @@
 //   reset
 // } = require('./stubs/strapi');
 
-global.strapi 
-
 describe('Caching', () => {
   // let middleware = null;
   // before(() => {
