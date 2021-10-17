@@ -9,12 +9,17 @@ const {
   reset
 } = require('./stubs/strapi');
 
+global.strapi 
+
 describe('Caching', () => {
   let middleware = null;
 
   before(() => {
     sinon.stub(process, 'version').value('3.4.0');
     strapi.config = {
+      info: {
+        strapi: '3.4.0'
+      },
       middleware: {
         settings: {
           cache: {
