@@ -5,14 +5,14 @@
   "version": "0.2.0",
   "configurations": [
     {
-        "name": "Run mocha",
-        "type": "node",
-        "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
-        "stopOnEntry": false,
-        "args": ["./tests/*.test.js", "--no-timeouts", "--exit"],
-        "cwd": "${workspaceFolder}",
-        "runtimeExecutable": null,
-        "request": "launch"
+      "name": "Run mocha",
+      "type": "node",
+      "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+      "stopOnEntry": false,
+      "args": ["./tests/*.test.js", "--no-timeouts", "--exit"],
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": null,
+      "request": "launch"
     }
   ]
 }
