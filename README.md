@@ -147,8 +147,8 @@ module.exports = ({ env }) => ({
      * @property {'mem'|'redis'=} type
      * @property {boolean=} enabled
      * @property {boolean=} logs
-     * @property {boolean=} populateContext
-     * @property {boolean=} populateStrapiMiddleware
+     * @property {boolean=} withKoaContext
+     * @property {boolean=} withStrapiMiddleware
      * @property {boolean=} enableEtagSupport
      * @property {boolean=} enableXCacheHeaders
      * @property {boolean=} clearRelatedCache
@@ -339,7 +339,7 @@ By setting the `clearRelatedCache` to `true`, the middleware will inspect the St
 
 ### Koa Context
 
-By setting the `populateContext` configuration to `true`, the middleware will extend the Koa Context with an entry point which can be used to clear the cache from within controllers
+By setting the `withKoaContext` configuration to `true`, the middleware will extend the Koa Context with an entry point which can be used to clear the cache from within controllers
 
 ```javascript
 // config/middleware.js
@@ -347,7 +347,7 @@ module.exports = ({ env }) => ({
   settings: {
     cache: {
       enabled: true,
-      populateContext: true,
+      withKoaContext: true,
       models: ['post'],
     },
   },
@@ -366,7 +366,7 @@ module.exports = {
 
 ### Strapi Middleware
 
-By setting the `populateStrapiMiddleware` configuration to `true`, the middleware will extend the Strapi middleware object with an entry point which can be used to clear the cache from anywhere (e.g., inside a Model's lifecycle hook where `ctx` is not available).
+By setting the `withStrapiMiddleware` configuration to `true`, the middleware will extend the Strapi middleware object with an entry point which can be used to clear the cache from anywhere (e.g., inside a Model's lifecycle hook where `ctx` is not available).
 
 ```javascript
 // config/middleware.js
@@ -374,7 +374,7 @@ module.exports = ({ env }) => ({
   settings: {
     cache: {
       enabled: true,
-      populateStrapiMiddleware: true,
+      withStrapiMiddleware: true,
       models: ['post'],
     },
   },
@@ -413,8 +413,8 @@ const cache = {
    * @property {'mem'|'redis'} type
    * @property {boolean} enabled
    * @property {boolean} logs
-   * @property {boolean} populateContext
-   * @property {boolean} populateStrapiMiddleware
+   * @property {boolean} withKoaContext
+   * @property {boolean} withStrapiMiddleware
    * @property {boolean} enableEtagSupport
    * @property {boolean} enableXCacheHeaders
    * @property {boolean} clearRelatedCache
