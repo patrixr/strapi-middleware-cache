@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "target": "ES2018",
+    "module": "CommonJS",
+    "strict": true,
+    "lib": ["ES2018", "dom"],
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "noEmit": true,
+    "baseUrl": "./",
+    "outDir": "./never",
+    "declaration": false,
+    "noImplicitAny": false,
+    "strictNullChecks": true,
+    "paths": {
+      "strapi-middleware-cache": ["./"]
+    },
+    "types": ["strapi-supercharged"]
+  },
+  "include": ["**/*.js", "./.eslintrc.js"],
+  "exclude": ["tests"]
+}
