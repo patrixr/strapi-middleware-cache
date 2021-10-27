@@ -3,6 +3,7 @@
   "version": "2.1.4",
   "description": "Cache strapi requests",
   "main": "./lib",
+  "types": "./types",
   "scripts": {
     "eslint": "eslint .",
     "eslint:fix": "eslint . --fix",
@@ -10,6 +11,7 @@
     "prettier:fix": "prettier --write .",
     "lint": "run-s eslint:fix prettier:fix",
     "test": "run-s test:*",
+    "test:tsc": "tsc",
     "test:lint": "run-s eslint prettier",
     "test:mocha": "mocha ./tests/*.test.js --exit"
   },
@@ -21,7 +23,8 @@
     "memcache"
   ],
   "directories": {
-    "lib": "./lib"
+    "lib": "./lib",
+    "types": "./types"
   },
   "repository": {
     "type": "git",
@@ -40,17 +43,27 @@
     "redis-lru": "^0.6.0"
   },
   "devDependencies": {
-    "@typescript-eslint/parser": "^4.28.4",
+    "@types/ioredis": "^4.27.8",
+    "@types/koa": "^2.13.4",
+    "@types/koa-router": "^7.4.4",
+    "@types/lodash": "^4.14.176",
+    "@types/lru-cache": "^5.1.1",
+    "@types/pluralize": "^0.0.29",
+    "@typescript-eslint/eslint-plugin": "^5.2.0",
+    "@typescript-eslint/parser": "^5.2.0",
+    "babel-eslint": "^10.1.0",
     "chai": "^4.2.0",
     "eslint": "^7.31.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-jsdoc": "^37.0.3",
     "koa": "^2.11.0",
     "lint-staged": "^11.1.0",
     "mocha": "^7.1.1",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.3.2",
     "sinon": "^9.2.4",
+    "strapi-supercharged": "0.3.2",
     "supertest": "^4.0.2",
     "supertest-koa-agent": "^0.3.2",
     "typescript": "^4.3.5",

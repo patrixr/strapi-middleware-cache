@@ -140,26 +140,15 @@ The module's configuration object supports the following properties
 
 ```javascript
 // config/middleware.js
+
+/**
+ * @typedef {import('strapi-middleware-cache').UserMiddlewareCacheConfig} UserMiddlewareCacheConfig
+ */
+
 module.exports = ({ env }) => ({
   settings: {
     /**
-     * @typedef {Object} UserMiddlewareCacheConfig
-     * @property {'mem'|'redis'=} type
-     * @property {boolean=} enabled
-     * @property {boolean=} logs
-     * @property {boolean=} withKoaContext
-     * @property {boolean=} withStrapiMiddleware
-     * @property {boolean=} enableEtagSupport
-     * @property {boolean=} enableXCacheHeaders
-     * @property {boolean=} clearRelatedCache
-     * @property {boolean=} withKoaContext
-     * @property {boolean=} withStrapiMiddleware
-     * @property {string[]=} headers
-     * @property {number=} max
-     * @property {number=} maxAge
-     * @property {number=} cacheTimeout
-     * @property {(UserModelCacheConfig | string)[]=} models
-     * @property {Object=} redisConfig
+     * @type {UserMiddlewareCacheConfig}
      */
     cache: {
       enabled: true,
@@ -207,6 +196,11 @@ e.g
 
 ```javascript
 // config/middleware.js
+
+/**
+ * @typedef {import('strapi-middleware-cache').UserModelCacheConfig} UserModelCacheConfig
+ */
+
 module.exports = ({ env }) => ({
   settings: {
     cache: {
@@ -215,15 +209,7 @@ module.exports = ({ env }) => ({
       maxAge: 3600000,
       models: [
         /**
-         * @typedef {Object} UserModelCacheConfig
-         * @property {string} model
-         * @property {string=} plugin
-         * @property {boolean=} singleType
-         * @property {Hitpass|boolean=} hitpass
-         * @property {boolean=} injectDefaultRoutes
-         * @property {string[]=} headers
-         * @property {number=} maxAge
-         * @property {(string | CustomRoute)[]=} routes
+         * @type {UserModelCacheConfig}
          */
         {
           model: 'reviews',
@@ -396,36 +382,21 @@ module.exports = {
 ## Cache API
 
 ```javascript
+/**
+ * @typedef {import('strapi-middleware-cache').CacheStore} CacheStore
+ * @typedef {import('strapi-middleware-cache').MiddlewareCacheConfig} MiddlewareCacheConfig
+ * @typedef {import('strapi-middleware-cache').ModelCacheConfig} ModelCacheConfig
+ * @typedef {import('strapi-middleware-cache').CustomRoute} CustomRoute
+ */
+
 const cache = {
   /**
-   * @typedef {Object} CacheStore
-   * @property {function(string): any} get
-   * @property {function(string): any} peek
-   * @property {function(string, any, number?): boolean} set
-   * @property {function(string): void} del
-   * @property {function(): any[]} keys
-   * @property {function(): void} reset
+   * @type {CacheStore}
    */
   store,
 
   /**
-   * @typedef {Object} MiddlewareCacheConfig
-   * @property {'mem'|'redis'} type
-   * @property {boolean} enabled
-   * @property {boolean} logs
-   * @property {boolean} withKoaContext
-   * @property {boolean} withStrapiMiddleware
-   * @property {boolean} enableEtagSupport
-   * @property {boolean} enableXCacheHeaders
-   * @property {boolean} clearRelatedCache
-   * @property {boolean} withKoaContext
-   * @property {boolean} withStrapiMiddleware
-   * @property {number} max
-   * @property {number} maxAge
-   * @property {number} cacheTimeout
-   * @property {string[]} headers
-   * @property {ModelCacheConfig[]} models
-   * @property {Object=} redisConfig
+   * @type {MiddlewareCacheConfig}
    */
   options,
 
