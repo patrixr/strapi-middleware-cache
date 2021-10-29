@@ -42,13 +42,13 @@ Important: Caching must be explicitely enabled **per model**
 Using npm
 
 ```bash
-npm install --save strapi-middleware-cache@beta
+npm install --save strapi-middleware-cache
 ```
 
 Using yarn
 
 ```bash
-yarn add strapi-middleware-cache@beta
+yarn add strapi-middleware-cache
 ```
 
 ## Version 1 compatibility
