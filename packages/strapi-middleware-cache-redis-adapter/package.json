@@ -1,0 +1,33 @@
+{
+  "name": "strapi-middleware-cache-redis-adapter",
+  "version": "0.0.1",
+  "description": "Redis adapter to cache strapi requests",
+  "main": "./lib",
+  "keywords": [
+    "cache",
+    "strapi",
+    "requests",
+    "redis",
+    "adapter",
+    "memcache"
+  ],
+  "directories": {
+    "lib": "./lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patrixr/strapi-middleware-cache.git"
+  },
+  "author": "Patrick R",
+  "license": "MIT",
+  "dependencies": {
+    "ioredis": "^4.17.1",
+    "lru-cache": "^5.1.1",
+    "redis-lru": "^0.6.0"
+  },
+  "devDependencies": {
+    "@types/ioredis": "^4.27.8",
+    "@types/lru-cache": "^5.1.1"
+  },
+  "peerDependencies": {}
+}

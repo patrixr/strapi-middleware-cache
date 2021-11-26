@@ -1,0 +1,1 @@
+# Redis adapter for Strapi LRU Caching middleware

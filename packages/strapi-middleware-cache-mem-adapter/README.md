@@ -1,0 +1,1 @@
+# Memory cache adapter for Strapi LRU Caching middleware
