@@ -9,4 +9,4 @@ function deserialize(str) {
   return JSON.parse(str).data;
 }
 
-module.exports = deserialize;
+module.exports = { deserialize };

@@ -1,16 +1,15 @@
 const arrayEquals = require('./arrayEquals');
 
 /**
- * @typedef {import('strapi-middleware-cache').ModelCacheParams} ModelCacheParams
- * @typedef {import('strapi-middleware-cache').CustomRoute} CustomRoute
+ * @typedef {import('../../types').CacheRouteConfig} CacheRouteConfig
  * @typedef {import('koa').Context} Context
  */
 
 /**
  * Get regexs to match CustomRoute keys with given params
  *
- * @param {CustomRoute} route
- * @param {ModelCacheParams} params
+ * @param {CacheRouteConfig} route
+ * @param {any} params
  * @param {boolean=} wildcard
  * @return {RegExp[]}
  */
@@ -53,4 +52,4 @@ function getRouteRegExp(route, params, wildcard = false) {
   return regExps;
 }
 
-module.exports = getRouteRegExp;
+module.exports = { getRouteRegExp };
