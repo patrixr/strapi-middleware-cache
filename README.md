@@ -57,35 +57,36 @@ yarn add strapi-middleware-cache
 
 ## Requirements
 
-Since `2.0.1`:
+Since `4.0.0`:
 
-- strapi `3.4.0`
+- strapi `4.0.0`
 - node `14`
 
 _See `1.5.0` for strapi < `3.4.0`_
+_See `2.1.1` for strapi > `3.4.0` & strapi > `4.0.0`_
 
 ## Setup
 
-For Strapi stable versions, add a `middleware.js` file within your config folder
+For Strapi stable versions, add a `plugins.js` file within your config folder
 
 e.g
 
 ```bash
-touch config/middleware.js
+touch config/plugins.js
 ```
 
 To use different settings per environment, see the [Strapi docs for environments](https://strapi.io/documentation/v3.x/concepts/configurations.html#environments).
 
 You can parse environment variables for the config here as well if you wish to, please see the [Strapi docs for environment variables](https://strapi.io/documentation/v3.x/concepts/configurations.html#environment-variables).
 
-Enable the cache middleware by adding the following snippet to an empty middleware file or simply add in the settings from the below example:
+Enable the cache plugins by adding the following snippet to an empty plugins file or simply add in the settings from the below example:
 
 ```javascript
+// config/plugins.js
 module.exports = ({ env }) => ({
-  settings: {
-    cache: {
-      enabled: true,
-    },
+  "strapi-middleware-cache": {
+    enabled: true,
+    config: {}
   },
 });
 ```
@@ -106,13 +107,13 @@ Add a list of models to enable to the module's configuration object.
 e.g
 
 ```javascript
-// config/middleware.js
+// config/plugins.js
 module.exports = ({ env }) => ({
-  settings: {
-    cache: {
-      enabled: true,
-      models: ['review'],
-    },
+  "strapi-middleware-cache": {
+    enabled: true,
+    config: {
+      contentTypes: ['api::review.review'],
+    }
   },
 });
 ```
@@ -139,21 +140,13 @@ The module's configuration object supports the following properties
 ### Example
 
 ```javascript
-// config/middleware.js
-
-/**
- * @typedef {import('strapi-middleware-cache').UserMiddlewareCacheConfig} UserMiddlewareCacheConfig
- */
-
+// config/plugins.js
 module.exports = ({ env }) => ({
-  settings: {
-    /**
-     * @type {UserMiddlewareCacheConfig}
-     */
-    cache: {
-      enabled: true,
+  "strapi-middleware-cache": {
+    enabled: true,
+    config: {
       type: 'redis',
-      models: ['review'],
+      contentTypes: ['api::review.review'],
       redisConfig: {
         sentinels: [
           { host: '192.168.10.41', port: 26379 },
@@ -162,10 +155,11 @@ module.exports = ({ env }) => ({
         ],
         name: 'redis-primary',
       },
-    },
+    }
   },
 });
 ```
+> WIP
 
 Running the CMS will output the following
 
@@ -195,24 +189,18 @@ On which you can set:
 e.g
 
 ```javascript
-// config/middleware.js
-
-/**
- * @typedef {import('strapi-middleware-cache').UserModelCacheConfig} UserModelCacheConfig
- */
-
+// config/plugins.js
 module.exports = ({ env }) => ({
-  settings: {
-    cache: {
-      enabled: true,
-      type: 'redis',
+  "strapi-middleware-cache": {
+    enabled: true,
+    config: {
       maxAge: 3600000,
-      models: [
+      contentTypes: [
         /**
          * @type {UserModelCacheConfig}
          */
         {
-          model: 'reviews',
+          contentType: 'api::review.review',
           headers: ['accept-language']
           maxAge: 1000000,
           routes: [
@@ -223,7 +211,7 @@ module.exports = ({ env }) => ({
         },
       ]
     }
-  }
+  },
 });
 ```
 
@@ -247,30 +235,7 @@ $ strapi develop
 
 ## Single types
 
-By default, the middleware assumes that the specified models are collections. Meaning that having `'post'` or `'posts'` in your configuration will result in the `/posts/*` being cached. Pluralization is applied in order to match the Strapi generated endpoints.
-
-That behaviour is however not desired for [single types](https://strapi.io/blog/beta-19-single-types-uid-field) such as `homepage` which should remain singular in the endpoint (`/homepage`)
-
-You can mark a specific model as being a single type by using the `singleType` boolean field on model configurations
-
-e.g
-
-```javascript
-// config/middleware.js
-module.exports = ({ env }) => ({
-  settings: {
-    cache: {
-      enabled: true,
-      models: [
-        {
-          model: 'footer',
-          singleType: true,
-        },
-      ],
-    },
-  },
-});
-```
+Single types are also supported withouth the need to specify anythign else.
 
 Running the CMS should now show the following
 
@@ -299,9 +264,9 @@ module.exports = ({ env }) => ({
   settings: {
     cache: {
       enabled: true,
-      models: [
+      contentTypes: [
         {
-          model: 'footer',
+          contentType: 'api::footer.footer',
           hitpass: false,
           singleType: true,
         },
@@ -321,143 +286,6 @@ Further requests sent with the `If-None-Match` header will be returned a `304 No
 
 By setting the `clearRelatedCache` to `true`, the middleware will inspect the Strapi models before a cache clearing operation to locate models that have relations with the queried model so that their cache is also cleared (this clears the whole cache for the related models). The ispection is performed by looking for direct relations between models and also by doing a deep dive in components, looking for relations to the queried model there too.
 
-## Cache entry point
-
-### Koa Context
-
-By setting the `withKoaContext` configuration to `true`, the middleware will extend the Koa Context with an entry point which can be used to clear the cache from within controllers
-
-```javascript
-// config/middleware.js
-module.exports = ({ env }) => ({
-  settings: {
-    cache: {
-      enabled: true,
-      withKoaContext: true,
-      models: ['post'],
-    },
-  },
-});
-
-// controller
-
-module.exports = {
-  async index(ctx) {
-    ctx.middleware.cache; // A direct access to the Cache API
-  },
-};
-```
-
-**IMPORTANT**: We do not recommend using this unless truly necessary. It is disabled by default as it goes against the non-intrusive/transparent nature of this middleware.
-
-### Strapi Middleware
-
-By setting the `withStrapiMiddleware` configuration to `true`, the middleware will extend the Strapi middleware object with an entry point which can be used to clear the cache from anywhere (e.g., inside a Model's lifecycle hook where `ctx` is not available).
-
-```javascript
-// config/middleware.js
-module.exports = ({ env }) => ({
-  settings: {
-    cache: {
-      enabled: true,
-      withStrapiMiddleware: true,
-      models: ['post'],
-    },
-  },
-});
-
-// model
-
-module.exports = {
-  lifecycles: {
-    async beforeUpdate(params, data) {
-      strapi.middleware.cache; // A direct access to the Cache API
-    },
-  },
-};
-```
-
-**IMPORTANT**: We do not recommend using this unless truly necessary. It is disabled by default as it goes against the non-intrusive/transparent nature of this middleware.
-
-## Cache API
-
-```javascript
-/**
- * @typedef {import('strapi-middleware-cache').CacheStore} CacheStore
- * @typedef {import('strapi-middleware-cache').MiddlewareCacheConfig} MiddlewareCacheConfig
- * @typedef {import('strapi-middleware-cache').ModelCacheConfig} ModelCacheConfig
- * @typedef {import('strapi-middleware-cache').CustomRoute} CustomRoute
- */
-
-const cache = {
-  /**
-   * @type {CacheStore}
-   */
-  store,
-
-  /**
-   * @type {MiddlewareCacheConfig}
-   */
-  options,
-
-  /**
-   * Clear cache with uri parameters
-   *
-   * @param {ModelCacheConfig} cacheConf
-   * @param {{ [key: string]: string; }=} params
-   */
-  clearCache,
-
-  /**
-   * Get related ModelCacheConfig
-   *
-   * @param {string} model
-   * @param {string=} plugin
-   * @returns {ModelCacheConfig=}
-   */
-  getCacheConfig,
-
-  /**
-   * Get related ModelCacheConfig with an uid
-   *
-   * uid:
-   * - application::sport.sport
-   * - plugins::users-permissions.user
-   *
-   * @param {string} uid
-   * @returns {ModelCacheConfig=}
-   */
-  getCacheConfigByUid,
-
-  /**
-   * Get models uid that is related to a ModelCacheConfig
-   *
-   * @param {ModelCacheConfig} cacheConf The model used to find related caches to purge
-   * @return {string[]} Array of related models uid
-   */
-  getRelatedModelsUid,
-
-  /**
-   * Get regexs to match all ModelCacheConfig keys with given params
-   *
-   * @param {ModelCacheConfig} cacheConf
-   * @param {{ [key: string]: string; }=} params
-   * @param {boolean=} wildcard
-   * @returns {RegExp[]}
-   */
-  getCacheConfRegExp,
-
-  /**
-   * Get regexs to match CustomRoute keys with given params
-   *
-   * @param {CustomRoute} route
-   * @param {{ [key: string]: string; }=} params
-   * @param {boolean=} wildcard
-   * @returns {RegExp[]}
-   */
-  getRouteRegExp,
-};
-```
 
 ## Admin panel interactions
 
