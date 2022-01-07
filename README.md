@@ -319,7 +319,7 @@ Further requests sent with the `If-None-Match` header will be returned a `304 No
 
 ## Clearing related cache
 
-By setting the `clearRelatedCache` to `true`, the middleware will inspect the Strapi models before a cache clearing operation to locate models that have relations with the queried model so that their cache is also cleared (this clears the whole cache for the related models). The ispection is performed by looking for direct relations between models and also by doing a deep dive in components, looking for relations to the queried model there too.
+By setting the `clearRelatedCache` to `true`, the middleware will inspect the Strapi models before a cache clearing operation to locate models that have relations with the queried model so that their cache is also cleared (this clears the whole cache for the related models). The inspection is performed by looking for direct relations between models and also by doing a deep dive in components, looking for relations to the queried model there too.
 
 ## Cache entry point
 
