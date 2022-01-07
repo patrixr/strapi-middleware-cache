@@ -1,5 +1,5 @@
-const chalk = require('chalk');
 const crypto = require('crypto');
+const chalk = require('chalk');
 const generateCacheKey = require('../utils/middlewares/generateCacheKey');
 
 /**
@@ -96,7 +96,7 @@ module.exports = (options, { strapi }) => {
       ctx.set('X-Cache', 'MISS');
     }
 
-    if (ctx.body && ctx.status == 200) {
+    if (ctx.body && ctx.status === 200) {
       // @TODO check Cache-Control response header
       await store.set(cacheKey, ctx.body, cacheConf.maxAge);
 

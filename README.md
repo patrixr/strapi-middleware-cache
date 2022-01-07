@@ -84,9 +84,9 @@ Enable the cache plugins by adding the following snippet to an empty plugins fil
 ```javascript
 // config/plugins.js
 module.exports = ({ env }) => ({
-  "strapi-middleware-cache": {
+  'strapi-middleware-cache': {
     enabled: true,
-    config: {}
+    config: {},
   },
 });
 ```
@@ -109,11 +109,11 @@ e.g
 ```javascript
 // config/plugins.js
 module.exports = ({ env }) => ({
-  "strapi-middleware-cache": {
+  'strapi-middleware-cache': {
     enabled: true,
     config: {
       contentTypes: ['api::review.review'],
-    }
+    },
   },
 });
 ```
@@ -142,7 +142,7 @@ The module's configuration object supports the following properties
 ```javascript
 // config/plugins.js
 module.exports = ({ env }) => ({
-  "strapi-middleware-cache": {
+  'strapi-middleware-cache': {
     enabled: true,
     config: {
       type: 'redis',
@@ -155,10 +155,11 @@ module.exports = ({ env }) => ({
         ],
         name: 'redis-primary',
       },
-    }
+    },
   },
 });
 ```
+
 > WIP
 
 Running the CMS will output the following
@@ -285,7 +286,6 @@ Further requests sent with the `If-None-Match` header will be returned a `304 No
 ## Clearing related cache
 
 By setting the `clearRelatedCache` to `true`, the middleware will inspect the Strapi models before a cache clearing operation to locate models that have relations with the queried model so that their cache is also cleared (this clears the whole cache for the related models). The ispection is performed by looking for direct relations between models and also by doing a deep dive in components, looking for relations to the queried model there too.
-
 
 ## Admin panel interactions
 

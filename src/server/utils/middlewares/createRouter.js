@@ -1,4 +1,5 @@
 const Router = require('koa-router');
+// eslint-disable-next-line import/no-unresolved
 const chalk = require('chalk');
 
 /**
@@ -95,6 +96,8 @@ function createRouter(strapi, options) {
           router.get(route.path, recvMiddleware);
           break;
         }
+        default:
+          break;
       }
     }
   }

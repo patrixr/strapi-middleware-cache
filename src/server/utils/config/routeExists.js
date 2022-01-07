@@ -12,12 +12,11 @@
  */
 function routeExists(strapi, route) {
   // check api routes
-  const match = strapi.server.listRoutes().find((routeLayer) => {
-    return (
+  const match = strapi.server.listRoutes().find(
+    (routeLayer) =>
       routeLayer.methods.includes(route.method) &&
       routeLayer.path.match(new RegExp(`${route.path}/?`)) // match with optional leading slash
-    );
-  });
+  );
 
   return match;
 }

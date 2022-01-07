@@ -16,7 +16,7 @@ function getRelatedModelsUid(strapi, uid) {
 
   const models = strapi.contentTypes;
 
-  const components = strapi.components;
+  const { components } = strapi;
   const modelObj = models[uid];
   const modelAttributes = modelObj?.attributes ?? {};
   /**
@@ -99,8 +99,8 @@ function getRelatedModelsUid(strapi, uid) {
       continue;
     }
 
-    const modelObj = models[modelKey];
-    const attributes = modelObj?.attributes ?? {};
+    const otherModelObj = models[modelKey];
+    const attributes = otherModelObj?.attributes ?? {};
 
     for (const key in attributes) {
       if (!Object.hasOwnProperty.call(attributes, key)) {

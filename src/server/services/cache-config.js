@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @typedef {import('../types').CachePluginConfig} CachePluginConfig
  * @typedef {import('../types').CacheContentTypeConfig} CacheContentTypeConfig
@@ -80,9 +78,7 @@ module.exports = ({ strapi }) => ({
 
     const regExps = [];
 
-    const routes = cacheConf.routes.filter((route) => {
-      return route.method === 'GET';
-    });
+    const routes = cacheConf.routes.filter((route) => route.method === 'GET');
 
     for (const route of routes) {
       regExps.push(...getRouteRegExp(route, params, wildcard));

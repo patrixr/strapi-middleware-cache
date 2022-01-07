@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @typedef {import('@strapi/strapi').Strapi} Strapi
  */
@@ -8,7 +6,7 @@
  * @param {{ strapi: Strapi }} strapi
  */
 module.exports = ({ strapi }) => {
-  //@todo: use cache provider instead of hard-coded LRU
+  // @todo: use cache provider instead of hard-coded LRU
   const store = strapi.plugin('strapi-middleware-cache').service('cacheStore');
 
   // watch for changes in any roles -> clear all cache

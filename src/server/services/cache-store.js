@@ -2,11 +2,11 @@
  * @typedef {import('@strapi/strapi').Strapi} Strapi
  */
 
+const LRU = require('lru-cache');
 const { serialize } = require('../utils/store/serialize');
 const { deserialize } = require('../utils/store/deserialize');
 
-//@todo: use cache provider instead of hard-coded LRU
-const LRU = require('lru-cache');
+// @todo: use cache provider instead of hard-coded LRU
 
 /**
  * @param {{ strapi: Strapi }} strapi

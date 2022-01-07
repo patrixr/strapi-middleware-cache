@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @typedef {import('koa').Context} Context
  * @typedef {import('@strapi/strapi').Strapi} Strapi
@@ -94,6 +92,7 @@ function resolveUserOptions(strapi, userOptions) {
       ),
     });
   }
+
   for (const cacheConfig of cacheConfigs) {
     // validate contentTypes
     const contentType = strapi.contentType(cacheConfig.contentType);
