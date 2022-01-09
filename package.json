@@ -1,55 +1,25 @@
 {
-  "name": "strapi-middleware-cache",
+  "name": "@strapi-plugin-rest-cache/monorepo",
+  "private": true,
   "version": "2.1.7",
   "description": "Speed-up HTTP requests with LRU cache",
-  "strapi": {
-    "displayName": "REST Cache",
-    "name": "strapi-middleware-cache",
-    "description": "Speed-up HTTP requests with LRU cache",
-    "kind": "plugin"
-  },
-  "main": "./",
-  "types": "./types",
-  "scripts": {
-    "eslint:server": "eslint .",
-    "eslint:server:fix": "eslint . --fix",
-    "eslint:admin": "eslint ./src/admin/src",
-    "eslint:admin:fix": "eslint ./src/admin/src --fix",
-    "prettier": "prettier --check .",
-    "prettier:fix": "prettier --write .",
-    "lint": "run-s eslint:server:fix eslint:admin:fix prettier:fix",
-    "test": "run-s test:*",
-    "test:tsc": "tsc",
-    "test:lint": "run-s eslint:server eslint:admin prettier",
-    "test:mocha": "mocha ./tests/*.test.js --exit"
-  },
-  "keywords": [
-    "cache",
-    "strapi",
-    "requests",
-    "redis",
-    "memcache"
+  "workspaces": [
+    "./packages/*",
+    "./playgrounds/*"
   ],
-  "directories": {
-    "lib": "./lib",
-    "types": "./types"
+  "scripts": {
+    "dev:memory": "yarn workspace @strapi-plugin-rest-cache/playground-memory develop",
+    "lint": "lerna run lint --stream",
+    "test": "lerna run test --stream"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/patrixr/strapi-middleware-cache.git"
+    "url": "git+https://github.com/patrixr/strapi-plugin-rest-cache.git"
   },
   "author": "Patrick R",
   "license": "MIT",
-  "dependencies": {
-    "chalk": "^4.1.2",
-    "ioredis": "^4.28.2",
-    "koa-router": "^10.1.1",
-    "lodash": "^4.17.15",
-    "lru-cache": "^6.0.0",
-    "redis-lru": "^0.6.0"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@strapi/strapi": "^4.0.3",
     "@babel/eslint-parser": "^7.5.4",
     "@babel/preset-react": "^7.16.7",
     "chai": "^4.2.0",
@@ -70,27 +40,18 @@
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-redux-saga": "^1.3.2",
+    "lerna": "^4.0.0",
     "jest": "^27.4.7",
     "jest-cli": "^27.4.7",
     "jest-styled-components": "^7.0.2",
-    "koa": "^2.11.0",
     "lint-staged": "^12.1.7",
-    "lodash": "^4.17.11",
     "mocha": "^9.1.3",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.5.1",
-    "react": "^17.0.2",
-    "react-intl": "^5.20.12",
-    "react-redux": "^7.2.2",
-    "redux": "^4.0.5",
     "sinon": "^12.0.1",
-    "styled-components": "^5.2.3",
     "supertest": "^6.1.6",
     "supertest-koa-agent": "^0.3.2",
     "yorkie": "^2.0.0"
-  },
-  "peerDependencies": {
-    "@strapi/strapi": "^4.0.0"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"

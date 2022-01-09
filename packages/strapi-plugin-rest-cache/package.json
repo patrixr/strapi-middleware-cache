@@ -1,0 +1,90 @@
+{
+  "name": "strapi-plugin-rest-cache",
+  "version": "4.0.0",
+  "description": "Speed-up HTTP requests with LRU cache",
+  "license": "MIT",
+  "strapi": {
+    "displayName": "REST Cache",
+    "name": "strapi-plugin-rest-cache",
+    "description": "Speed-up HTTP requests with LRU cache",
+    "kind": "plugin"
+  },
+  "keywords": [
+    "cache",
+    "strapi",
+    "requests",
+    "redis",
+    "memcache"
+  ],
+  "files": [
+    "./admin",
+    "./server",
+    "./strapi-admin.js",
+    "./strapi-admin.js"
+  ],
+  "scripts": {
+    "lint": "run-s eslint:server:fix eslint:admin:fix prettier:fix",
+    "eslint:server": "eslint .",
+    "eslint:server:fix": "eslint . --fix",
+    "eslint:admin": "eslint ./admin/src",
+    "eslint:admin:fix": "eslint ./admin/src --fix",
+    "prettier": "prettier --check .",
+    "prettier:fix": "prettier --write .",
+    "test": "run-s test:*",
+    "test:lint": "run-s eslint:server eslint:admin prettier",
+    "test:mocha": "mocha ./tests/*.test.js --exit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patrixr/strapi-plugin-rest-cache.git"
+  },
+  "author": {
+    "name": "Patrick R",
+    "url": "https://github.com/patrixr/"
+  },
+  "maintainers": [
+    {
+      "name": "Sacha Stafyniak",
+      "email": "sacha@digisquad.io",
+      "url": "https://digisquad.io"
+    }
+  ],
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "ioredis": "^4.28.2",
+    "koa-router": "^10.1.1",
+    "lodash": "^4.17.15",
+    "lru-cache": "^6.0.0",
+    "redis-lru": "^0.6.0"
+  },
+  "devDependencies": {
+    "@strapi/strapi": "^4.0.3",
+    "koa": "^2.11.0",
+    "npm-run-all": "^4.1.5",
+    "react": "^17.0.2",
+    "react-intl": "^5.20.12",
+    "react-redux": "^7.2.2",
+    "redux": "^4.0.5",
+    "styled-components": "^5.2.3"
+  },
+  "peerDependencies": {
+    "@strapi/strapi": "^4.0.0"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.js": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  }
+}

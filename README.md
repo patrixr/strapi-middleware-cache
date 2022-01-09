@@ -2,7 +2,7 @@
 
 A cache middleware for the headless CMS strapi.io
 
-![](https://github.com/patrixr/strapi-middleware-cache/workflows/Tests/badge.svg)
+![](https://github.com/patrixr/strapi-plugin-rest-cache/workflows/Tests/badge.svg)
 ![Maintenance](https://img.shields.io/badge/Maintenance%20-Actively%20Maintained-green.svg)
 
 - [Strapi LRU Caching middleware](#strapi-lru-caching-middleware)
@@ -42,13 +42,13 @@ Important: Caching must be explicitely enabled **per model**
 Using npm
 
 ```bash
-npm install --save strapi-middleware-cache
+npm install --save strapi-plugin-rest-cache
 ```
 
 Using yarn
 
 ```bash
-yarn add strapi-middleware-cache
+yarn add strapi-plugin-rest-cache
 ```
 
 ## Version 1 compatibility
@@ -84,7 +84,7 @@ Enable the cache plugins by adding the following snippet to an empty plugins fil
 ```javascript
 // config/plugins.js
 module.exports = ({ env }) => ({
-  'strapi-middleware-cache': {
+  'strapi-plugin-rest-cache': {
     enabled: true,
     config: {},
   },
@@ -109,7 +109,7 @@ e.g
 ```javascript
 // config/plugins.js
 module.exports = ({ env }) => ({
-  'strapi-middleware-cache': {
+  'strapi-plugin-rest-cache': {
     enabled: true,
     config: {
       contentTypes: ['api::review.review'],
@@ -142,7 +142,7 @@ The module's configuration object supports the following properties
 ```javascript
 // config/plugins.js
 module.exports = ({ env }) => ({
-  'strapi-middleware-cache': {
+  'strapi-plugin-rest-cache': {
     enabled: true,
     config: {
       type: 'redis',
@@ -192,7 +192,7 @@ e.g
 ```javascript
 // config/plugins.js
 module.exports = ({ env }) => ({
-  "strapi-middleware-cache": {
+  "strapi-plugin-rest-cache": {
     enabled: true,
     config: {
       maxAge: 3600000,
