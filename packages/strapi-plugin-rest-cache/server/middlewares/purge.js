@@ -5,7 +5,7 @@
 module.exports = (options, { strapi }) => {
   if (!options.contentType) {
     throw new Error(
-      'Unable to initialize purge cache middleware: options.contentType is required'
+      'REST Cache: unable to initialize purge middleware: options.contentType is required'
     );
   }
 
@@ -15,7 +15,7 @@ module.exports = (options, { strapi }) => {
 
   if (!cacheConf.isCached(options.contentType)) {
     throw new Error(
-      `Unable to initialize purge cache middleware: no configuration found for contentType "${options.contentType}"`
+      `REST Cache: unable to initialize purge middleware: no configuration found for contentType "${options.contentType}"`
     );
   }
 

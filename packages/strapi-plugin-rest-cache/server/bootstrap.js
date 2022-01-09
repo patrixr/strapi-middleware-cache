@@ -1,6 +1,7 @@
 /**
  * @typedef {import('@strapi/strapi').Strapi} Strapi
  */
+const chalk = require('chalk');
 
 const { CacheProvider } = require('./types');
 const { resolveUserStrategy } = require('./utils/config/resolveUserStrategy');
@@ -63,6 +64,10 @@ module.exports = async ({ strapi }) => {
     .plugin('strapi-plugin-rest-cache')
     .service('cacheStore')
     .init(provider);
+
+  strapi.log.info(
+    `REST Cache provider ${chalk.cyan(pluginOption.provider.name)} initialized`
+  );
 
   // boostrap plugin permissions
   await strapi.admin.services.permission.actionProvider.registerMany(

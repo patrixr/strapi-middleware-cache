@@ -9,7 +9,7 @@ const generateCacheKey = require('../utils/middlewares/generateCacheKey');
 module.exports = (options, { strapi }) => {
   if (!options.contentType) {
     throw new Error(
-      'Unable to initialize recv cache middleware: options.contentType is required'
+      'REST Cache: unable to initialize recv middleware: options.contentType is required'
     );
   }
 
@@ -23,7 +23,7 @@ module.exports = (options, { strapi }) => {
 
   if (!cacheConf) {
     throw new Error(
-      `Unable to initialize recv cache middleware: no configuration found for contentType "${options.contentType}"`
+      `REST Cache: unable to initialize recv middleware: no configuration found for contentType "${options.contentType}"`
     );
   }
 

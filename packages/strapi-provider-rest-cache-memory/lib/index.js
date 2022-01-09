@@ -8,7 +8,7 @@ module.exports = {
   provider: "memory",
   name: "Memory",
 
-  init(options /* , { strapi } */) {
+  async init(options /* , { strapi } */) {
     return new MemoryCacheProvider(options);
   },
 };
