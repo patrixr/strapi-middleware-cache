@@ -1,9 +1,8 @@
 module.exports = {
   default: () => ({
-    logs: true,
     provider: {
       name: 'memory',
-      options: { max: 100, maxAge: 3600 },
+      options: {},
     },
     strategy: {
       enableEtagSupport: false,

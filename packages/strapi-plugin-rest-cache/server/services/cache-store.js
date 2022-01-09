@@ -16,7 +16,7 @@ module.exports = ({ strapi }) => {
   /**
    * @type {CacheProvider}
    */
-  let cache;
+  let provider;
   let initialized = false;
 
   const pluginConfig = strapi.config.get('plugin.strapi-plugin-rest-cache');
@@ -26,8 +26,8 @@ module.exports = ({ strapi }) => {
     /**
      * @param {CacheProvider} provider
      */
-    async init(provider) {
-      cache = provider;
+    async init(newProvider) {
+      provider = newProvider;
       initialized = true;
     },
 
@@ -40,8 +40,13 @@ module.exports = ({ strapi }) => {
         return null;
       }
 
+      if (!this.ready) {
+        strapi.log.error('REST Cache provider not ready');
+        return null;
+      }
+
       return withTimeout(
-        async () => deserialize(await cache.get(key)),
+        async () => deserialize(await provider.get(key)),
         cacheTimeout
       ).catch((error) => {
         if (error?.message === 'timeout') {
@@ -52,6 +57,7 @@ module.exports = ({ strapi }) => {
           strapi.log.error(`REST Cache provider errored:`);
           strapi.log.error(error);
         }
+        return null;
       });
     },
 
@@ -66,7 +72,18 @@ module.exports = ({ strapi }) => {
         return null;
       }
 
-      return cache.set(key, serialize(val), maxAge);
+      if (!this.ready) {
+        strapi.log.error('REST Cache provider not ready');
+        return null;
+      }
+
+      try {
+        return provider.set(key, serialize(val), maxAge);
+      } catch (error) {
+        strapi.log.error(`REST Cache provider errored:`);
+        strapi.log.error(error);
+        return null;
+      }
     },
 
     /**
@@ -78,7 +95,18 @@ module.exports = ({ strapi }) => {
         return null;
       }
 
-      return deserialize(await cache.peek(key));
+      if (!this.ready) {
+        strapi.log.error('REST Cache provider not ready');
+        return null;
+      }
+
+      try {
+        return deserialize(await provider.peek(key));
+      } catch (error) {
+        strapi.log.error(`REST Cache provider errored:`);
+        strapi.log.error(error);
+        return null;
+      }
     },
 
     /**
@@ -90,7 +118,18 @@ module.exports = ({ strapi }) => {
         return null;
       }
 
-      return cache.del(key);
+      if (!this.ready) {
+        strapi.log.error('REST Cache provider not ready');
+        return null;
+      }
+
+      try {
+        return provider.del(key);
+      } catch (error) {
+        strapi.log.error(`REST Cache provider errored:`);
+        strapi.log.error(error);
+        return null;
+      }
     },
 
     async keys() {
@@ -99,7 +138,18 @@ module.exports = ({ strapi }) => {
         return null;
       }
 
-      return cache.keys();
+      if (!this.ready) {
+        strapi.log.error('REST Cache provider not ready');
+        return null;
+      }
+
+      try {
+        return provider.keys();
+      } catch (error) {
+        strapi.log.error(`REST Cache provider errored:`);
+        strapi.log.error(error);
+        return null;
+      }
     },
 
     async reset() {
@@ -108,7 +158,27 @@ module.exports = ({ strapi }) => {
         return null;
       }
 
-      return cache.reset();
+      if (!this.ready) {
+        strapi.log.error('REST Cache provider not ready');
+        return null;
+      }
+
+      try {
+        return provider.reset();
+      } catch (error) {
+        strapi.log.error(`REST Cache provider errored:`);
+        strapi.log.error(error);
+        return null;
+      }
+    },
+
+    get ready() {
+      if (!initialized) {
+        strapi.log.error('REST Cache provider not initialized');
+        return false;
+      }
+
+      return provider.ready;
     },
   };
 };

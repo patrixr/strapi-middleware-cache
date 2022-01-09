@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "dev:memory": "yarn workspace @strapi-plugin-rest-cache/playground-memory develop",
+    "dev:redis": "yarn workspace @strapi-plugin-rest-cache/playground-redis develop",
     "lint": "lerna run lint --stream",
     "test": "lerna run test --stream"
   },

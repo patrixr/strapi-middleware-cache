@@ -1,10 +1,14 @@
-const LRU = require("lru-cache");
+const lru = require("redis-lru");
 const { CacheProvider } = require("strapi-plugin-rest-cache/server/types");
 
-class MemoryCacheProvider extends CacheProvider {
-  constructor(options = { max: 10, maxAge: 3600 }) {
+class RedisCacheProvider extends CacheProvider {
+  constructor(
+    client,
+    options = { max: 10, namespace: "strapi-plugin-rest-cache" }
+  ) {
     super();
-    this.cache = new LRU(options);
+    this.client = client;
+    this.cache = lru(client, options);
   }
 
   /**
@@ -45,12 +49,11 @@ class MemoryCacheProvider extends CacheProvider {
     return this.cache.reset();
   }
 
-  // eslint-disable-next-line class-methods-use-this
   get ready() {
-    return true;
+    return this.client.status === "ready";
   }
 }
 
 module.exports = {
-  MemoryCacheProvider,
+  RedisCacheProvider,
 };

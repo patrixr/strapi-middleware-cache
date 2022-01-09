@@ -1,12 +1,12 @@
 {
-  "name": "strapi-provider-rest-cache-memory",
+  "name": "strapi-provider-rest-cache-redis",
   "version": "4.0.0",
   "description": "Speed-up HTTP requests with LRU cache",
   "license": "MIT",
   "strapi": {
-    "displayName": "REST Cache (memory)",
-    "name": "strapi-provider-rest-cache-memory",
-    "description": "In-memory provider for REST Cache plugin",
+    "displayName": "REST Cache (redis)",
+    "name": "strapi-provider-rest-cache-redis",
+    "description": "Redis provider for REST Cache plugin",
     "kind": "plugin"
   },
   "keywords": [
@@ -45,15 +45,17 @@
     }
   ],
   "dependencies": {
-    "lru-cache": "^6.0.0"
+    "redis-lru": "^0.6.0"
   },
   "devDependencies": {
     "@strapi/strapi": "^4.0.3",
-    "strapi-plugin-rest-cache": "4.0.0"
+    "strapi-plugin-rest-cache": "^4.0.0",
+    "strapi-plugin-redis": "^1.0.0-alpha.1"
   },
   "peerDependencies": {
     "@strapi/strapi": "^4.0.0",
-    "strapi-plugin-rest-cache": "4.0.0"
+    "strapi-plugin-rest-cache": "^4.0.0",
+    "strapi-plugin-redis": "^1.0.0-alpha.1"
   },
   "engines": {
     "node": ">=14.0.0",
