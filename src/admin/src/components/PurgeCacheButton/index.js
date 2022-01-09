@@ -3,14 +3,14 @@ import { useIntl } from 'react-intl';
 import { Button } from '@strapi/design-system/Button';
 import Refresh from '@strapi/icons/Refresh';
 import get from 'lodash/get';
-import { ConfirmDialog } from '@strapi/helper-plugin';
+import { ConfirmDialog, useNotification } from '@strapi/helper-plugin';
 
 function PurgeCacheButton() {
   const [showWarningDelete, setWarningDelete] = useState(false);
   const [isModalConfirmButtonLoading, setIsModalConfirmButtonLoading] =
     useState(false);
   const { formatMessage } = useIntl();
-  // const toggleNotification = useNotification();
+  const toggleNotification = useNotification();
 
   const toggleWarningDelete = () => setWarningDelete((prevState) => !prevState);
 
@@ -23,13 +23,13 @@ function PurgeCacheButton() {
         setTimeout(resolve, 5000);
       });
 
-      // toggleNotification({
-      //   type: 'success',
-      //   message: {
-      //     id: 'notification.cache.purge.success',
-      //     defaultMessage: 'Cache purged successfully',
-      //   },
-      // });
+      toggleNotification({
+        type: 'success',
+        message: {
+          id: 'notification.cache.purge.success',
+          defaultMessage: 'Cache purged successfully',
+        },
+      });
 
       // await onDelete(trackerProperty);
 
@@ -46,7 +46,7 @@ function PurgeCacheButton() {
       toggleWarningDelete();
       console.log(err);
       console.log(errorMessage);
-      // toggleNotification({ type: 'warning', message: errorMessage });
+      toggleNotification({ type: 'warning', message: errorMessage });
     }
   };
 
