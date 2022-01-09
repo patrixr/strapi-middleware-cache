@@ -1,6 +1,5 @@
 /**
  * @typedef {import('../../types').CacheRouteConfig} CacheRouteConfig
- * @typedef {import('strapi-supercharged').Strapi} Strapi
  */
 
 /**

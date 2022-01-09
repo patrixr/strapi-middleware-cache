@@ -3,26 +3,25 @@ const chalk = require('chalk');
 
 /**
  * @typedef {import('../../types').CachePluginStrategy} CachePluginStrategy
- * @typedef {import('strapi-supercharged').Strapi} Strapi
  */
 
 // @see https://github.com/strapi/strapi/blob/master/packages/core/content-manager/server/routes/admin.js
 const adminRoutes = {
   post: [
-    '/content-manager/single-types/:model/actions/publish',
-    '/content-manager/single-types/:model/actions/unpublish',
-    '/content-manager/collection-types/:model',
-    '/content-manager/collection-types/:model/:id/actions/publish',
-    '/content-manager/collection-types/:model/:id/actions/unpublish',
-    '/content-manager/collection-types/:model/actions/bulkDelete',
+    '/admin/content-manager/single-types/:model/actions/publish',
+    '/admin/content-manager/single-types/:model/actions/unpublish',
+    '/admin/content-manager/collection-types/:model',
+    '/admin/content-manager/collection-types/:model/:id/actions/publish',
+    '/admin/content-manager/collection-types/:model/:id/actions/unpublish',
+    '/admin/content-manager/collection-types/:model/actions/bulkDelete',
   ],
   put: [
-    '/content-manager/single-types/:model',
-    '/content-manager/collection-types/:model/:id',
+    '/admin/content-manager/single-types/:model',
+    '/admin/content-manager/collection-types/:model/:id',
   ],
   delete: [
-    '/content-manager/single-types/:model',
-    '/content-manager/collection-types/:model/:id',
+    '/admin/content-manager/single-types/:model',
+    '/admin/content-manager/collection-types/:model/:id',
   ],
 };
 
