@@ -7,7 +7,6 @@ import EntityCacheInformation from '../EntityCacheInformation';
 function EditViewInfoInjectedComponent() {
   const { allowedActions } = useRBAC(cachePermissions);
   const { slug } = useCMEditViewDataManager();
-  console.log('EditViewInfoInjectedComponent slug', slug);
 
   if (!allowedActions.canReadStrategy) {
     return null;
