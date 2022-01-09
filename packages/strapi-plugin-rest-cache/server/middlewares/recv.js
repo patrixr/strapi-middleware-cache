@@ -14,7 +14,7 @@ module.exports = (options, { strapi }) => {
   }
 
   const store = strapi.plugin('strapi-plugin-rest-cache').service('cacheStore');
-  const pluginOptions = strapi.config.get('plugin.strapi-plugin-rest-cache');
+  const { strategy } = strapi.config.get('plugin.strapi-plugin-rest-cache');
 
   const cacheConf = strapi
     .plugin('strapi-plugin-rest-cache')
@@ -39,7 +39,7 @@ module.exports = (options, { strapi }) => {
 
     if (lookup) {
       // lookup
-      if (pluginOptions.enableEtagSupport) {
+      if (strategy.enableEtagSupport) {
         const ifNoneMatch = ctx.request.headers['if-none-match'];
         const etagEntry = await store.get(`${cacheKey}_etag`);
         const etagMatch = ifNoneMatch === etagEntry;
@@ -49,7 +49,7 @@ module.exports = (options, { strapi }) => {
         } else {
           strapi.log.debug(`GET ${ctx.path} ${chalk.green('HIT')}`);
 
-          if (pluginOptions.enableXCacheHeaders) {
+          if (strategy.enableXCacheHeaders) {
             ctx.set('X-Cache', 'HIT');
           }
 
@@ -64,7 +64,7 @@ module.exports = (options, { strapi }) => {
       if (cacheEntry) {
         strapi.log.debug(`GET ${ctx.path} ${chalk.green('HIT')}`);
 
-        if (pluginOptions.enableXCacheHeaders) {
+        if (strategy.enableXCacheHeaders) {
           ctx.set('X-Cache', 'HIT');
         }
 
@@ -81,7 +81,7 @@ module.exports = (options, { strapi }) => {
     if (!lookup) {
       strapi.log.debug(`GET ${ctx.path} ${chalk.magenta('HITPASS')}`);
 
-      if (pluginOptions.enableXCacheHeaders) {
+      if (strategy.enableXCacheHeaders) {
         ctx.set('X-Cache', 'HITPASS');
       }
 
@@ -92,7 +92,7 @@ module.exports = (options, { strapi }) => {
     // deliver
     strapi.log.debug(`GET ${ctx.path} ${chalk.yellow('MISS')}`);
 
-    if (pluginOptions.enableXCacheHeaders) {
+    if (strategy.enableXCacheHeaders) {
       ctx.set('X-Cache', 'MISS');
     }
 
@@ -100,7 +100,7 @@ module.exports = (options, { strapi }) => {
       // @TODO check Cache-Control response header
       await store.set(cacheKey, ctx.body, cacheConf.maxAge);
 
-      if (pluginOptions.enableEtagSupport) {
+      if (strategy.enableEtagSupport) {
         const etag = crypto
           .createHash('md5')
           .update(JSON.stringify(ctx.body))

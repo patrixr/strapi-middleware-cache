@@ -7,7 +7,8 @@ const { getRelatedModelsUid } = require('./getRelatedModelsUid');
 const { deepFreeze } = require('./deepFreeze');
 const { routeExists } = require('./routeExists');
 const {
-  CachePluginConfig,
+  CachePluginStrategy,
+  defaultHitpass,
   CacheRouteConfig,
   CacheContentTypeConfig,
 } = require('../../types');
@@ -15,23 +16,16 @@ const {
 /**
  * @param {Strapi} strapi
  * @param {any} userOptions
- * @return {CachePluginConfig}
+ * @return {CachePluginStrategy}
  */
-function resolveUserOptions(strapi, userOptions) {
+function resolveUserStrategy(strapi, userOptions) {
   /**
-   * @type {CachePluginConfig}
+   * @type {CachePluginStrategy}
    */
   const defaultOptions = {
-    type: 'mem',
-    logs: true,
-    enabled: false,
-    populateContext: false,
-    populateStrapiMiddleware: false,
     enableEtagSupport: false,
     enableXCacheHeaders: false,
     clearRelatedCache: false,
-    withKoaContext: false,
-    withStrapiMiddleware: false,
     headers: [],
     max: 500,
     maxAge: 3600000,
@@ -50,8 +44,7 @@ function resolveUserOptions(strapi, userOptions) {
     /**
      * @param {Context} ctx
      */
-    hitpass: (ctx) =>
-      Boolean(ctx.request.headers.authorization || ctx.request.headers.cookie),
+    hitpass: defaultHitpass,
     injectDefaultRoutes: true,
     headers: userOptions.headers || defaultOptions.headers,
     maxAge: userOptions.maxAge || defaultOptions.maxAge,
@@ -198,7 +191,7 @@ function resolveUserOptions(strapi, userOptions) {
   }
 
   return deepFreeze(
-    Object.assign(new CachePluginConfig(), {
+    Object.assign(new CachePluginStrategy(), {
       ...defaultOptions,
       ...userOptions,
       contentTypes: cacheConfigs.map((cacheConfig) =>
@@ -208,4 +201,4 @@ function resolveUserOptions(strapi, userOptions) {
   );
 }
 
-module.exports = { resolveUserOptions };
+module.exports = { resolveUserStrategy };

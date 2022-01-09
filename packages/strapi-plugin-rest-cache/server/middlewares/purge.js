@@ -9,14 +9,11 @@ module.exports = (options, { strapi }) => {
     );
   }
 
-  const store = strapi.plugin('strapi-plugin-rest-cache').service('cacheStore');
-
   const cacheConf = strapi
     .plugin('strapi-plugin-rest-cache')
-    .service('cacheConfig')
-    .get(options.contentType);
+    .service('cacheConfig');
 
-  if (!cacheConf) {
+  if (!cacheConf.isCached(options.contentType)) {
     throw new Error(
       `Unable to initialize purge cache middleware: no configuration found for contentType "${options.contentType}"`
     );
@@ -27,6 +24,6 @@ module.exports = (options, { strapi }) => {
 
     if (!(ctx.status >= 200 && ctx.status <= 300)) return;
 
-    await store.clearCache(options.contentType, ctx.params);
+    await cacheConf.clearCache(options.contentType, ctx.params);
   };
 };

@@ -2,7 +2,6 @@
  * @typedef {import('@strapi/strapi').Strapi} Strapi
  */
 
-const LRU = require('lru-cache');
 const { serialize } = require('../utils/store/serialize');
 const { deserialize } = require('../utils/store/deserialize');
 
@@ -11,15 +10,17 @@ const { deserialize } = require('../utils/store/deserialize');
 /**
  * @param {{ strapi: Strapi }} strapi
  */
-module.exports = ({ strapi }) => {
-  const cache = new LRU({ max: 10, maxAge: 3600 });
-
-  const pluginOptions = strapi.config.get('plugin.strapi-plugin-rest-cache');
-  const cacheConfigService = strapi
-    .plugin('strapi-plugin-rest-cache')
-    .service('cacheConfig');
+module.exports = () => {
+  let cache;
 
   return {
+    /**
+     * @param {string} key
+     */
+    async init(provider) {
+      cache = provider;
+    },
+
     /**
      * @param {string} key
      */
@@ -56,42 +57,6 @@ module.exports = ({ strapi }) => {
 
     async reset() {
       return cache.reset();
-    },
-
-    async clearCache(uid, params = {}) {
-      const cacheConf = cacheConfigService.get(uid);
-
-      if (!cacheConf) {
-        throw new Error(
-          `Unable to clear cache: no configuration found for contentType "${uid}"`
-        );
-      }
-
-      const keys = (await this.keys()) || [];
-      const regExps = cacheConfigService.getCacheKeysRegexp(uid, params);
-
-      if (pluginOptions.clearRelatedCache) {
-        for (const relatedUid of cacheConf.relatedContentTypeUid) {
-          if (cacheConfigService.isCached(relatedUid)) {
-            // clear all cache because we can't predict uri params
-            regExps.push(
-              ...cacheConfigService.getCacheKeysRegexp(relatedUid, {}, true)
-            );
-          }
-        }
-      }
-
-      /**
-       * @param {string} key
-       */
-      const shouldDel = (key) => regExps.find((r) => r.test(key));
-
-      /**
-       * @param {string} key
-       */
-      const del = (key) => this.del(key);
-
-      await Promise.all(keys.filter(shouldDel).map(del));
     },
   };
 };

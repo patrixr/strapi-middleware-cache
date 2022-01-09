@@ -3,7 +3,7 @@ const Router = require('koa-router');
 const chalk = require('chalk');
 
 /**
- * @typedef {import('../../types').CachePluginConfig} CachePluginConfig
+ * @typedef {import('../../types').CachePluginStrategy} CachePluginStrategy
  * @typedef {import('strapi-supercharged').Strapi} Strapi
  */
 
@@ -29,7 +29,7 @@ const adminRoutes = {
 
 /**
  * @param {Strapi} strapi
- * @param {CachePluginConfig} options
+ * @param {CachePluginStrategy} options
  * @return {Router}
  */
 function createRouter(strapi, options) {

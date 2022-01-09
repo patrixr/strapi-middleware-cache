@@ -27,11 +27,7 @@ module.exports = ({ strapi }) => ({
       return;
     }
 
-    const store = strapi
-      .plugin('strapi-plugin-rest-cache')
-      .service('cacheStore');
-
-    await store.clearCache(contentType, params);
+    await cacheConfigService.clearCache(contentType, params);
 
     // send no-content status
     ctx.status = 204;

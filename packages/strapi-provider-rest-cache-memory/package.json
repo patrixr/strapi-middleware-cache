@@ -1,0 +1,62 @@
+{
+  "name": "strapi-provider-rest-cache-memory",
+  "version": "4.0.0",
+  "description": "Speed-up HTTP requests with LRU cache",
+  "license": "MIT",
+  "strapi": {
+    "displayName": "REST Cache (memory)",
+    "name": "strapi-provider-rest-cache-memory",
+    "description": "In-memory cache provider for REST Cache plugin",
+    "kind": "plugin"
+  },
+  "keywords": [
+    "cache",
+    "strapi",
+    "requests",
+    "redis",
+    "memcache"
+  ],
+  "main": "./lib",
+  "files": [
+    "./lib"
+  ],
+  "scripts": {
+    "lint": "run-s eslint:fix eslint:admin:fix prettier:fix",
+    "eslint": "eslint .",
+    "eslint:fix": "eslint . --fix",
+    "prettier": "prettier --check .",
+    "prettier:fix": "prettier --write .",
+    "test": "run-s test:*",
+    "test:lint": "run-s eslint eslint:admin prettier"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patrixr/strapi-plugin-rest-cache.git"
+  },
+  "author": {
+    "name": "Patrick R",
+    "url": "https://github.com/patrixr/"
+  },
+  "maintainers": [
+    {
+      "name": "Sacha Stafyniak",
+      "email": "sacha@digisquad.io",
+      "url": "https://digisquad.io"
+    }
+  ],
+  "dependencies": {
+    "lru-cache": "^6.0.0"
+  },
+  "devDependencies": {
+    "@strapi/strapi": "^4.0.3",
+    "strapi-plugin-rest-cache": "4.0.0"
+  },
+  "peerDependencies": {
+    "@strapi/strapi": "^4.0.0",
+    "strapi-plugin-rest-cache": "4.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  }
+}

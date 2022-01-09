@@ -11,7 +11,7 @@ module.exports = ({ strapi }) => ({
    * @param {Context} ctx
    */
   async index(ctx) {
-    const options = strapi.config.get('plugin.strapi-plugin-rest-cache');
-    ctx.body = options;
+    const strategy = strapi.config.get('plugin.strapi-plugin-rest-cache');
+    ctx.body = strategy;
   },
 });

@@ -1,9 +1,16 @@
-const { CachePluginConfig } = require('./CachePluginConfig');
-const { CacheRouteConfig } = require('./CacheRouteConfig');
-const { CacheContentTypeConfig } = require('./CacheContentTypeConfig');
+const { CachePluginStrategy } = require('./CachePluginStrategy');
+const { routeParamNameRegex, CacheRouteConfig } = require('./CacheRouteConfig');
+const { CacheProvider } = require('./CacheProvider');
+const {
+  defaultHitpass,
+  CacheContentTypeConfig,
+} = require('./CacheContentTypeConfig');
 
 module.exports = {
-  CachePluginConfig,
+  CachePluginStrategy,
+  routeParamNameRegex,
   CacheRouteConfig,
+  CacheProvider,
+  defaultHitpass,
   CacheContentTypeConfig,
 };

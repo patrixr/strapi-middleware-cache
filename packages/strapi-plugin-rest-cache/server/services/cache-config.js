@@ -1,5 +1,5 @@
 /**
- * @typedef {import('../types').CachePluginConfig} CachePluginConfig
+ * @typedef {import('../types').CachePluginStrategy} CachePluginStrategy
  * @typedef {import('../types').CacheContentTypeConfig} CacheContentTypeConfig
  * @typedef {import('@strapi/strapi').Strapi} Strapi
  */
@@ -20,8 +20,8 @@ module.exports = ({ strapi }) => ({
    * @return {string[]}
    */
   getUids() {
-    const options = strapi.config.get('plugin.strapi-plugin-rest-cache');
-    return options.contentTypes.map((cacheConf) => cacheConf.contentType);
+    const { strategy } = strapi.config.get('plugin.strapi-plugin-rest-cache');
+    return strategy.contentTypes.map((cacheConf) => cacheConf.contentType);
   },
 
   /**
@@ -56,8 +56,8 @@ module.exports = ({ strapi }) => ({
    * @return {CacheContentTypeConfig | undefined}
    */
   get(uid) {
-    const options = strapi.config.get('plugin.strapi-plugin-rest-cache');
-    return options.contentTypes.find(
+    const { strategy } = strapi.config.get('plugin.strapi-plugin-rest-cache');
+    return strategy.contentTypes.find(
       (cacheConf) => cacheConf.contentType === uid
     );
   },
@@ -99,5 +99,51 @@ module.exports = ({ strapi }) => ({
    */
   isCached(uid) {
     return !!this.get(uid);
+  },
+
+  async clearCache(uid, params = {}) {
+    const { strategy } = strapi.config.get('plugin.strapi-plugin-rest-cache');
+
+    const cacheConfigService = strapi
+      .plugin('strapi-plugin-rest-cache')
+      .service('cacheConfig');
+
+    const storeService = strapi
+      .plugin('strapi-plugin-rest-cache')
+      .service('cacheStore');
+
+    const cacheConf = cacheConfigService.get(uid);
+
+    if (!cacheConf) {
+      throw new Error(
+        `Unable to clear cache: no configuration found for contentType "${uid}"`
+      );
+    }
+
+    const keys = (await storeService.keys()) || [];
+    const regExps = cacheConfigService.getCacheKeysRegexp(uid, params);
+
+    if (strategy.clearRelatedCache) {
+      for (const relatedUid of cacheConf.relatedContentTypeUid) {
+        if (cacheConfigService.isCached(relatedUid)) {
+          // clear all cache because we can't predict uri params
+          regExps.push(
+            ...cacheConfigService.getCacheKeysRegexp(relatedUid, {}, true)
+          );
+        }
+      }
+    }
+
+    /**
+     * @param {string} key
+     */
+    const shouldDel = (key) => regExps.find((r) => r.test(key));
+
+    /**
+     * @param {string} key
+     */
+    const del = (key) => storeService.del(key);
+
+    await Promise.all(keys.filter(shouldDel).map(del));
   },
 });

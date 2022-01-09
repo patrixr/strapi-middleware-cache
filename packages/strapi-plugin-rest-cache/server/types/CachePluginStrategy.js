@@ -2,29 +2,12 @@
  * @typedef {import('./CacheContentTypeConfig').CacheContentTypeConfig} CacheContentTypeConfig
  */
 
-class CachePluginConfig {
-  /**
-   * @type {'mem' | 'redis'}
-   */
-  type = 'mem';
-
-  logs = true;
-
-  enabled = false;
-
-  populateContext = false;
-
-  populateStrapiMiddleware = false;
-
+class CachePluginStrategy {
   enableEtagSupport = false;
 
   enableXCacheHeaders = false;
 
   clearRelatedCache = false;
-
-  withKoaContext = false;
-
-  withStrapiMiddleware = false;
 
   /**
    * @type {string[]}
@@ -43,4 +26,4 @@ class CachePluginConfig {
   contentTypes = [];
 }
 
-module.exports = { CachePluginConfig };
+module.exports = { CachePluginStrategy };

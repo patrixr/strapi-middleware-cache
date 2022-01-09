@@ -6,7 +6,6 @@ module.exports = (options, { strapi }) => {
   const cacheConfig = strapi
     .plugin('strapi-plugin-rest-cache')
     .service('cacheConfig');
-  const store = strapi.plugin('strapi-plugin-rest-cache').service('cacheStore');
 
   return async (ctx, next) => {
     // uid:
@@ -28,6 +27,6 @@ module.exports = (options, { strapi }) => {
 
     if (!(ctx.status >= 200 && ctx.status <= 300)) return;
 
-    await store.clearCache(uid, params);
+    await cacheConfig.clearCache(uid, params);
   };
 };

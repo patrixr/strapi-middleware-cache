@@ -25,5 +25,6 @@ class CacheRouteConfig {
 }
 
 module.exports = {
+  routeParamNameRegex,
   CacheRouteConfig,
 };

@@ -48,4 +48,4 @@ class CacheContentTypeConfig {
   relatedContentTypeUid = [];
 }
 
-module.exports = { CacheContentTypeConfig };
+module.exports = { defaultHitpass, CacheContentTypeConfig };
