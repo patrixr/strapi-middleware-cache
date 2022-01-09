@@ -1,8 +1,39 @@
-module.exports = ({ strapi }) => ({
-  async index(ctx) {
-    strapi.log.debug('Hello purge World!');
+/**
+ * @typedef {import('@strapi/strapi').Strapi} Strapi
+ * @typedef {import('koa').Context} Context
+ */
 
-    // called by GET /hello
-    ctx.body = 'Hello purge World!'; // we could also send a JSON
+/**
+ * @param {{ strapi: Strapi }} strapi
+ */
+module.exports = ({ strapi }) => ({
+  /**
+   * @param {Context} ctx
+   */
+  async index(ctx) {
+    const { contentType, params } = ctx.request.body;
+
+    if (!contentType) {
+      ctx.badRequest('contentType is required');
+      return;
+    }
+
+    const cacheConfigService = strapi
+      .plugin('strapi-middleware-cache')
+      .service('cacheConfig');
+
+    if (!cacheConfigService.isCached(contentType)) {
+      ctx.badRequest('contentType is not cached', { contentType });
+      return;
+    }
+
+    const store = strapi
+      .plugin('strapi-middleware-cache')
+      .service('cacheStore');
+
+    await store.clearCache(contentType, params);
+
+    // send no-content status
+    ctx.status = 204;
   },
 });

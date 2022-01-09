@@ -3,13 +3,14 @@ import React from 'react';
 // import { Button } from '@strapi/design-system/Button';
 // import Refresh from '@strapi/icons/Refresh';
 // import get from 'lodash/get';
-import // ConfirmDialog,
-// useNotification,
-// hasPermissions,
-// useRBACProvider,
-// useCMEditViewDataManager,
-// request,
-'@strapi/helper-plugin';
+// import {
+//   // ConfirmDialog,
+//   useNotification,
+//   // hasPermissions,
+//   // useRBACProvider,
+//   // useCMEditViewDataManager,
+//   // request,
+// } from '@strapi/helper-plugin';
 // import { useRouteMatch } from 'react-router-dom';
 // import cachePermissions from '../../permissions';
 import PurgeCacheButton from '../PurgeCacheButton';
@@ -22,6 +23,15 @@ function InjectedCMEditViewCacheComponent() {
 
   // const toggleNotification = useNotification();
 
+  // const onClick = async () => {
+  //   toggleNotification({
+  //     type: 'success',
+  //     message: {
+  //       id: 'notification.cache.purge.success',
+  //       defaultMessage: 'Cache purged successfully',
+  //     },
+  //   });
+  // };
   // const { slug } = useCMEditViewDataManager();
   // console.log('slug', slug);
 

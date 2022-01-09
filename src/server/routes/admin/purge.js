@@ -2,7 +2,7 @@ const pluginId = require('../../pluginId');
 
 module.exports = [
   {
-    method: 'GET',
+    method: 'POST',
     path: '/purge',
     handler: 'purge.index',
     config: {

@@ -3,6 +3,7 @@
   "version": "2.1.7",
   "description": "Speed-up HTTP requests with LRU cache",
   "strapi": {
+    "displayName": "REST Cache",
     "name": "strapi-middleware-cache",
     "description": "Speed-up HTTP requests with LRU cache",
     "kind": "plugin"
@@ -48,12 +49,9 @@
     "redis-lru": "^0.6.0"
   },
   "devDependencies": {
+    "@strapi/strapi": "^4.0.3",
     "@babel/eslint-parser": "^7.5.4",
     "@babel/preset-react": "^7.16.7",
-    "@fortawesome/react-fontawesome": "^0.1.16",
-    "@strapi/design-system": "^0.0.1-alpha.71",
-    "@strapi/icons": "^0.0.1-alpha.71",
-    "@strapi/utils": "^4.0.3",
     "chai": "^4.2.0",
     "codecov": "^3.8.3",
     "eslint": "^8.6.0",

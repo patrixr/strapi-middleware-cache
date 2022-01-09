@@ -14,6 +14,7 @@ const { deserialize } = require('../utils/store/deserialize');
 module.exports = ({ strapi }) => {
   const cache = new LRU({ max: 10, maxAge: 3600 });
 
+  const pluginOptions = strapi.config.get('plugin.strapi-middleware-cache');
   const cacheConfigService = strapi
     .plugin('strapi-middleware-cache')
     .service('cacheConfig');
@@ -58,8 +59,6 @@ module.exports = ({ strapi }) => {
     },
 
     async clearCache(uid, params = {}) {
-      const pluginOptions = strapi.config.get('plugin.strapi-middleware-cache');
-
       const cacheConf = cacheConfigService.get(uid);
 
       if (!cacheConf) {

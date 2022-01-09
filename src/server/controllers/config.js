@@ -1,15 +1,17 @@
 /**
  * @typedef {import('@strapi/strapi').Strapi} Strapi
+ * @typedef {import('koa').Context} Context
  */
 
 /**
  * @param {{ strapi: Strapi }} strapi
  */
 module.exports = ({ strapi }) => ({
+  /**
+   * @param {Context} ctx
+   */
   async index(ctx) {
-    strapi.log.debug('Hello config World!');
-
-    // called by GET /hello
-    ctx.body = 'Hello config World!'; // we could also send a JSON
+    const options = strapi.config.get('plugin.strapi-middleware-cache');
+    ctx.body = options;
   },
 });
