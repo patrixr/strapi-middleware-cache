@@ -40,7 +40,6 @@
   "author": "Patrick R",
   "license": "MIT",
   "dependencies": {
-    "@strapi/helper-plugin": "^4.0.3",
     "chalk": "^4.1.2",
     "ioredis": "^4.28.2",
     "koa-router": "^10.1.1",
