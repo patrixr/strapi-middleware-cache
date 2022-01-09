@@ -9,6 +9,7 @@ module.exports = {
       strategy: {
         enableXCacheHeaders: true,
         clearRelatedCache: true,
+        injectAdminMiddlewares: false,
         contentTypes: [
           "api::article.article",
           "api::category.category",

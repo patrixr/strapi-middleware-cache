@@ -1,8 +1,21 @@
-import pluginId from './pluginId';
+// import pluginId from './pluginId';
 
 const pluginPermissions = {
-  purgeCache: [{ action: `plugin::${pluginId}.cache.purge`, subject: null }],
-  readCache: [{ action: `plugin::${pluginId}.cache.read`, subject: null }],
+  purge: [
+    { action: `plugin::strapi-plugin-rest-cache.cache.purge`, subject: null },
+  ],
+  readStrategy: [
+    {
+      action: `plugin::strapi-plugin-rest-cache.cache.read-strategy`,
+      subject: null,
+    },
+  ],
+  readProvider: [
+    {
+      action: `plugin::strapi-plugin-rest-cache.cache.read-provider`,
+      subject: null,
+    },
+  ],
 };
 
 export default pluginPermissions;

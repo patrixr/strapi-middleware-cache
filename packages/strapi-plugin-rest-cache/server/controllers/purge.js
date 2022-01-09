@@ -30,6 +30,7 @@ module.exports = ({ strapi }) => ({
     await cacheConfigService.clearCache(contentType, params);
 
     // send no-content status
-    ctx.status = 204;
+    // ctx.status = 204;
+    ctx.body = {};
   },
 });

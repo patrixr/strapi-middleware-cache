@@ -1,90 +1,131 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import get from 'lodash.get';
 import { useIntl } from 'react-intl';
 import { Button } from '@strapi/design-system/Button';
 import Refresh from '@strapi/icons/Refresh';
-import get from 'lodash/get';
-import { ConfirmDialog, useNotification } from '@strapi/helper-plugin';
+import { ConfirmDialog, useNotification, request } from '@strapi/helper-plugin';
+import PropTypes from 'prop-types';
 
-function PurgeCacheButton() {
-  const [showWarningDelete, setWarningDelete] = useState(false);
+import pluginId from '../../pluginId';
+import { useCacheStrategy } from '../../hooks';
+
+function PurgeCacheButton({ contentType, params }) {
+  const { strategy } = useCacheStrategy();
+
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [isModalConfirmButtonLoading, setIsModalConfirmButtonLoading] =
     useState(false);
   const { formatMessage } = useIntl();
   const toggleNotification = useNotification();
 
-  const toggleWarningDelete = () => setWarningDelete((prevState) => !prevState);
+  const abortController = new AbortController();
+  const { signal } = abortController;
+
+  useEffect(() => {
+    return () => {
+      abortController.abort();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const toggleConfirmModal = () =>
+    setShowConfirmModal((prevState) => !prevState);
 
   const handleConfirmDelete = async () => {
     try {
       // Show the loading state
       setIsModalConfirmButtonLoading(true);
 
-      await new Promise((resolve) => {
-        setTimeout(resolve, 5000);
+      await request(`/${pluginId}/purge`, {
+        method: 'POST',
+        signal,
+        body: {
+          contentType,
+          params,
+        },
       });
 
       toggleNotification({
         type: 'success',
         message: {
-          id: 'notification.cache.purge.success',
+          id: 'cache.purge.success',
           defaultMessage: 'Cache purged successfully',
         },
       });
 
-      // await onDelete(trackerProperty);
-
       setIsModalConfirmButtonLoading(false);
 
-      toggleWarningDelete();
+      toggleConfirmModal();
     } catch (err) {
-      const errorMessage = get(
-        err,
-        'response.payload.message',
-        formatMessage({ id: 'test' })
-      );
+      const errorMessage = get(err, 'response.payload.error.message');
       setIsModalConfirmButtonLoading(false);
-      toggleWarningDelete();
-      console.log(err);
-      console.log(errorMessage);
-      toggleNotification({ type: 'warning', message: errorMessage });
+      toggleConfirmModal();
+
+      if (errorMessage) {
+        toggleNotification({
+          type: 'warning',
+          message: { id: 'cache.purge.error', defaultMessage: errorMessage },
+        });
+      } else {
+        toggleNotification({
+          type: 'warning',
+          message: { id: 'notification.error' },
+        });
+      }
     }
   };
+
+  if (
+    !strategy?.contentTypes?.find(
+      (config) => config.contentType === contentType
+    )
+  ) {
+    return null;
+  }
 
   return (
     <>
       <Button
-        onClick={toggleWarningDelete}
+        onClick={toggleConfirmModal}
         size="S"
         startIcon={<Refresh />}
         variant="danger"
       >
         {formatMessage({
-          id: 'containers.Edit.delete-entry',
-          defaultMessage: 'Purge cache',
+          id: 'cache.purge.delete-entry',
+          defaultMessage: 'Purge REST Cache',
         })}
       </Button>
       <ConfirmDialog
         isConfirmButtonLoading={isModalConfirmButtonLoading}
-        isOpen={showWarningDelete}
+        isOpen={showConfirmModal}
         onConfirm={handleConfirmDelete}
-        onToggleDialog={toggleWarningDelete}
+        onToggleDialog={toggleConfirmModal}
         title={{
-          id: 'containers.Edit.purge-entity-modal-title',
-          defaultMessage: 'Confirm purging cache?',
+          id: 'cache.purge.confirm-modal-title',
+          defaultMessage: 'Confirm purging REST Cache?',
         }}
         bodyText={{
-          id: 'containers.Edit.purge-entity-modal-body',
+          id: 'cache.purge.confirm-modal-body',
           defaultMessage:
-            'Are you sure you want to purge cache for this entry?',
+            'Are you sure you want to purge REST Cache for this entry?',
         }}
         iconRightButton={<Refresh />}
         rightButtonText={{
-          id: 'containers.Edit.purge-entity-modal-confirm',
-          defaultMessage: 'Purge cache',
+          id: 'cache.purge.confirm-modal-confirm',
+          defaultMessage: 'Purge REST Cache',
         }}
       />
     </>
   );
 }
+
+PurgeCacheButton.propTypes = {
+  contentType: PropTypes.string.isRequired,
+  params: PropTypes.object,
+};
+PurgeCacheButton.defaultProps = {
+  params: {},
+};
 
 export default PurgeCacheButton;

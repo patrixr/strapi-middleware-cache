@@ -8,6 +8,7 @@ class CachePluginStrategy {
   enableXCacheHeaders = false;
 
   clearRelatedCache = false;
+  injectAdminMiddlewares = true;
 
   /**
    * @type {string[]}

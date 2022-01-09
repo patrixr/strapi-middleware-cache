@@ -8,7 +8,7 @@ const { createRouter } = require('./utils/middlewares/createRouter');
 
 const permissionsActions = require('./permissions-actions');
 
-const createProvider = (providerConfig, { strapi }) => {
+const createProvider = async (providerConfig, { strapi }) => {
   const providerName = providerConfig.name.toLowerCase();
   let provider;
 
@@ -32,7 +32,9 @@ const createProvider = (providerConfig, { strapi }) => {
     );
   }
 
-  const providerInstance = provider.init(providerConfig.options, { strapi });
+  const providerInstance = await provider.init(providerConfig.options, {
+    strapi,
+  });
 
   if (!(providerInstance instanceof CacheProvider)) {
     throw new Error(
@@ -56,7 +58,7 @@ module.exports = async ({ strapi }) => {
   });
 
   // register cache provider
-  const provider = createProvider(pluginOption.provider, { strapi });
+  const provider = await createProvider(pluginOption.provider, { strapi });
   strapi
     .plugin('strapi-plugin-rest-cache')
     .service('cacheStore')

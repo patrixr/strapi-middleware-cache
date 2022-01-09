@@ -29,10 +29,10 @@ const adminRoutes = {
 
 /**
  * @param {Strapi} strapi
- * @param {CachePluginStrategy} options
+ * @param {CachePluginStrategy} strategy
  * @return {Router}
  */
-function createRouter(strapi, options) {
+function createRouter(strapi, strategy) {
   const router = new Router();
 
   const createRecvMiddleware = strapi
@@ -46,7 +46,7 @@ function createRouter(strapi, options) {
     .middleware('purgeAdmin');
   const purgeAdminMiddleware = createPurgeAdminMiddleware({}, { strapi });
 
-  for (const cacheConf of options.contentTypes) {
+  for (const cacheConf of strategy.contentTypes) {
     strapi.log.debug(
       `Register ${chalk.cyan(cacheConf.contentType)} routes middlewares`
     );
@@ -103,21 +103,23 @@ function createRouter(strapi, options) {
   }
 
   // --- Admin REST endpoints
-  strapi.log.debug(
-    `Register ${chalk.magentaBright('admin')} routes middlewares`
-  );
+  if (strategy.injectAdminMiddlewares) {
+    strapi.log.debug(
+      `Register ${chalk.magentaBright('admin')} routes middlewares`
+    );
 
-  for (const route of adminRoutes.post) {
-    strapi.log.debug(`POST ${route} ${chalk.magentaBright('purge-admin')}`);
-    router.post(route, purgeAdminMiddleware);
-  }
-  for (const route of adminRoutes.put) {
-    strapi.log.debug(`PUT ${route} ${chalk.magentaBright('purge-admin')}`);
-    router.put(route, purgeAdminMiddleware);
-  }
-  for (const route of adminRoutes.delete) {
-    strapi.log.debug(`DELETE ${route} ${chalk.magentaBright('purge-admin')}`);
-    router.delete(route, purgeAdminMiddleware);
+    for (const route of adminRoutes.post) {
+      strapi.log.debug(`POST ${route} ${chalk.magentaBright('purge-admin')}`);
+      router.post(route, purgeAdminMiddleware);
+    }
+    for (const route of adminRoutes.put) {
+      strapi.log.debug(`PUT ${route} ${chalk.magentaBright('purge-admin')}`);
+      router.put(route, purgeAdminMiddleware);
+    }
+    for (const route of adminRoutes.delete) {
+      strapi.log.debug(`DELETE ${route} ${chalk.magentaBright('purge-admin')}`);
+      router.delete(route, purgeAdminMiddleware);
+    }
   }
 
   return router;

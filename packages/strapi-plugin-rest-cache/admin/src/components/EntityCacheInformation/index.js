@@ -1,15 +1,40 @@
 import React from 'react';
-// import { useRouteMatch } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { useIntl } from 'react-intl';
+import { Status } from '@strapi/design-system/Status';
+import { Typography } from '@strapi/design-system/Typography';
+import { Box } from '@strapi/design-system/Box';
 
-function EntityCacheInformation() {
-  // const {
-  //   params: { model, id },
-  // } = useRouteMatch('/content-manager/:kind/:model/:id?');
+import { useCacheStrategy } from '../../hooks';
 
-  // console.log('EntityCacheInformation id', id);
-  // console.log('EntityCacheInformation model', model);
+function EntityCacheInformation({ contentType }) {
+  const { strategy } = useCacheStrategy();
+  const { formatMessage } = useIntl();
 
-  return <>This entity is cached!</>;
+  if (
+    !strategy?.contentTypes?.find(
+      (config) => config.contentType === contentType
+    )
+  ) {
+    return null;
+  }
+
+  return (
+    <Box paddingTop={2}>
+      <Status variant="neutral">
+        <Typography>
+          {formatMessage({
+            id: 'cache.info-box.entity-cached',
+            defaultMessage: 'This entity is cached via REST Cache plugin',
+          })}
+        </Typography>
+      </Status>
+    </Box>
+  );
 }
+
+EntityCacheInformation.propTypes = {
+  contentType: PropTypes.string.isRequired,
+};
 
 export default EntityCacheInformation;
