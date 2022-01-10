@@ -101,7 +101,7 @@ module.exports = ({ strapi }) => ({
     return !!this.get(uid);
   },
 
-  async clearCache(uid, params = {}) {
+  async clearCache(uid, params = {}, wildcard = false) {
     const { strategy } = strapi.config.get('plugin.strapi-plugin-rest-cache');
 
     const cacheConfigService = strapi
@@ -121,7 +121,11 @@ module.exports = ({ strapi }) => ({
     }
 
     const keys = (await storeService.keys()) || [];
-    const regExps = cacheConfigService.getCacheKeysRegexp(uid, params);
+    const regExps = cacheConfigService.getCacheKeysRegexp(
+      uid,
+      params,
+      wildcard
+    );
 
     if (strategy.clearRelatedCache) {
       for (const relatedUid of cacheConf.relatedContentTypeUid) {

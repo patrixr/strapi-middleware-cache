@@ -2,6 +2,8 @@
  * @typedef {import('@strapi/strapi').Strapi} Strapi
  * @typedef {import('../types').CacheProvider} CacheProvider
  */
+const chalk = require('chalk');
+const debug = require('debug')('strapi:strapi-plugin-rest-cache');
 
 const { serialize } = require('../utils/store/serialize');
 const { deserialize } = require('../utils/store/deserialize');
@@ -124,6 +126,7 @@ module.exports = ({ strapi }) => {
       }
 
       try {
+        debug(`${chalk.redBright('PURGING KEY')}: ${key}`);
         return provider.del(key);
       } catch (error) {
         strapi.log.error(`REST Cache provider errored:`);

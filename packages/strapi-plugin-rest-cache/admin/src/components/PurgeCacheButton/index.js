@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import pluginId from '../../pluginId';
 import { useCacheStrategy } from '../../hooks';
 
-function PurgeCacheButton({ contentType, params }) {
+function PurgeCacheButton({ contentType, params, wildcard }) {
   const { strategy } = useCacheStrategy();
 
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -42,6 +42,7 @@ function PurgeCacheButton({ contentType, params }) {
         body: {
           contentType,
           params,
+          wildcard,
         },
       });
 
@@ -123,9 +124,11 @@ function PurgeCacheButton({ contentType, params }) {
 PurgeCacheButton.propTypes = {
   contentType: PropTypes.string.isRequired,
   params: PropTypes.object,
+  wildcard: PropTypes.bool,
 };
 PurgeCacheButton.defaultProps = {
   params: {},
+  wildcard: undefined,
 };
 
 export default PurgeCacheButton;

@@ -1,5 +1,6 @@
-const Router = require('koa-router');
+const Router = require('@koa/router');
 const chalk = require('chalk');
+const debug = require('debug')('strapi:strapi-plugin-rest-cache');
 
 /**
  * @typedef {import('../../types').CachePluginStrategy} CachePluginStrategy
@@ -8,20 +9,20 @@ const chalk = require('chalk');
 // @see https://github.com/strapi/strapi/blob/master/packages/core/content-manager/server/routes/admin.js
 const adminRoutes = {
   post: [
-    '/admin/content-manager/single-types/:model/actions/publish',
-    '/admin/content-manager/single-types/:model/actions/unpublish',
-    '/admin/content-manager/collection-types/:model',
-    '/admin/content-manager/collection-types/:model/:id/actions/publish',
-    '/admin/content-manager/collection-types/:model/:id/actions/unpublish',
-    '/admin/content-manager/collection-types/:model/actions/bulkDelete',
+    '/content-manager/single-types/:model/actions/publish',
+    '/content-manager/single-types/:model/actions/unpublish',
+    '/content-manager/collection-types/:model',
+    '/content-manager/collection-types/:model/:id/actions/publish',
+    '/content-manager/collection-types/:model/:id/actions/unpublish',
+    '/content-manager/collection-types/:model/actions/bulkDelete',
   ],
   put: [
-    '/admin/content-manager/single-types/:model',
-    '/admin/content-manager/collection-types/:model/:id',
+    '/content-manager/single-types/:model',
+    '/content-manager/collection-types/:model/:id',
   ],
   delete: [
-    '/admin/content-manager/single-types/:model',
-    '/admin/content-manager/collection-types/:model/:id',
+    '/content-manager/single-types/:model',
+    '/content-manager/collection-types/:model/:id',
   ],
 };
 
@@ -45,53 +46,53 @@ function createRouter(strapi, strategy) {
   const purgeAdminMiddleware = createPurgeAdminMiddleware({}, { strapi });
 
   for (const cacheConf of strategy.contentTypes) {
-    strapi.log.debug(
-      `Register ${chalk.cyan(cacheConf.contentType)} routes middlewares`
-    );
+    debug(`Register ${chalk.cyan(cacheConf.contentType)} routes middlewares`);
 
     const purgeMiddleware = createPurgeMiddleware(
       { contentType: cacheConf.contentType },
-      { strapi, cacheConf }
-    );
-    const recvMiddleware = createRecvMiddleware(
-      { contentType: cacheConf.contentType },
-      { strapi, cacheConf }
+      { strapi }
     );
 
     for (const route of cacheConf.routes) {
       switch (route.method) {
         case 'DELETE': {
-          strapi.log.debug(`DELETE ${route.path} ${chalk.redBright('purge')}`);
+          debug(`DELETE ${route.path} ${chalk.redBright('purge')}`);
           router.delete(route.path, purgeMiddleware);
           break;
         }
         case 'PUT': {
-          strapi.log.debug(`PUT ${route.path} ${chalk.redBright('purge')}`);
+          debug(`PUT ${route.path} ${chalk.redBright('purge')}`);
           router.put(route.path, purgeMiddleware);
           break;
         }
         case 'PATCH': {
-          strapi.log.debug(`PATCH ${route.path} ${chalk.redBright('purge')}`);
+          debug(`PATCH ${route.path} ${chalk.redBright('purge')}`);
           router.patch(route.path, purgeMiddleware);
           break;
         }
         case 'POST': {
-          strapi.log.debug(`POST ${route.path} ${chalk.redBright('purge')}`);
+          debug(`POST ${route.path} ${chalk.redBright('purge')}`);
           router.post(route.path, purgeMiddleware);
           break;
         }
         case 'GET': {
-          const vary = cacheConf.headers
+          const vary = route.headers
             .map((name) => name.toLowerCase())
             .join(',');
 
-          strapi.log.debug(
+          debug(
             `GET ${route.path} ${chalk.green('recv')} ${chalk.grey(
-              `maxAge=${cacheConf.maxAge}`
+              `maxAge=${route.maxAge}`
             )}${vary && chalk.grey(` vary=${vary}`)}`
           );
 
-          router.get(route.path, recvMiddleware);
+          router.get(
+            route.path,
+            createRecvMiddleware(
+              { contentType: cacheConf.contentType, cacheRouteConfig: route },
+              { strapi }
+            )
+          );
           break;
         }
         default:
@@ -102,20 +103,18 @@ function createRouter(strapi, strategy) {
 
   // --- Admin REST endpoints
   if (strategy.injectAdminMiddlewares) {
-    strapi.log.debug(
-      `Register ${chalk.magentaBright('admin')} routes middlewares`
-    );
+    debug(`Register ${chalk.magentaBright('admin')} routes middlewares`);
 
     for (const route of adminRoutes.post) {
-      strapi.log.debug(`POST ${route} ${chalk.magentaBright('purge-admin')}`);
+      debug(`POST ${route} ${chalk.magentaBright('purge-admin')}`);
       router.post(route, purgeAdminMiddleware);
     }
     for (const route of adminRoutes.put) {
-      strapi.log.debug(`PUT ${route} ${chalk.magentaBright('purge-admin')}`);
+      debug(`PUT ${route} ${chalk.magentaBright('purge-admin')}`);
       router.put(route, purgeAdminMiddleware);
     }
     for (const route of adminRoutes.delete) {
-      strapi.log.debug(`DELETE ${route} ${chalk.magentaBright('purge-admin')}`);
+      debug(`DELETE ${route} ${chalk.magentaBright('purge-admin')}`);
       router.delete(route, purgeAdminMiddleware);
     }
   }

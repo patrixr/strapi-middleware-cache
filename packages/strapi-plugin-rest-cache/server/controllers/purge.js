@@ -11,7 +11,7 @@ module.exports = ({ strapi }) => ({
    * @param {Context} ctx
    */
   async index(ctx) {
-    const { contentType, params } = ctx.request.body;
+    const { contentType, params, wildcard } = ctx.request.body;
 
     if (!contentType) {
       ctx.badRequest('contentType is required');
@@ -27,7 +27,7 @@ module.exports = ({ strapi }) => ({
       return;
     }
 
-    await cacheConfigService.clearCache(contentType, params);
+    await cacheConfigService.clearCache(contentType, params, wildcard);
 
     // send no-content status
     // ctx.status = 204;

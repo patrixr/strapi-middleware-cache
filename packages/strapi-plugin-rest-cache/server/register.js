@@ -18,7 +18,7 @@ module.exports = ({ strapi }) => {
     if (!role.lifecycles) {
       role.lifecycles = {
         async afterUpdate() {
-          strapi.log.debug('A role has been updated, invalidating cache...');
+          strapi.log.info('A role has been updated, invalidating cache...');
           await store.reset();
         },
       };
@@ -27,7 +27,7 @@ module.exports = ({ strapi }) => {
       role.lifecycles = {
         ...role.lifecycles,
         async afterUpdate(event) {
-          strapi.log.debug('A role has been updated, invalidating cache...');
+          strapi.log.info('A role has been updated, invalidating cache...');
           await originalAfterUpdate(event);
           await store.reset();
         },
@@ -36,7 +36,7 @@ module.exports = ({ strapi }) => {
       role.lifecycles = {
         ...role.lifecycles,
         async afterUpdate() {
-          strapi.log.debug('A role has been updated, invalidating cache...');
+          strapi.log.info('A role has been updated, invalidating cache...');
           await store.reset();
         },
       };

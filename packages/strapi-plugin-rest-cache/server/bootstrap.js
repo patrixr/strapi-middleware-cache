@@ -65,10 +65,6 @@ module.exports = async ({ strapi }) => {
     .service('cacheStore')
     .init(provider);
 
-  strapi.log.info(
-    `REST Cache provider ${chalk.cyan(pluginOption.provider.name)} initialized`
-  );
-
   // boostrap plugin permissions
   await strapi.admin.services.permission.actionProvider.registerMany(
     permissionsActions.actions
@@ -76,5 +72,11 @@ module.exports = async ({ strapi }) => {
 
   // boostrap cache middlewares
   const router = createRouter(strapi, strategy);
-  strapi.server.use(router.routes());
+  strapi.server.router.use(router.routes());
+
+  strapi.log.info(
+    `Using REST Cache plugin with provider "${chalk.cyan(
+      pluginOption.provider.name
+    )}"`
+  );
 };

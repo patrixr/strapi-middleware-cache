@@ -27,7 +27,7 @@ function ListViewInjectedComponent() {
     return null;
   }
 
-  return <PurgeCacheButton contentType={slug} />;
+  return <PurgeCacheButton contentType={slug} wildcard />;
 }
 
 export default ListViewInjectedComponent;

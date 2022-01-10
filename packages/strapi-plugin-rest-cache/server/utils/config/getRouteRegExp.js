@@ -1,5 +1,3 @@
-const arrayEquals = require('./arrayEquals');
-
 /**
  * @typedef {import('../../types').CacheRouteConfig} CacheRouteConfig
  * @typedef {import('koa').Context} Context
@@ -23,7 +21,7 @@ function getRouteRegExp(route, params, wildcard = false) {
   if (wildcard) {
     let pattern = route.path;
     for (const paramName of route.paramNames) {
-      pattern = pattern.replace(paramName, '([^/]+)');
+      pattern = pattern.replace(`:${paramName}`, '([^/]+)');
     }
 
     return [new RegExp(`^${pattern}\\?`)];
@@ -33,19 +31,16 @@ function getRouteRegExp(route, params, wildcard = false) {
     return [];
   }
 
-  const paramNames = Object.keys(params).map((param) => param.replace(':', ''));
-  const routeParams = route.paramNames.map((param) => param.replace(':', ''));
+  const paramNames = Object.keys(params);
   const regExps = [];
 
-  // route contains :xxx -> check if xxx is in params key -> clear
-  if (arrayEquals(routeParams, paramNames)) {
-    let pattern = route.path;
-    for (const paramName of paramNames) {
-      pattern = pattern.replace(
-        `:${paramName}`,
-        params[paramName] || params[`:${paramName}`]
-      );
-    }
+  let pattern = route.path;
+  for (const paramName of paramNames) {
+    pattern = pattern.replace(`:${paramName}`, params[paramName]);
+  }
+
+  // add if pattern does not contain any unresolved params
+  if (!pattern.includes(':')) {
     regExps.push(new RegExp(`^${pattern}\\?`));
   }
 

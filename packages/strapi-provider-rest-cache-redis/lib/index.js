@@ -7,7 +7,7 @@ const { RedisCacheProvider } = require("./RedisCacheProvider");
 function waitForRedis(client) {
   return new Promise((resolve, reject) => {
     const onReady = () => {
-      strapi.log.debug('REST Cache provider "redis": connection established');
+      strapi.log.info('REST Cache provider "redis": connection established');
 
       // eslint-disable-next-line no-use-before-define
       client.off("error", onError);

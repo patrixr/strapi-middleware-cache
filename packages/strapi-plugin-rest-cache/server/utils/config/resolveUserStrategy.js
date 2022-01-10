@@ -13,6 +13,8 @@ const {
   CacheContentTypeConfig,
 } = require('../../types');
 
+const routeParamNameRegex = /:([^/]+)/g;
+
 /**
  * @param {Strapi} strapi
  * @param {any} userOptions
@@ -28,7 +30,6 @@ function resolveUserStrategy(strapi, userOptions) {
     clearRelatedCache: false,
     injectAdminMiddlewares: true,
     headers: [],
-    max: 500,
     maxAge: 3600000,
     cacheTimeout: 500,
     contentTypes: [],
@@ -42,9 +43,6 @@ function resolveUserStrategy(strapi, userOptions) {
 
   const defaultModelConfig = {
     singleType: false,
-    /**
-     * @param {Context} ctx
-     */
     hitpass: defaultHitpass,
     injectDefaultRoutes: true,
     headers: userOptions.headers || defaultOptions.headers,
@@ -67,12 +65,30 @@ function resolveUserStrategy(strapi, userOptions) {
     const routes = [];
     contentTypeOption.routes?.reduce((acc, value) => {
       if (typeof value === 'string') {
-        acc.push({
-          path: value,
-          method: 'GET',
-        });
+        acc.push(
+          new CacheRouteConfig({
+            path: value,
+            method: 'GET',
+            headers: [...defaultModelConfig.headers],
+            maxAge: defaultModelConfig.maxAge,
+            hitpass: defaultModelConfig.hitpass,
+            paramNames: (value.match(routeParamNameRegex) ?? []).map((param) =>
+              param.replace(':', '')
+            ),
+          })
+        );
       } else {
-        acc.push(value);
+        acc.push(
+          new CacheRouteConfig({
+            headers: [...defaultModelConfig.headers],
+            maxAge: defaultModelConfig.maxAge,
+            hitpass: defaultModelConfig.hitpass,
+            paramNames: (value.path.match(routeParamNameRegex) ?? []).map(
+              (param) => param.replace(':', '')
+            ),
+            ...value,
+          })
+        );
       }
 
       return acc;
@@ -81,9 +97,7 @@ function resolveUserStrategy(strapi, userOptions) {
     cacheConfigs.push({
       ...defaultModelConfig,
       ...contentTypeOption,
-      routes: routes.map((routeConfig) =>
-        Object.assign(new CacheRouteConfig(), routeConfig)
-      ),
+      routes,
     });
   }
 
@@ -137,6 +151,9 @@ function resolveUserStrategy(strapi, userOptions) {
         new CacheRouteConfig({
           path: base,
           method: 'GET',
+          headers: [...cacheConfig.headers],
+          maxAge: cacheConfig.maxAge,
+          hitpass: cacheConfig.hitpass,
         })
       );
     } else {
@@ -154,6 +171,7 @@ function resolveUserStrategy(strapi, userOptions) {
         new CacheRouteConfig({
           path: `${base}/:id`,
           method: 'DELETE',
+          paramNames: ['id'],
         })
       );
       // update
@@ -161,6 +179,7 @@ function resolveUserStrategy(strapi, userOptions) {
         new CacheRouteConfig({
           path: `${base}/:id`,
           method: 'PUT',
+          paramNames: ['id'],
         })
       );
 
@@ -169,6 +188,9 @@ function resolveUserStrategy(strapi, userOptions) {
         new CacheRouteConfig({
           path: base,
           method: 'GET',
+          headers: [...cacheConfig.headers],
+          maxAge: cacheConfig.maxAge,
+          hitpass: cacheConfig.hitpass,
         })
       );
       // findOne
@@ -176,6 +198,10 @@ function resolveUserStrategy(strapi, userOptions) {
         new CacheRouteConfig({
           path: `${base}/:id`,
           method: 'GET',
+          paramNames: ['id'],
+          headers: [...cacheConfig.headers],
+          maxAge: cacheConfig.maxAge,
+          hitpass: cacheConfig.hitpass,
         })
       );
     }

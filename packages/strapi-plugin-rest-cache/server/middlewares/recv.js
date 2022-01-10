@@ -1,40 +1,41 @@
+/**
+ * @typedef {import('../types').CacheRouteConfig} CacheRouteConfig
+ */
+
 const crypto = require('crypto');
 const chalk = require('chalk');
+const debug = require('debug')('strapi:strapi-plugin-rest-cache');
 const generateCacheKey = require('../utils/middlewares/generateCacheKey');
 
 /**
- * @param {{ contentType: string }} options
+ * @param {{ cacheRouteConfig: CacheRouteConfig }} options
  * @param {{ strapi: import('@strapi/strapi').Strapi }} context
  */
 module.exports = (options, { strapi }) => {
-  if (!options.contentType) {
+  const { cacheRouteConfig } = options;
+
+  if (!cacheRouteConfig) {
     throw new Error(
-      'REST Cache: unable to initialize recv middleware: options.contentType is required'
+      'REST Cache: unable to initialize recv middleware: options.cacheRouteConfig is required'
     );
   }
 
   const store = strapi.plugin('strapi-plugin-rest-cache').service('cacheStore');
   const { strategy } = strapi.config.get('plugin.strapi-plugin-rest-cache');
 
-  const cacheConf = strapi
-    .plugin('strapi-plugin-rest-cache')
-    .service('cacheConfig')
-    .get(options.contentType);
-
-  if (!cacheConf) {
-    throw new Error(
-      `REST Cache: unable to initialize recv middleware: no configuration found for contentType "${options.contentType}"`
-    );
-  }
-
   return async (ctx, next) => {
     // hash
-    const cacheKey = generateCacheKey(cacheConf, ctx);
+    const cacheKey = `${ctx.request.path}?${generateCacheKey(
+      cacheRouteConfig,
+      ctx
+    )}`;
 
     // hitpass check
     const lookup = !(
-      (typeof cacheConf.hitpass === 'function' && cacheConf.hitpass(ctx)) ||
-      (typeof cacheConf.hitpass === 'boolean' && cacheConf.hitpass)
+      (typeof cacheRouteConfig.hitpass === 'function' &&
+        cacheRouteConfig.hitpass(ctx)) ||
+      (typeof cacheRouteConfig.hitpass === 'boolean' &&
+        cacheRouteConfig.hitpass)
     );
 
     if (lookup) {
@@ -47,7 +48,7 @@ module.exports = (options, { strapi }) => {
         if (!etagMatch) {
           ctx.set('ETag', etagEntry);
         } else {
-          strapi.log.debug(`GET ${ctx.path} ${chalk.green('HIT')}`);
+          debug(`GET ${cacheKey} ${chalk.green('HIT')}`);
 
           if (strategy.enableXCacheHeaders) {
             ctx.set('X-Cache', 'HIT');
@@ -62,7 +63,7 @@ module.exports = (options, { strapi }) => {
 
       // hit cache
       if (cacheEntry) {
-        strapi.log.debug(`GET ${ctx.path} ${chalk.green('HIT')}`);
+        debug(`GET ${cacheKey} ${chalk.green('HIT')}`);
 
         if (strategy.enableXCacheHeaders) {
           ctx.set('X-Cache', 'HIT');
@@ -79,7 +80,7 @@ module.exports = (options, { strapi }) => {
 
     // fetch done
     if (!lookup) {
-      strapi.log.debug(`GET ${ctx.path} ${chalk.magenta('HITPASS')}`);
+      debug(`GET ${cacheKey} ${chalk.magenta('HITPASS')}`);
 
       if (strategy.enableXCacheHeaders) {
         ctx.set('X-Cache', 'HITPASS');
@@ -90,15 +91,15 @@ module.exports = (options, { strapi }) => {
     }
 
     // deliver
-    strapi.log.debug(`GET ${ctx.path} ${chalk.yellow('MISS')}`);
+    debug(`GET ${cacheKey} ${chalk.yellow('MISS')}`);
 
     if (strategy.enableXCacheHeaders) {
       ctx.set('X-Cache', 'MISS');
     }
 
-    if (ctx.body && ctx.status === 200) {
+    if (ctx.body && ctx.status >= 200 && ctx.status <= 300) {
       // @TODO check Cache-Control response header
-      await store.set(cacheKey, ctx.body, cacheConf.maxAge);
+      await store.set(cacheKey, ctx.body, cacheRouteConfig.maxAge);
 
       if (strategy.enableEtagSupport) {
         const etag = crypto
@@ -108,7 +109,11 @@ module.exports = (options, { strapi }) => {
 
         ctx.set('ETag', `"${etag}"`);
 
-        await store.set(`${cacheKey}_etag`, `"${etag}"`, cacheConf.maxAge);
+        await store.set(
+          `${cacheKey}_etag`,
+          `"${etag}"`,
+          cacheRouteConfig.maxAge
+        );
       }
     }
   };

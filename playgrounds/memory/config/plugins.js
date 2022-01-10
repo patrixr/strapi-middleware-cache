@@ -9,12 +9,28 @@ module.exports = {
       strategy: {
         enableXCacheHeaders: true,
         clearRelatedCache: true,
+        enableEtagSupport: true,
+        maxAge: 420000,
         injectAdminMiddlewares: true,
+        headers: ["accept-encoding"],
         contentTypes: [
           "api::article.article",
-          "api::category.category",
           "api::global.global",
           "api::homepage.homepage",
+          {
+            contentType: "api::category.category",
+            maxAge: 3600000,
+            headers: ["accept-encoding", "accept-language"],
+            routes: [
+              {
+                path: "/api/categories/slug/:slug",
+                headers: ["authorization"],
+                hitpass: false,
+                maxAge: 18000,
+                method: "GET",
+              },
+            ],
+          },
         ],
       },
     },

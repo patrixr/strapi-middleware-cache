@@ -7,10 +7,9 @@ module.exports = {
     strategy: {
       enableEtagSupport: false,
       enableXCacheHeaders: false,
-      clearRelatedCache: false,
+      clearRelatedCache: true,
       injectAdminMiddlewares: true,
       headers: [],
-      max: 500,
       maxAge: 3600000,
       cacheTimeout: 500,
       contentTypes: [],

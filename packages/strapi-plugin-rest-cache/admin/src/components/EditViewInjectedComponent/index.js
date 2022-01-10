@@ -29,7 +29,8 @@ function EditViewInjectedComponent() {
   return (
     <PurgeCacheButton
       contentType={slug}
-      params={isSingleType ? {} : { id: initialData.id }}
+      params={isSingleType ? {} : initialData}
+      wildcard={isSingleType}
     />
   );
 }
