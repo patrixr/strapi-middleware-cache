@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 const LRU = require("lru-cache");
 const { CacheProvider } = require("strapi-plugin-rest-cache/server/types");
 
@@ -45,7 +46,6 @@ class MemoryCacheProvider extends CacheProvider {
     return this.cache.reset();
   }
 
-  // eslint-disable-next-line class-methods-use-this
   get ready() {
     return true;
   }

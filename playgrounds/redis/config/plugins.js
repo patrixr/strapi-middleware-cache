@@ -28,7 +28,6 @@ module.exports = {
     },
   },
   "strapi-plugin-rest-cache": {
-    enabled: true,
     config: {
       provider: {
         name: "redis",
