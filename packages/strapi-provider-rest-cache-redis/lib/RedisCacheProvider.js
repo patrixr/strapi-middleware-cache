@@ -1,14 +1,17 @@
-const lru = require("redis-lru");
+const cacheManager = require("cache-manager");
+const redisStore = require("cache-manager-ioredis");
+
 const { CacheProvider } = require("strapi-plugin-rest-cache/server/types");
 
 class RedisCacheProvider extends CacheProvider {
-  constructor(
-    client,
-    options = { max: 10, namespace: "strapi-plugin-rest-cache" }
-  ) {
+  constructor(client, options) {
     super();
     this.client = client;
-    this.cache = lru(client, options);
+    this.cache = cacheManager.caching({
+      store: redisStore,
+      redisInstance: client,
+      ...options,
+    });
   }
 
   /**
@@ -24,18 +27,14 @@ class RedisCacheProvider extends CacheProvider {
    * @param {number=} maxAge
    */
   async set(key, val, maxAge = 3600) {
-    return this.cache.set(key, val, maxAge);
+    const options = {
+      ttl: maxAge / 1000,
+    };
+    return this.cache.set(key, val, options);
   }
 
   /**
-   * @param {string} key
-   */
-  async peek(key) {
-    return this.cache.peek(key);
-  }
-
-  /**
-   * @param {string} key
+   * @param {string|string[]} key
    */
   async del(key) {
     return this.cache.del(key);
@@ -50,7 +49,8 @@ class RedisCacheProvider extends CacheProvider {
   }
 
   get ready() {
-    return this.client.status === "ready";
+    const client = this.cache.store.getClient();
+    return client.status === "ready";
   }
 }
 

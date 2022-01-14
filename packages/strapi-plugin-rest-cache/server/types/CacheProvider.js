@@ -27,14 +27,7 @@ class CacheProvider {
   }
 
   /**
-   * @param {string} key
-   */
-  async peek(key) {
-    throw new Error("Method 'peek()' must be implemented.");
-  }
-
-  /**
-   * @param {string} key
+   * @param {string|string[]} key
    */
   async del(key) {
     throw new Error("Method 'del()' must be implemented.");

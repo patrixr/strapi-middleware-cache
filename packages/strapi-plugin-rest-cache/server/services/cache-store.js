@@ -91,29 +91,6 @@ module.exports = ({ strapi }) => {
     /**
      * @param {string} key
      */
-    async peek(key) {
-      if (!initialized) {
-        strapi.log.error('REST Cache provider not initialized');
-        return null;
-      }
-
-      if (!this.ready) {
-        strapi.log.error('REST Cache provider not ready');
-        return null;
-      }
-
-      try {
-        return deserialize(await provider.peek(key));
-      } catch (error) {
-        strapi.log.error(`REST Cache provider errored:`);
-        strapi.log.error(error);
-        return null;
-      }
-    },
-
-    /**
-     * @param {string} key
-     */
     async del(key) {
       if (!initialized) {
         strapi.log.error('REST Cache provider not initialized');

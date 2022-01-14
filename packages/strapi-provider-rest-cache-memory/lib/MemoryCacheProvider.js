@@ -1,11 +1,13 @@
 /* eslint-disable class-methods-use-this */
-const LRU = require("lru-cache");
+// const LRU = require("lru-cache");
+const cacheManager = require("cache-manager");
+
 const { CacheProvider } = require("strapi-plugin-rest-cache/server/types");
 
 class MemoryCacheProvider extends CacheProvider {
-  constructor(options = { max: 10, maxAge: 3600 }) {
+  constructor(options) {
     super();
-    this.cache = new LRU(options);
+    this.cache = cacheManager.caching({ store: "memory", ...options });
   }
 
   /**
@@ -21,18 +23,14 @@ class MemoryCacheProvider extends CacheProvider {
    * @param {number=} maxAge
    */
   async set(key, val, maxAge = 3600) {
-    return this.cache.set(key, val, maxAge);
+    const options = {
+      ttl: maxAge / 1000,
+    };
+    return this.cache.set(key, val, options);
   }
 
   /**
-   * @param {string} key
-   */
-  async peek(key) {
-    return this.cache.peek(key);
-  }
-
-  /**
-   * @param {string} key
+   * @param {string|string[]} key
    */
   async del(key) {
     return this.cache.del(key);

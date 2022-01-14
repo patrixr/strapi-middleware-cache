@@ -45,7 +45,7 @@
     }
   ],
   "dependencies": {
-    "lru-cache": "^6.0.0"
+    "cache-manager": "^3.6.0"
   },
   "devDependencies": {
     "@strapi/strapi": "^4.0.3",

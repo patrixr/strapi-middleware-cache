@@ -45,7 +45,8 @@
     }
   ],
   "dependencies": {
-    "redis-lru": "^0.6.0"
+    "cache-manager": "^3.6.0",
+    "cache-manager-ioredis": "^2.1.0"
   },
   "devDependencies": {
     "@strapi/strapi": "^4.0.3",

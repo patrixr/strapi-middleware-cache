@@ -1,7 +1,6 @@
 /**
  * @typedef {import('@strapi/strapi').Strapi} Strapi
  */
-
 const { RedisCacheProvider } = require("./RedisCacheProvider");
 
 function waitForRedis(client) {
