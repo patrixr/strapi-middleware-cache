@@ -7,7 +7,7 @@ title: Configuration Reference
 
 ### Plugin configuration
 
-#### `enableEtagSupport`
+#### `enableEtag`
 #### `enableXCacheHeaders`
 #### `clearRelatedCache`
 #### `injectAdminMiddlewares`

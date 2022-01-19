@@ -25,7 +25,7 @@ function resolveUserStrategy(strapi, userOptions) {
    * @type {CachePluginStrategy}
    */
   const defaultOptions = {
-    enableEtagSupport: false,
+    enableEtag: false,
     enableXCacheHeaders: false,
     clearRelatedCache: false,
     injectAdminMiddlewares: true,

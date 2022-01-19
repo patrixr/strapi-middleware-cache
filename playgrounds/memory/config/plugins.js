@@ -8,7 +8,7 @@ module.exports = {
       strategy: {
         enableXCacheHeaders: true,
         clearRelatedCache: true,
-        enableEtagSupport: true,
+        enableEtag: true,
         maxAge: 420000,
         injectAdminMiddlewares: true,
         headers: ["accept-encoding"],

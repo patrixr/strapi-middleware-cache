@@ -40,7 +40,7 @@ module.exports = (options, { strapi }) => {
 
     if (lookup) {
       // lookup
-      if (strategy.enableEtagSupport) {
+      if (strategy.enableEtag) {
         const ifNoneMatch = ctx.request.headers['if-none-match'];
         const etagEntry = await store.get(`${cacheKey}_etag`);
         const etagMatch = ifNoneMatch === etagEntry;
@@ -101,7 +101,7 @@ module.exports = (options, { strapi }) => {
       // @TODO check Cache-Control response header
       await store.set(cacheKey, ctx.body, cacheRouteConfig.maxAge);
 
-      if (strategy.enableEtagSupport) {
+      if (strategy.enableEtag) {
         const etag = crypto
           .createHash('md5')
           .update(JSON.stringify(ctx.body))

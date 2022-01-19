@@ -3,7 +3,7 @@
  */
 
 class CachePluginStrategy {
-  enableEtagSupport = false;
+  enableEtag = false;
 
   enableXCacheHeaders = false;
 

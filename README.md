@@ -279,7 +279,7 @@ module.exports = ({ env }) => ({
 
 ## Etag support
 
-By setting the `enableEtagSupport` to `true`, the middleware will automatically create an Etag for each payload it caches.
+By setting the `enableEtag` to `true`, the middleware will automatically create an Etag for each payload it caches.
 
 Further requests sent with the `If-None-Match` header will be returned a `304 Not Modified` status if the content for that url has not changed.
 

@@ -9,7 +9,7 @@
 //   reset
 // } = require('./stubs/strapi');
 
-describe('Caching', () => {
+describe("Caching", () => {
   // let middleware = null;
   // before(() => {
   //   sinon.stub(process, 'version').value('3.4.0');
@@ -21,7 +21,7 @@ describe('Caching', () => {
   //           enabled: true,
   //           populateContext: true,
   //           populateStrapiMiddleware: true,
-  //           enableEtagSupport: true,
+  //           enableEtag: true,
   //           clearRelatedCache: true,
   //           models: [
   //             'academy',

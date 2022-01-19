@@ -5,7 +5,7 @@ module.exports = {
       options: {},
     },
     strategy: {
-      enableEtagSupport: false,
+      enableEtag: false,
       enableXCacheHeaders: false,
       clearRelatedCache: true,
       injectAdminMiddlewares: true,
