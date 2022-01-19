@@ -1,39 +1,106 @@
 ---
-title: How it works
+title: Guide
 ---
 
+# strapi-plugin-rest-cache
 
-## How it works
+This plugin provide a way to cache **HTTP requests** in order to **improve performance**. It's get inspired by varnish cache which is a popular caching solution.
 
-This plugin inject a middleware that caches incoming `GET` requests on the strapi API, based on query params and model ID.
-The cache is automatically busted everytime a `PUT`, `PATCH`, `POST`, or `DELETE` request comes in.
+The cache content is stored by a **provider**, which can be either an in-memory provider, a redis connection, a file system, or any other custom provider.
+You can set a **strategy** to tell what to cache and how much time responses should be cached. The cache will be invalidated when the related Content-Type is updated, so you **never have to worry about stale data**.
 
-Supported storage engines
-
-- Memory _(default)_
-- Redis
-
-Important: Caching must be explicitely enabled **per Content-Type**
+In addition, you can interact with the plugin through the admin panel, api admin routes or programmatically using internal services.
 
 
-<mermaid id="hello">
-{{`
-sequenceDiagram
-  autonumber
-  participant C as Client
-  participant S as Strapi
-  participant CS as Cache Store
-  C->>S: [GET] /api/restaurants/1
-  Note over S: Generated cache key
-  S->>CS: Has cache?
-  alt
-      CS->>S: HIT
-      S->>C: Return cached data
-  else
-      CS->>S: MISS
-      Note over S: Call internal controller
-      S->>CS: Store data in cache
-      S->>C: Return data
-  end
-`}}
-</mermaid>
+## Provider
+
+By default, the **strapi-plugin-rest-cache** has no provider, you have to install one of the following providers:
+
+- **strapi-provider-rest-cache-memory**: In-memory provider, it's not persisted and will be lost when the server restarts.
+- **strapi-provider-rest-cache-redis**: Bridge between the cache plugin and the [strapi-plugin-redis](https://github.com/strapi-community/strapi-plugin-redis)
+
+You have to set the provider name in the **strapi-plugin-rest-cache** configuration so it will be initialized once the plugin is bootstrapped. At this time only one provider can be used at a time. 
+
+```js {6-18}
+// file: /config/plugins.js
+
+module.exports = ({ env }) => ({
+  'rest-cache': {
+    config: {,
+      provider: { 
+        // use an alias: try to load 'strapi-provider-rest-cache-my-provider'
+        name: "my-provider",
+        options: {},
+
+        // a full package name: try to load '@org/my-cache-provider'
+        name: "@org/my-cache-provider",
+        options: {},
+
+        // or a relative path: 
+        name: "../path/to/my-provider",
+        options: {},
+      },
+      strategy: {
+        // ...
+      },
+    },
+  },
+});
+```
+
+Note that each provider has its own configuration, so you will have to refer to the provider documentation to know how to configure it. 
+
+::: tip
+Check the [memory provider](./memory-provider.html) and the [redis provider](./redis-provider.html) documentation for more details.
+:::
+
+## Strategy
+
+The plugin will **only inject cache middleware to Content-Types which have been explicitely enabled**. This can be done by setting the `config.strategy.contentTypes`  configuration.
+
+It accept either a string or an object, so we can configure differently each Content-Type.
+
+
+```js {10-25}
+// file: /config/plugins.js
+
+module.exports = ({ env }) => ({
+  'rest-cache': {
+    config: {,
+      provider: { 
+        // ...
+      },
+      strategy: {
+        // set X-Cache header in all responses
+        enableXCacheHeaders: true,
+
+        // enable cache for specific Content-Types
+        contentTypes: [
+          // can be a string (the Content-Type UID)
+          // it will use the default configuration
+          "api::article.article",
+
+          // or an object with specific strategy
+          {
+            contentType: "api::article.article",
+            maxAge: 3600000,
+            headers: ["accept-encoding", "accept-language"],
+          },
+        ],
+      },
+    },
+  },
+});
+```
+
+In addition to the **contentType** configuration, you can also set the default **maxAge** and **headers** configuration, enables **ETag** and **X-Cache** headers or tune how the plugin will work.
+
+::: tip
+Check the [configuration reference](./configuration-reference.html) for all available options.
+:::
+
+
+### Enable cache on custom routes
+
+### Dealing with private content and authentication
+

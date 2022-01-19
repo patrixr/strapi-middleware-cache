@@ -18,6 +18,7 @@ module.exports = {
       },
       strategy: {
         contentTypes: [
+          // list of Content-Types UID to cache
           "api::category.category",
           "api::article.article",
           "api::global.global",

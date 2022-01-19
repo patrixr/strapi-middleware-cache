@@ -9,4 +9,4 @@ title: Redis provider
 
 ## Implementation
 
-@[code{4-55}](../../packages/strapi-provider-rest-cache-redis/lib/RedisCacheProvider.js)
+@[code{1-55}](../../packages/strapi-provider-rest-cache-redis/lib/RedisCacheProvider.js)

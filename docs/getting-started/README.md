@@ -1,6 +1,6 @@
 ---
 title: Getting started
-next: /documentation/configuration
+next: /documentation/
 ---
 
 ::: tip
@@ -28,7 +28,7 @@ yarn add \
 ```
 ::: tip
 This plugin use `strapi-plugin-redis` to handle the connection with Redis.
-[https://github.com/derrickmehaffy/strapi-plugin-redis/](https://github.com/derrickmehaffy/strapi-plugin-redis/)
+[https://github.com/strapi-community/strapi-plugin-redis/](https://github.com/strapi-community/strapi-plugin-redis/)
 :::
 :::
 ::::
@@ -42,7 +42,7 @@ This plugin use `strapi-plugin-redis` to handle the connection with Redis.
 @[code js{4-20}](../samples/config/plugins.memory.js)
 :::
 ::: code-group-item Redis Cache
-@[code js{10-27}](../samples/config/plugins.redis.js)
+@[code js{10-28}](../samples/config/plugins.redis.js)
 ::: warning
 Ensure `redis` configuration come before `strapi-plugin-rest-cache`
 :::

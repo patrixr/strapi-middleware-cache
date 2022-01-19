@@ -8,4 +8,4 @@ title: Memory provider
 
 ## Implementation
 
-@[code{5-52}](../../packages/strapi-provider-rest-cache-memory/lib/MemoryCacheProvider.js)
+@[code{2-48}](../../packages/strapi-provider-rest-cache-memory/lib/MemoryCacheProvider.js)

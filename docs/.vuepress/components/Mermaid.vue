@@ -42,8 +42,22 @@ watchEffect(() => {
 
 <style lang="scss">
 .mermaid {
-	.actor, .messageText {
+	.actor, .messageText, .loopText, .labelText, .labelText>span {
 		font-family: var(--font-family) !important;
+	}
+}
+html.dark {
+	.mermaid .actor-man circle, .mermaid line {
+		stroke: #5a586a !important;
+	}
+	.mermaid .note {
+		fill: #1f2020 !important;
+	}
+	.mermaid .actor {
+		stroke: #5a586a !important;
+	}
+	.mermaid .labelBox {
+		stroke: #5a586a !important;
 	}
 }
 </style>

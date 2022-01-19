@@ -7,7 +7,8 @@ export const sidebar: SidebarConfig = {
       text: "Developer Guide",
       children: [
         "/documentation/README.md",
-        "/documentation/configuration.md",
+        "/documentation/how-it-works.md",
+        "/documentation/configuration-reference.md",
         "/documentation/memory-provider.md",
         "/documentation/redis-provider.md",
       ],
