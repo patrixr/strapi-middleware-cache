@@ -1,2 +1,3 @@
 types
 tests
+**/node_modules/**

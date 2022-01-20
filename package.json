@@ -1,77 +1,72 @@
 {
-  "name": "strapi-middleware-cache",
-  "version": "2.1.7",
-  "description": "Cache strapi requests",
-  "main": "./lib",
-  "types": "./types",
-  "scripts": {
-    "eslint": "eslint .",
-    "eslint:fix": "eslint . --fix",
-    "prettier": "prettier --check .",
-    "prettier:fix": "prettier --write .",
-    "lint": "run-s eslint:fix prettier:fix",
-    "test": "run-s test:*",
-    "test:tsc": "tsc",
-    "test:lint": "run-s eslint prettier",
-    "test:mocha": "mocha ./tests/*.test.js --exit"
-  },
-  "keywords": [
-    "cache",
-    "strapi",
-    "requests",
-    "redis",
-    "memcache"
+  "name": "@strapi-plugin-rest-cache/monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Speed-up HTTP requests with LRU cache",
+  "workspaces": [
+    "./packages/*",
+    "./playgrounds/*"
   ],
-  "directories": {
-    "lib": "./lib",
-    "types": "./types"
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
+    "docs:serve": "vuepress serve docs",
+    "dev:memory": "yarn workspace @strapi-plugin-rest-cache/playground-memory develop",
+    "dev:redis": "yarn workspace @strapi-plugin-rest-cache/playground-redis develop",
+    "lint": "lerna run lint --stream",
+    "test": "lerna run test --stream"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/patrixr/strapi-middleware-cache.git"
+    "url": "git+https://github.com/patrixr/strapi-plugin-rest-cache.git"
   },
   "author": "Patrick R",
   "license": "MIT",
-  "dependencies": {
-    "chalk": "^4.1.0",
-    "ioredis": "^4.17.1",
-    "koa-router": "^8.0.8",
-    "lodash": "^4.17.15",
-    "lru-cache": "^5.1.1",
-    "path-to-regexp": "^6.2.0",
-    "pluralize": "^8.0.0",
-    "redis-lru": "^0.6.0"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@types/ioredis": "^4.27.8",
-    "@types/koa": "^2.13.4",
-    "@types/koa-router": "^7.4.4",
-    "@types/lodash": "^4.14.176",
-    "@types/lru-cache": "^5.1.1",
-    "@types/pluralize": "^0.0.29",
-    "@typescript-eslint/eslint-plugin": "^5.2.0",
-    "@typescript-eslint/parser": "^5.2.0",
-    "babel-eslint": "^10.1.0",
+    "@babel/eslint-parser": "^7.5.4",
+    "@babel/preset-react": "^7.16.7",
+    "@vuepress/plugin-register-components": "^2.0.0-beta.32",
+    "@vuepress/plugin-search": "^2.0.0-beta.32",
     "chai": "^4.2.0",
-    "eslint": "^7.31.0",
+    "codecov": "^3.8.3",
+    "eslint": "^8.6.0",
+    "eslint-config-airbnb": "^19.0.4",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-jsdoc": "^37.0.3",
-    "koa": "^2.11.0",
-    "lint-staged": "^11.1.0",
-    "mocha": "^7.1.1",
+    "eslint-config-react-app": "^7.0.0",
+    "eslint-import-resolver-webpack": "^0.13.2",
+    "eslint-loader": "4.0.2",
+    "eslint-plugin-babel": "^5.3.0",
+    "eslint-plugin-flowtype": "8.0.3",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsdoc": "^37.5.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-redux-saga": "^1.3.2",
+    "jest": "^27.4.7",
+    "jest-cli": "^27.4.7",
+    "jest-styled-components": "^7.0.2",
+    "lerna": "^4.0.0",
+    "lint-staged": "^12.1.7",
+    "mermaid": "^8.13.8",
+    "mocha": "^9.1.3",
     "npm-run-all": "^4.1.5",
-    "prettier": "^2.3.2",
-    "sinon": "^9.2.4",
-    "strapi-supercharged": "0.3.2",
-    "supertest": "^4.0.2",
+    "prettier": "^2.5.1",
+    "sinon": "^12.0.1",
+    "supertest": "^6.1.6",
     "supertest-koa-agent": "^0.3.2",
-    "typescript": "^4.3.5",
+    "vuepress": "next",
     "yorkie": "^2.0.0"
   },
-  "peerDependencies": {},
   "gitHooks": {
     "pre-commit": "lint-staged"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
   },
   "lint-staged": {
     "*.ts": [
