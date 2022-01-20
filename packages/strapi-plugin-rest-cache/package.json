@@ -69,7 +69,7 @@
     "debug": "^4.3.3"
   },
   "devDependencies": {
-    "@strapi/strapi": "^4.0.3",
+    "@strapi/strapi": "^4.0.5",
     "koa": "^2.11.0",
     "npm-run-all": "^4.1.5",
     "react": "^17.0.2",
@@ -79,7 +79,7 @@
     "styled-components": "^5.2.3"
   },
   "peerDependencies": {
-    "@strapi/strapi": "^4.0.0"
+    "@strapi/strapi": "^4.0.5"
   },
   "engines": {
     "node": ">=14.0.0",
