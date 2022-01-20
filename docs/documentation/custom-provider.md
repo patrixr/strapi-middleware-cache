@@ -1,10 +1,9 @@
 ---
 title: Custom provider
 ---
+# Create a custom provider
 
-## Create a custom provider
-
-### Extends the `CacheProvider` class
+## Extends the `CacheProvider` class
 
 ```js
 // file: /custom-rest-cache-provider/MyCacheProvider.js
@@ -23,7 +22,7 @@ module.exports = {
 @[code{6-54}](../../packages/strapi-plugin-rest-cache/server/types/CacheProvider.js)
 :::
 
-### Export the provider
+## Export the provider
 
 ```js
 // file: /custom-rest-cache-provider/index.js
@@ -46,14 +45,14 @@ module.exports = {
 
 ```
 
-### Use your custom cache provider
+## Use your custom cache provider
 
 
 ```js
 // file: /config/plugins.js
 
 module.exports = {
-  "rest-cache": {
+  "strapi-plugin-rest-cache": {
     config: {
       provider: {
         name: "../custom-rest-cache-provider/index.js",

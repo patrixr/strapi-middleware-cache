@@ -2,6 +2,8 @@
 title: Services
 ---
 
+# REST Cache Services
+
 ## cacheConfig
 
 ### `getUids()`

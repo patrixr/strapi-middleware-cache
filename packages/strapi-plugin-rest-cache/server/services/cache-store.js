@@ -22,7 +22,7 @@ module.exports = ({ strapi }) => {
   let initialized = false;
 
   const pluginConfig = strapi.config.get('plugin.strapi-plugin-rest-cache');
-  const { cacheTimeout } = pluginConfig.strategy;
+  const { getTimeout } = pluginConfig.provider;
 
   return {
     /**
@@ -49,11 +49,11 @@ module.exports = ({ strapi }) => {
 
       return withTimeout(
         async () => deserialize(await provider.get(key)),
-        cacheTimeout
+        getTimeout
       ).catch((error) => {
         if (error?.message === 'timeout') {
           strapi.log.error(
-            `REST Cache provider timed-out after ${cacheTimeout}ms.`
+            `REST Cache provider timed-out after ${getTimeout}ms.`
           );
         } else {
           strapi.log.error(`REST Cache provider errored:`);

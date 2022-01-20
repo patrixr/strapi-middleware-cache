@@ -1,5 +1,5 @@
 module.exports = {
-  "rest-cache": {
+  "strapi-plugin-rest-cache": {
     config: {
       provider: {
         name: "memory",
@@ -9,6 +9,7 @@ module.exports = {
         enableXCacheHeaders: true,
         clearRelatedCache: true,
         enableEtag: true,
+        resetOnStartup: true,
         maxAge: 420000,
         injectAdminMiddlewares: true,
         headers: ["accept-encoding"],

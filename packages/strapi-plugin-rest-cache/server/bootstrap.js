@@ -79,4 +79,12 @@ module.exports = async ({ strapi }) => {
       pluginOption.provider.name
     )}"`
   );
+
+  if (strategy.resetOnStartup) {
+    strapi.log.warn('Reset cache on startup is enabled');
+    await strapi
+      .plugin('strapi-plugin-rest-cache')
+      .service('cacheStore')
+      .reset();
+  }
 };

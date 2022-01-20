@@ -5,6 +5,8 @@
 const { defaultHitpass } = require('./CacheContentTypeConfig');
 
 class CacheRouteConfig {
+  maxAge = 3600000;
+
   /**
    * @type {string}
    */
@@ -24,8 +26,6 @@ class CacheRouteConfig {
    * @type {string[]}
    */
   headers = [];
-
-  maxAge = 3600000;
 
   /**
    * @type {CachePluginHitpass | boolean}

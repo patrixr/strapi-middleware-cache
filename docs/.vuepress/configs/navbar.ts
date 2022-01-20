@@ -8,7 +8,7 @@ export const navbar: NavbarConfig = [
     activeMatch: "^/getting-started/",
   },
   {
-    text: "Documentation",
+    text: "Developer Guide",
     link: "/documentation/",
     activeMatch: "^/documentation/",
   },

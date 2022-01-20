@@ -7,7 +7,7 @@ module.exports = {
     // ...
   },
   // Step 2: Configure the redis cache plugin
-  "rest-cache": {
+  "strapi-plugin-rest-cache": {
     config: {
       provider: {
         name: "redis",

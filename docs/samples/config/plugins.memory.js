@@ -1,7 +1,7 @@
 // file: /config/plugins.js
 
 module.exports = {
-  "rest-cache": {
+  "strapi-plugin-rest-cache": {
     config: {
       provider: {
         name: "memory",

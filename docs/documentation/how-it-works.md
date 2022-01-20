@@ -3,10 +3,12 @@ title: How it works
 ---
 
 
-## How it works
+# How it works
 
 This plugin inject a **recv** middleware that caches incoming `GET` requests on the strapi API, based on query params and Content-Type UID.
 The cache is automatically busted everytime a `PUT`, `PATCH`, `POST`, or `DELETE` request comes in or when an entity is updated through the admin panel. It can also be programmatically cleared via exposed services or admin routes. 
+
+## Journey to the cache
 
 Here is a sequence of the events that happen when a `GET` request comes in:
 
@@ -35,8 +37,8 @@ sequenceDiagram
 `}}
 </mermaid>
 
-### Definition of a cache key
+## Cache key generation
 
-### Cache `HIT`, `MISS` and `HITPASS`
+## Cache `HIT`, `MISS` and `HITPASS`
 
-### Using `ETag` and `If-None-Match` headers
+## Using `ETag` and `If-None-Match` headers

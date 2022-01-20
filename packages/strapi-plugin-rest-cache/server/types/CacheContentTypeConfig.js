@@ -12,15 +12,13 @@ const defaultHitpass = (ctx) =>
 
 class CacheContentTypeConfig {
   singleType = false;
+  injectDefaultRoutes = true;
+  maxAge = 3600000;
 
   /**
    * @type {CachePluginHitpass | boolean}
    */
   hitpass = defaultHitpass;
-
-  maxAge = 3600000;
-
-  injectDefaultRoutes = true;
 
   /**
    * @type {string[]}

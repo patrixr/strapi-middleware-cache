@@ -2,6 +2,14 @@
 title: Configuration Reference
 ---
 
+# Configuration Reference
+
+## Provider
+
+#### `name`
+#### `getTimeout`
+#### `options`
+
 
 ## Strategy
 
@@ -9,11 +17,11 @@ title: Configuration Reference
 
 #### `enableEtag`
 #### `enableXCacheHeaders`
+#### `resetOnStartup`
 #### `clearRelatedCache`
 #### `injectAdminMiddlewares`
 #### `headers`
 #### `maxAge`
-#### `cacheTimeout`
 #### `contentTypes`
 
 ### Content-Type
@@ -35,8 +43,3 @@ title: Configuration Reference
 #### `headers`
 #### `maxAge`
 
-
-## Provider
-
-#### `name`
-#### `options`

@@ -2,6 +2,7 @@
 title: Redis provider
 ---
 
+# Redis provider
 
 ## Installation
 

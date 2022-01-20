@@ -3,8 +3,9 @@ title: Getting started
 next: /documentation/
 ---
 
-::: tip
-This plugin is only compatible with Strapi v4.0.0 and above.
+::: warning
+This plugin is only compatible with Strapi v4.0.0 and above.  
+If you are looking for a plugin for Strapi v3.x, please check the [strapi-middleware-cache](https://github.com/patrixr/strapi-middleware-cache/).
 :::
 
 
