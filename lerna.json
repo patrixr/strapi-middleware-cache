@@ -1,6 +1,9 @@
 {
-  "packages": ["packages/*", "playgrounds/*"],
-  "version": "1.0.0",
+  "packages": [
+    "packages/*",
+    "playgrounds/*"
+  ],
+  "version": "1.0.1-alpha.0",
   "npmClient": "yarn",
   "useWorkspaces": true
 }

@@ -1,7 +1,7 @@
 {
   "name": "@strapi-plugin-rest-cache/playground-memory",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1-alpha.0",
   "description": "A Strapi application",
   "scripts": {
     "develop": "strapi develop",
@@ -9,16 +9,15 @@
     "build": "strapi build",
     "strapi": "strapi"
   },
-  "devDependencies": {},
   "dependencies": {
-    "@strapi/strapi": "4.0.5",
-    "@strapi/plugin-users-permissions": "4.0.5",
     "@strapi/plugin-i18n": "4.0.5",
+    "@strapi/plugin-users-permissions": "4.0.5",
+    "@strapi/strapi": "4.0.5",
     "lodash.set": "^4.3.2",
     "mime-types": "^2.1.27",
-    "strapi-plugin-rest-cache": "1.0.0",
-    "strapi-provider-rest-cache-memory": "1.0.0",
-    "sqlite3": "5.0.2"
+    "sqlite3": "5.0.2",
+    "strapi-plugin-rest-cache": "^1.0.1-alpha.0",
+    "strapi-provider-rest-cache-memory": "^1.0.1-alpha.0"
   },
   "author": {
     "name": "A Strapi developer"
