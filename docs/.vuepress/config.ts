@@ -9,7 +9,7 @@ export default defineUserConfig<DefaultThemeOptions>({
   title: "REST Cache",
   description: "Speed-up HTTP requests with LRU cache",
   lang: "en-US",
-
+  base: "/strapi-plugin-rest-cache/",
   head: [
     ["link", { rel: "icon", type: "image/png", href: "/icon.png" }],
     [
@@ -36,7 +36,6 @@ export default defineUserConfig<DefaultThemeOptions>({
       },
     ],
   ],
-
   theme: "@vuepress/default",
   themeConfig: {
     docsRepo: "strapi-community/strapi-plugin-rest-cache",
