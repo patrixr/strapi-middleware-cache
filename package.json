@@ -16,11 +16,6 @@
     "lint": "lerna run lint --stream",
     "test": "lerna run test --stream"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/patrixr/strapi-plugin-rest-cache.git"
-  },
-  "author": "Patrick R",
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
