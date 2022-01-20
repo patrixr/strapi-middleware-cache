@@ -110,3 +110,5 @@ Check the [configuration reference](./configuration-reference.html) for all avai
 ### Dealing with private content and authentication
 
 ### Purging cache programmatically
+
+### Enable debug mode
