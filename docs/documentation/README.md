@@ -27,7 +27,7 @@ You can also set the provider `getTimeout` which is the time in milliseconds to 
 // file: /config/plugins.js
 
 module.exports = ({ env }) => ({
-  'rest-cache': {
+  'strapi-plugin-rest-cache': {
     config: {,
       provider: { 
         // name can be an alias: 
@@ -66,7 +66,7 @@ It accept either a string or an object, so we can configure differently each Con
 // file: /config/plugins.js
 
 module.exports = ({ env }) => ({
-  'rest-cache': {
+  'strapi-plugin-rest-cache': {
     config: {,
       provider: { 
         // ...

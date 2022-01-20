@@ -6,7 +6,7 @@ import { navbar } from "./configs/navbar";
 import { sidebar } from "./configs/sidebar";
 
 export default defineUserConfig<DefaultThemeOptions>({
-  title: "RESTCache",
+  title: "REST Cache",
   description: "Speed-up HTTP requests with LRU cache",
   lang: "en-US",
 
@@ -16,7 +16,7 @@ export default defineUserConfig<DefaultThemeOptions>({
       "link",
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,800&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,600,0,700&display=swap",
       },
     ],
     [
@@ -39,12 +39,12 @@ export default defineUserConfig<DefaultThemeOptions>({
 
   theme: "@vuepress/default",
   themeConfig: {
-    docsRepo: "patrixr/strapi-middleware-cache",
+    docsRepo: "strapi-community/strapi-plugin-rest-cache",
     docsDir: "docs",
     docsBranch: "feature/strapi-v4",
     editLinks: true,
     logo: "/icon.png",
-    repo: "patrixr/strapi-middleware-cache",
+    repo: "strapi-community/strapi-plugin-rest-cache",
     lastUpdated: true,
     contributors: true,
     navbar,

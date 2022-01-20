@@ -1,6 +1,6 @@
 {
   "name": "strapi-plugin-rest-cache",
-  "version": "4.0.0",
+  "version": "1.0.0",
   "description": "Speed-up HTTP requests with LRU cache",
   "license": "MIT",
   "strapi": {
@@ -10,11 +10,12 @@
     "kind": "plugin"
   },
   "keywords": [
-    "cache",
     "strapi",
-    "requests",
-    "redis",
-    "memcache"
+    "plugin",
+    "rest",
+    "cache",
+    "http",
+    "lru"
   ],
   "files": [
     "./admin",
@@ -22,6 +23,30 @@
     "./strapi-admin.js",
     "./strapi-admin.js"
   ],
+  "author": {
+    "name": "Strapi Community",
+    "url": "https://github.com/strapi-community/"
+  },
+  "maintainers": [
+    {
+      "name": "Sacha Stafyniak",
+      "email": "sacha@digisquad.io",
+      "url": "https://digisquad.io"
+    },
+    {
+      "name": "Patrick R",
+      "url": "https://github.com/patrixr/"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/strapi-community/strapi-plugin-rest-cache.git",
+    "directory": "packages/strapi-plugin-rest-cache"
+  },
+  "bugs": {
+    "url": "https://github.com/strapi-community/strapi-plugin-rest-cache/issues"
+  },
+  "homepage": "https://github.com/strapi-community/strapi-plugin-rest-cache#readme",
   "scripts": {
     "lint": "run-s eslint:server:fix eslint:admin:fix prettier:fix",
     "eslint:server": "eslint .",
@@ -34,21 +59,6 @@
     "test:lint": "run-s eslint:server eslint:admin prettier",
     "test:mocha": "mocha ./tests/*.test.js --exit"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/patrixr/strapi-plugin-rest-cache.git"
-  },
-  "author": {
-    "name": "Patrick R",
-    "url": "https://github.com/patrixr/"
-  },
-  "maintainers": [
-    {
-      "name": "Sacha Stafyniak",
-      "email": "sacha@digisquad.io",
-      "url": "https://digisquad.io"
-    }
-  ],
   "dependencies": {
     "chalk": "^4.1.2",
     "ioredis": "^4.28.2",

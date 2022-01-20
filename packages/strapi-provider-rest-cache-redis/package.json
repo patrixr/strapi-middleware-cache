@@ -1,6 +1,6 @@
 {
   "name": "strapi-provider-rest-cache-redis",
-  "version": "4.0.0",
+  "version": "1.0.0",
   "description": "Speed-up HTTP requests with LRU cache",
   "license": "MIT",
   "strapi": {
@@ -10,12 +10,35 @@
     "kind": "plugin"
   },
   "keywords": [
-    "cache",
     "strapi",
-    "requests",
-    "redis",
-    "memcache"
+    "provider",
+    "rest-cache",
+    "redis"
   ],
+  "author": {
+    "name": "Strapi Community",
+    "url": "https://github.com/strapi-community/"
+  },
+  "maintainers": [
+    {
+      "name": "Sacha Stafyniak",
+      "email": "sacha@digisquad.io",
+      "url": "https://digisquad.io"
+    },
+    {
+      "name": "Patrick R",
+      "url": "https://github.com/patrixr/"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/strapi-community/strapi-plugin-rest-cache.git",
+    "directory": "packages/strapi-provider-rest-cache-redis"
+  },
+  "bugs": {
+    "url": "https://github.com/strapi-community/strapi-plugin-rest-cache/issues"
+  },
+  "homepage": "https://github.com/strapi-community/strapi-plugin-rest-cache#readme",
   "main": "./lib",
   "files": [
     "./lib"
@@ -29,33 +52,18 @@
     "test": "run-s test:*",
     "test:lint": "run-s eslint eslint:admin prettier"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/patrixr/strapi-plugin-rest-cache.git"
-  },
-  "author": {
-    "name": "Patrick R",
-    "url": "https://github.com/patrixr/"
-  },
-  "maintainers": [
-    {
-      "name": "Sacha Stafyniak",
-      "email": "sacha@digisquad.io",
-      "url": "https://digisquad.io"
-    }
-  ],
   "dependencies": {
     "cache-manager": "^3.6.0",
     "cache-manager-ioredis": "^2.1.0"
   },
   "devDependencies": {
-    "@strapi/strapi": "^4.0.3",
-    "strapi-plugin-rest-cache": "^4.0.0",
+    "@strapi/strapi": "^4.0.0",
+    "strapi-plugin-rest-cache": "1.0.0",
     "strapi-plugin-redis": "^1.0.0-alpha.1"
   },
   "peerDependencies": {
-    "@strapi/strapi": "^4.0.0",
-    "strapi-plugin-rest-cache": "^4.0.0",
+    "@strapi/strapi": "1.0.0",
+    "strapi-plugin-rest-cache": "1.0.0",
     "strapi-plugin-redis": "^1.0.0-alpha.1"
   },
   "engines": {

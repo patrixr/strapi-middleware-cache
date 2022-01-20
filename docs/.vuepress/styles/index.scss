@@ -16,14 +16,14 @@ html.dark {
 
 .site-name {
   align-items: center;
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.2rem !important;
-  font-weight: 800 !important;
+  font-weight: 700 !important;
 }
 
 #main-title {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 800 !important;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700 !important;
   margin-bottom: 0;
 }
 
@@ -38,11 +38,21 @@ html.dark {
   display: inline-block;
   background-color: var(--c-brand);
   border-radius: 0.4rem;
-  font-size: 0.8rem;
+  font-size: .9rem;
   line-height: 1;
+  vertical-align: middle;
   padding: 0.3rem 0.5rem 0.2rem;
   margin-left: .5rem; 
+  font-family: 'Fira Code', sans-serif !important;
+  font-weight: 600 !important;
 }
+
+.site-name::after {
+  font-size: .7rem;
+  vertical-align: 2px;
+}
+
+
 .site-name:hover::after {
   background-color: var(--c-brand-light);
 }

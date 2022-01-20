@@ -17,7 +17,11 @@ export const navbar: NavbarConfig = [
     children: [
       {
         text: "Releases",
-        link: "https://github.com/patrixr/strapi-middleware-cache/releases",
+        link: "https://github.com/strapi-community/strapi-plugin-rest-cache/releases",
+      },
+      {
+        text: "Strapi v3.x.x version",
+        link: "https://github.com/patrixr/strapi-middleware-cache",
       },
     ],
   },
