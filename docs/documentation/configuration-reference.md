@@ -19,7 +19,7 @@ title: Configuration Reference
 #### `enableXCacheHeaders`
 #### `resetOnStartup`
 #### `clearRelatedCache`
-#### `injectAdminMiddlewares`
+#### `enableAdminCTBMiddleware`
 #### `headers`
 #### `maxAge`
 #### `contentTypes`

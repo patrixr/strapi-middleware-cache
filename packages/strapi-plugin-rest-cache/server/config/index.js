@@ -8,9 +8,9 @@ module.exports = {
     strategy: {
       enableEtag: false,
       enableXCacheHeaders: false,
+      enableAdminCTBMiddleware: true,
       resetOnStartup: false,
       clearRelatedCache: true,
-      injectAdminMiddlewares: true,
       headers: [],
       maxAge: 3600000,
       contentTypes: [],

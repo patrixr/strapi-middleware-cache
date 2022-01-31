@@ -7,7 +7,7 @@ class CachePluginStrategy {
   enableXCacheHeaders = false;
   resetOnStartup = false;
   clearRelatedCache = false;
-  injectAdminMiddlewares = true;
+  enableAdminCTBMiddleware = true;
   max = 500;
   maxAge = 3600000;
 

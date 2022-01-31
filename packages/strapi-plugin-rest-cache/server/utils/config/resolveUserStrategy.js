@@ -28,7 +28,7 @@ function resolveUserStrategy(strapi, userOptions) {
     enableEtag: false,
     enableXCacheHeaders: false,
     clearRelatedCache: false,
-    injectAdminMiddlewares: true,
+    enableAdminCTBMiddleware: true,
     headers: [],
     maxAge: 3600000,
     cacheTimeout: 500,

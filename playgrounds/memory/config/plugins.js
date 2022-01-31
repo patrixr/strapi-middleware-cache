@@ -11,7 +11,7 @@ module.exports = {
         enableEtag: true,
         resetOnStartup: true,
         maxAge: 420000,
-        injectAdminMiddlewares: true,
+        enableAdminCTBMiddleware: true,
         headers: ["accept-encoding"],
         contentTypes: [
           "api::article.article",

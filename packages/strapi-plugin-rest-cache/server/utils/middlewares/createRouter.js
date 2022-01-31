@@ -102,7 +102,7 @@ function createRouter(strapi, strategy) {
   }
 
   // --- Admin REST endpoints
-  if (strategy.injectAdminMiddlewares) {
+  if (strategy.enableAdminCTBMiddleware) {
     debug(`Register ${chalk.magentaBright('admin')} routes middlewares`);
 
     for (const route of adminRoutes.post) {
