@@ -46,7 +46,7 @@ function createRouter(strapi, strategy) {
   const purgeAdminMiddleware = createPurgeAdminMiddleware({}, { strapi });
 
   for (const cacheConf of strategy.contentTypes) {
-    debug(`Register ${chalk.cyan(cacheConf.contentType)} routes middlewares`);
+    debug(`[REGISTER] ${chalk.cyan(cacheConf.contentType)} routes middlewares`);
 
     const purgeMiddleware = createPurgeMiddleware(
       { contentType: cacheConf.contentType },
@@ -56,22 +56,22 @@ function createRouter(strapi, strategy) {
     for (const route of cacheConf.routes) {
       switch (route.method) {
         case 'DELETE': {
-          debug(`DELETE ${route.path} ${chalk.redBright('purge')}`);
+          debug(`[REGISTER] DELETE ${route.path} ${chalk.redBright('purge')}`);
           router.delete(route.path, purgeMiddleware);
           break;
         }
         case 'PUT': {
-          debug(`PUT ${route.path} ${chalk.redBright('purge')}`);
+          debug(`[REGISTER] PUT ${route.path} ${chalk.redBright('purge')}`);
           router.put(route.path, purgeMiddleware);
           break;
         }
         case 'PATCH': {
-          debug(`PATCH ${route.path} ${chalk.redBright('purge')}`);
+          debug(`[REGISTER] PATCH ${route.path} ${chalk.redBright('purge')}`);
           router.patch(route.path, purgeMiddleware);
           break;
         }
         case 'POST': {
-          debug(`POST ${route.path} ${chalk.redBright('purge')}`);
+          debug(`[REGISTER] POST ${route.path} ${chalk.redBright('purge')}`);
           router.post(route.path, purgeMiddleware);
           break;
         }
@@ -81,7 +81,7 @@ function createRouter(strapi, strategy) {
             .join(',');
 
           debug(
-            `GET ${route.path} ${chalk.green('recv')} ${chalk.grey(
+            `[REGISTER] GET ${route.path} ${chalk.green('recv')} ${chalk.grey(
               `maxAge=${route.maxAge}`
             )}${vary && chalk.grey(` vary=${vary}`)}`
           );
@@ -103,18 +103,18 @@ function createRouter(strapi, strategy) {
 
   // --- Admin REST endpoints
   if (strategy.enableAdminCTBMiddleware) {
-    debug(`Register ${chalk.magentaBright('admin')} routes middlewares`);
+    debug(`[REGISTER] ${chalk.magentaBright('admin')} routes middlewares`);
 
     for (const route of adminRoutes.post) {
-      debug(`POST ${route} ${chalk.magentaBright('purge-admin')}`);
+      debug(`[REGISTER] POST ${route} ${chalk.magentaBright('purge-admin')}`);
       router.post(route, purgeAdminMiddleware);
     }
     for (const route of adminRoutes.put) {
-      debug(`PUT ${route} ${chalk.magentaBright('purge-admin')}`);
+      debug(`[REGISTER] PUT ${route} ${chalk.magentaBright('purge-admin')}`);
       router.put(route, purgeAdminMiddleware);
     }
     for (const route of adminRoutes.delete) {
-      debug(`DELETE ${route} ${chalk.magentaBright('purge-admin')}`);
+      debug(`[REGISTER] DELETE ${route} ${chalk.magentaBright('purge-admin')}`);
       router.delete(route, purgeAdminMiddleware);
     }
   }

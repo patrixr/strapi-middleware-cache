@@ -62,9 +62,8 @@
     "strapi-plugin-rest-cache": "^4.0.0-alpha.1"
   },
   "peerDependencies": {
-    "@strapi/strapi": "^4.0.5",
-    "strapi-plugin-redis": "^1.0.0-alpha.1",
-    "strapi-plugin-rest-cache": "4.0.0-alpha.0"
+    "@strapi/strapi": "^4.0.0",
+    "strapi-plugin-rest-cache": "^4.0.0"
   },
   "engines": {
     "node": ">=14.0.0",

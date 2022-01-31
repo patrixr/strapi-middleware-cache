@@ -48,7 +48,7 @@ module.exports = (options, { strapi }) => {
         if (!etagMatch) {
           ctx.set('ETag', etagEntry);
         } else {
-          debug(`GET ${cacheKey} ${chalk.green('HIT')}`);
+          debug(`[RECV] GET ${cacheKey} ${chalk.green('HIT')}`);
 
           if (strategy.enableXCacheHeaders) {
             ctx.set('X-Cache', 'HIT');
@@ -63,7 +63,7 @@ module.exports = (options, { strapi }) => {
 
       // hit cache
       if (cacheEntry) {
-        debug(`GET ${cacheKey} ${chalk.green('HIT')}`);
+        debug(`[RECV] GET ${cacheKey} ${chalk.green('HIT')}`);
 
         if (strategy.enableXCacheHeaders) {
           ctx.set('X-Cache', 'HIT');
@@ -80,7 +80,7 @@ module.exports = (options, { strapi }) => {
 
     // fetch done
     if (!lookup) {
-      debug(`GET ${cacheKey} ${chalk.magenta('HITPASS')}`);
+      debug(`[RECV] GET ${cacheKey} ${chalk.magenta('HITPASS')}`);
 
       if (strategy.enableXCacheHeaders) {
         ctx.set('X-Cache', 'HITPASS');
@@ -91,7 +91,7 @@ module.exports = (options, { strapi }) => {
     }
 
     // deliver
-    debug(`GET ${cacheKey} ${chalk.yellow('MISS')}`);
+    debug(`[RECV] GET ${cacheKey} ${chalk.yellow('MISS')}`);
 
     if (strategy.enableXCacheHeaders) {
       ctx.set('X-Cache', 'MISS');

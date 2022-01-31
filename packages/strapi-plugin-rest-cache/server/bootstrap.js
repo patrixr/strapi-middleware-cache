@@ -2,6 +2,7 @@
  * @typedef {import('@strapi/strapi').Strapi} Strapi
  */
 const chalk = require('chalk');
+const debug = require('debug')('strapi:strapi-plugin-rest-cache');
 
 const { CacheProvider } = require('./types');
 const { resolveUserStrategy } = require('./utils/config/resolveUserStrategy');
@@ -57,6 +58,8 @@ module.exports = async ({ strapi }) => {
     ...pluginOption,
     strategy,
   });
+
+  debug('[STRATEGY]: %o', strategy);
 
   // register cache provider
   const provider = await createProvider(pluginOption.provider, { strapi });
