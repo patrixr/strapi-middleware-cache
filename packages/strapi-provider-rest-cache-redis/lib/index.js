@@ -13,7 +13,7 @@ function waitForRedis(client) {
       resolve();
     };
     const onError = (error) => {
-      client.off("error", onReady);
+      client.off("ready", onReady);
       reject(
         new Error(
           `Could not initialize REST Cache provider "redis": ${error?.message}`
