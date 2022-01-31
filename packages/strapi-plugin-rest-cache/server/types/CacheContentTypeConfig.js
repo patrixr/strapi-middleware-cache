@@ -3,12 +3,7 @@
  * @typedef {import('koa').Context} Context
  * @typedef {(ctx: Context) => boolean} CachePluginHitpass
  */
-
-/**
- * @type {CachePluginHitpass}
- */
-const defaultHitpass = (ctx) =>
-  Boolean(ctx.request.headers.authorization || ctx.request.headers.cookie);
+const { CacheKeysConfig } = require('./CacheKeysConfig');
 
 class CacheContentTypeConfig {
   singleType = false;
@@ -18,12 +13,12 @@ class CacheContentTypeConfig {
   /**
    * @type {CachePluginHitpass | boolean}
    */
-  hitpass = defaultHitpass;
+  hitpass = false;
 
   /**
-   * @type {string[]}
+   * @type {CacheKeysConfig}
    */
-  headers = [];
+  keys;
 
   /**
    * @type {string=}
@@ -44,6 +39,32 @@ class CacheContentTypeConfig {
    * @type {string[]}
    */
   relatedContentTypeUid = [];
+
+  constructor(options) {
+    if (!options) return;
+
+    const {
+      singleType = false,
+      injectDefaultRoutes = true,
+      maxAge = true,
+      hitpass = false,
+      keys = new CacheKeysConfig(),
+      routes = [],
+      relatedContentTypeUid = [],
+      contentType,
+      plugin,
+    } = options;
+
+    this.singleType = singleType;
+    this.injectDefaultRoutes = injectDefaultRoutes;
+    this.maxAge = maxAge;
+    this.hitpass = hitpass;
+    this.keys = keys;
+    this.routes = routes;
+    this.relatedContentTypeUid = relatedContentTypeUid;
+    this.contentType = contentType;
+    this.plugin = plugin;
+  }
 }
 
-module.exports = { defaultHitpass, CacheContentTypeConfig };
+module.exports = { CacheContentTypeConfig };

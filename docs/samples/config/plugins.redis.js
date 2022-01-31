@@ -12,7 +12,7 @@ module.exports = {
       provider: {
         name: "redis",
         options: {
-          max: 100,
+          max: 32767,
           connection: "default",
         },
       },

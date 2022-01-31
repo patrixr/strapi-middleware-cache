@@ -10,9 +10,9 @@
     "strapi": "strapi"
   },
   "dependencies": {
-    "@strapi/plugin-i18n": "4.0.5",
-    "@strapi/plugin-users-permissions": "4.0.5",
-    "@strapi/strapi": "4.0.5",
+    "@strapi/plugin-i18n": "4.0.6",
+    "@strapi/plugin-users-permissions": "4.0.6",
+    "@strapi/strapi": "4.0.6",
     "lodash.set": "^4.3.2",
     "mime-types": "^2.1.27",
     "sqlite3": "5.0.2",

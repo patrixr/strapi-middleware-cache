@@ -5,6 +5,7 @@ module.exports = [
   "strapi::poweredBy",
   "strapi::logger",
   "strapi::query",
+  "strapi::session",
   "strapi::body",
   "strapi::favicon",
   "strapi::public",

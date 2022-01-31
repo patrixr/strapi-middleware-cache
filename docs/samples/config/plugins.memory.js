@@ -5,7 +5,10 @@ module.exports = {
     config: {
       provider: {
         name: "memory",
-        options: { max: 10, maxAge: 3600 },
+        options: {
+          max: 32767,
+          maxAge: 3600,
+        },
       },
       strategy: {
         contentTypes: [

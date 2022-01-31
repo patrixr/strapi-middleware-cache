@@ -3,16 +3,19 @@ module.exports = {
     config: {
       provider: {
         name: "memory",
-        options: { max: 10, maxAge: 3600 },
+        max: 32767,
       },
       strategy: {
-        enableXCacheHeaders: true,
-        clearRelatedCache: true,
         enableEtag: true,
+        enableXCacheHeaders: true,
+        enableAdminCTBMiddleware: true,
+        clearRelatedCache: true,
         resetOnStartup: true,
         maxAge: 420000,
-        enableAdminCTBMiddleware: true,
-        headers: ["accept-encoding"],
+        keys: {
+          useQueryParams: true,
+          useHeaders: ["accept-encoding"],
+        },
         contentTypes: [
           "api::article.article",
           "api::global.global",
@@ -20,12 +23,18 @@ module.exports = {
           {
             contentType: "api::category.category",
             maxAge: 3600000,
-            headers: ["accept-encoding", "accept-language"],
+            hitpass: false,
+            keys: {
+              useQueryParams: false,
+              useHeaders: ["accept-encoding"],
+            },
             routes: [
               {
                 path: "/api/categories/slug/:slug",
-                headers: ["authorization"],
-                hitpass: false,
+                keys: {
+                  useQueryParams: false,
+                  useHeaders: ["accept-encoding", "authorization"],
+                },
                 maxAge: 18000,
                 method: "GET",
               },

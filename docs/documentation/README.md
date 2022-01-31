@@ -62,7 +62,7 @@ The plugin will **only inject cache middleware to Content-Types which have been 
 It accept either a string or an object, so we can configure differently each Content-Type.
 
 
-```js {9-26}
+```js {9-29}
 // file: /config/plugins.js
 
 module.exports = ({ env }) => ({
@@ -85,7 +85,10 @@ module.exports = ({ env }) => ({
           {
             contentType: "api::article.article",
             maxAge: 3600000,
-            headers: ["accept-encoding", "accept-language"],
+            keys: {
+              useQueryParams: true,
+              useHeaders: ["accept-encoding", "accept-language"]
+            }
           },
         ],
       },
@@ -94,7 +97,7 @@ module.exports = ({ env }) => ({
 });
 ```
 
-In addition to the **contentType** configuration, you can also set the default **maxAge** and **headers** configuration, enables **ETag** and **X-Cache** headers or tune how the plugin will work.
+In addition to the **contentType** configuration, you can also set the default **maxAge**, **hitpass** and **keys** configuration, enables **ETag** and **X-Cache** headers or tune how the plugin will work.
 
 ::: tip
 Check the [configuration reference](./configuration-reference.html) for all available options.

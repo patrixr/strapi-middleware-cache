@@ -1,8 +1,7 @@
 /**
  * @typedef {(ctx: Context) => boolean} CachePluginHitpass
  */
-
-const { defaultHitpass } = require('./CacheContentTypeConfig');
+const { CacheKeysConfig } = require('./CacheKeysConfig');
 
 class CacheRouteConfig {
   maxAge = 3600000;
@@ -23,14 +22,14 @@ class CacheRouteConfig {
   paramNames = [];
 
   /**
-   * @type {string[]}
+   * @type {CacheKeysConfig}
    */
-  headers = [];
+  keys;
 
   /**
    * @type {CachePluginHitpass | boolean}
    */
-  hitpass = defaultHitpass;
+  hitpass = false;
 
   constructor(options) {
     if (!options) return;
@@ -39,16 +38,16 @@ class CacheRouteConfig {
       path,
       method = 'GET',
       paramNames = [],
-      headers = [],
       maxAge = 3600000,
-      hitpass = defaultHitpass,
+      hitpass = false,
+      keys = new CacheKeysConfig(),
     } = options;
     this.path = path;
     this.method = method;
     this.paramNames = paramNames;
-    this.headers = headers;
     this.maxAge = maxAge;
     this.hitpass = hitpass;
+    this.keys = keys;
   }
 }
 

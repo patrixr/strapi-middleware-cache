@@ -40,10 +40,10 @@ This plugin use `strapi-plugin-redis` to handle the connection with Redis.
 
 :::: code-group
 ::: code-group-item In-Memory Cache
-@[code js{4-20}](../samples/config/plugins.memory.js)
+@[code js{4-23}](../samples/config/plugins.memory.js)
 :::
 ::: code-group-item Redis Cache
-@[code js{10-28}](../samples/config/plugins.redis.js)
+@[code js{10-29}](../samples/config/plugins.redis.js)
 ::: warning
 Ensure `redis` configuration come before `strapi-plugin-rest-cache`
 :::

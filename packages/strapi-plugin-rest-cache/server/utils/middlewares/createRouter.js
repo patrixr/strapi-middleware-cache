@@ -76,7 +76,7 @@ function createRouter(strapi, strategy) {
           break;
         }
         case 'GET': {
-          const vary = route.headers
+          const vary = route.keys.useHeaders
             .map((name) => name.toLowerCase())
             .join(',');
 

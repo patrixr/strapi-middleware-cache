@@ -8,9 +8,9 @@ const { deepFreeze } = require('./deepFreeze');
 const { routeExists } = require('./routeExists');
 const {
   CachePluginStrategy,
-  defaultHitpass,
   CacheRouteConfig,
   CacheContentTypeConfig,
+  CacheKeysConfig,
 } = require('../../types');
 
 const routeParamNameRegex = /:([^/]+)/g;
@@ -21,21 +21,8 @@ const routeParamNameRegex = /:([^/]+)/g;
  * @return {CachePluginStrategy}
  */
 function resolveUserStrategy(strapi, userOptions) {
-  /**
-   * @type {CachePluginStrategy}
-   */
-  const defaultOptions = {
-    enableEtag: false,
-    enableXCacheHeaders: false,
-    clearRelatedCache: false,
-    enableAdminCTBMiddleware: true,
-    headers: [],
-    maxAge: 3600000,
-    cacheTimeout: 500,
-    contentTypes: [],
-  };
-
   const { contentTypes = [] } = userOptions;
+
   /**
    * @type {CacheContentTypeConfig[]}
    */
@@ -43,10 +30,10 @@ function resolveUserStrategy(strapi, userOptions) {
 
   const defaultModelConfig = {
     singleType: false,
-    hitpass: defaultHitpass,
     injectDefaultRoutes: true,
-    headers: userOptions.headers || defaultOptions.headers,
-    maxAge: userOptions.maxAge || defaultOptions.maxAge,
+    keys: userOptions.keys,
+    hitpass: userOptions.hitpass,
+    maxAge: userOptions.maxAge,
   };
 
   for (const contentTypeOption of contentTypes) {
@@ -55,6 +42,7 @@ function resolveUserStrategy(strapi, userOptions) {
         ...defaultModelConfig,
         routes: [],
         contentType: contentTypeOption,
+        keys: new CacheKeysConfig(defaultModelConfig.keys),
       });
       continue;
     }
@@ -63,13 +51,15 @@ function resolveUserStrategy(strapi, userOptions) {
      * @type {CacheRouteConfig[]}
      */
     const routes = [];
+    const contentTypeKeys = contentTypeOption?.keys ?? defaultModelConfig.keys;
+
     contentTypeOption.routes?.reduce((acc, value) => {
       if (typeof value === 'string') {
         acc.push(
           new CacheRouteConfig({
             path: value,
             method: 'GET',
-            headers: [...defaultModelConfig.headers],
+            keys: new CacheKeysConfig(contentTypeKeys),
             maxAge: defaultModelConfig.maxAge,
             hitpass: defaultModelConfig.hitpass,
             paramNames: (value.match(routeParamNameRegex) ?? []).map((param) =>
@@ -80,13 +70,15 @@ function resolveUserStrategy(strapi, userOptions) {
       } else {
         acc.push(
           new CacheRouteConfig({
-            headers: [...defaultModelConfig.headers],
             maxAge: defaultModelConfig.maxAge,
             hitpass: defaultModelConfig.hitpass,
             paramNames: (value.path.match(routeParamNameRegex) ?? []).map(
               (param) => param.replace(':', '')
             ),
             ...value,
+            keys: value.keys
+              ? new CacheKeysConfig(value.keys)
+              : new CacheKeysConfig(contentTypeKeys),
           })
         );
       }
@@ -98,6 +90,7 @@ function resolveUserStrategy(strapi, userOptions) {
       ...defaultModelConfig,
       ...contentTypeOption,
       routes,
+      keys: new CacheKeysConfig(contentTypeKeys),
     });
   }
 
@@ -137,6 +130,7 @@ function resolveUserStrategy(strapi, userOptions) {
         new CacheRouteConfig({
           path: base,
           method: 'DELETE',
+          keys: new CacheKeysConfig(cacheConfig.keys),
         })
       );
       // update
@@ -144,6 +138,7 @@ function resolveUserStrategy(strapi, userOptions) {
         new CacheRouteConfig({
           path: base,
           method: 'PUT',
+          keys: new CacheKeysConfig(cacheConfig.keys),
         })
       );
       // find
@@ -151,7 +146,7 @@ function resolveUserStrategy(strapi, userOptions) {
         new CacheRouteConfig({
           path: base,
           method: 'GET',
-          headers: [...cacheConfig.headers],
+          keys: new CacheKeysConfig(cacheConfig.keys),
           maxAge: cacheConfig.maxAge,
           hitpass: cacheConfig.hitpass,
         })
@@ -164,6 +159,7 @@ function resolveUserStrategy(strapi, userOptions) {
         new CacheRouteConfig({
           path: base,
           method: 'POST',
+          keys: new CacheKeysConfig(cacheConfig.keys),
         })
       );
       // delete
@@ -171,6 +167,7 @@ function resolveUserStrategy(strapi, userOptions) {
         new CacheRouteConfig({
           path: `${base}/:id`,
           method: 'DELETE',
+          keys: new CacheKeysConfig(cacheConfig.keys),
           paramNames: ['id'],
         })
       );
@@ -179,6 +176,7 @@ function resolveUserStrategy(strapi, userOptions) {
         new CacheRouteConfig({
           path: `${base}/:id`,
           method: 'PUT',
+          keys: new CacheKeysConfig(cacheConfig.keys),
           paramNames: ['id'],
         })
       );
@@ -188,7 +186,7 @@ function resolveUserStrategy(strapi, userOptions) {
         new CacheRouteConfig({
           path: base,
           method: 'GET',
-          headers: [...cacheConfig.headers],
+          keys: new CacheKeysConfig(cacheConfig.keys),
           maxAge: cacheConfig.maxAge,
           hitpass: cacheConfig.hitpass,
         })
@@ -199,7 +197,7 @@ function resolveUserStrategy(strapi, userOptions) {
           path: `${base}/:id`,
           method: 'GET',
           paramNames: ['id'],
-          headers: [...cacheConfig.headers],
+          keys: new CacheKeysConfig(cacheConfig.keys),
           maxAge: cacheConfig.maxAge,
           hitpass: cacheConfig.hitpass,
         })
@@ -218,11 +216,11 @@ function resolveUserStrategy(strapi, userOptions) {
   }
 
   return deepFreeze(
-    Object.assign(new CachePluginStrategy(), {
-      ...defaultOptions,
+    new CachePluginStrategy({
       ...userOptions,
-      contentTypes: cacheConfigs.map((cacheConfig) =>
-        Object.assign(new CacheContentTypeConfig(), cacheConfig)
+      keys: new CacheKeysConfig(userOptions.keys),
+      contentTypes: cacheConfigs.map(
+        (cacheConfig) => new CacheContentTypeConfig(cacheConfig)
       ),
     })
   );

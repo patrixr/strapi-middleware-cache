@@ -17,10 +17,11 @@ title: Configuration Reference
 
 #### `enableEtag`
 #### `enableXCacheHeaders`
+#### `enableAdminCTBMiddleware`
 #### `resetOnStartup`
 #### `clearRelatedCache`
-#### `enableAdminCTBMiddleware`
-#### `headers`
+#### `hitpass`
+#### `keys`
 #### `maxAge`
 #### `contentTypes`
 
@@ -30,16 +31,19 @@ title: Configuration Reference
 #### `hitpass`
 #### `routes`
 #### `contentType`
-
-#### `headers`
+#### `keys`
 #### `maxAge`
 
 ### Route
 
 #### `path`
 #### `method`
-
 #### `hitpass`
-#### `headers`
+#### `keys`
 #### `maxAge`
+
+### CacheKeys
+
+#### `useQueryParams`
+#### `useJeaders`
 

@@ -11,7 +11,14 @@ module.exports = {
       enableAdminCTBMiddleware: true,
       resetOnStartup: false,
       clearRelatedCache: true,
-      headers: [],
+      keys: {
+        useHeaders: [],
+        useQueryParams: true,
+      },
+      hitpass: (ctx) =>
+        Boolean(
+          ctx.request.headers.authorization || ctx.request.headers.cookie
+        ),
       maxAge: 3600000,
       contentTypes: [],
     },
