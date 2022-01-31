@@ -11,6 +11,7 @@ module.exports = {
       enableAdminCTBMiddleware: true,
       resetOnStartup: false,
       clearRelatedCache: true,
+      keysPrefix: '',
       keys: {
         useHeaders: [],
         useQueryParams: true,

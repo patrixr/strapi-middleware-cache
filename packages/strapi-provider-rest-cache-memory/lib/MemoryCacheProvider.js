@@ -38,10 +38,6 @@ class MemoryCacheProvider extends CacheProvider {
     return this.cache.keys();
   }
 
-  async reset() {
-    return this.cache.reset();
-  }
-
   get ready() {
     return true;
   }

@@ -43,10 +43,6 @@ class RedisCacheProvider extends CacheProvider {
     return this.cache.keys();
   }
 
-  async reset() {
-    return this.cache.reset();
-  }
-
   get ready() {
     const client = this.cache.store.getClient();
     return client.status === "ready";

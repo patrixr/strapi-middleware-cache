@@ -10,6 +10,7 @@ class CachePluginStrategy {
   resetOnStartup = false;
   clearRelatedCache = false;
   maxAge = 3600000;
+  keysPrefix = '';
 
   /**
    * @type {CacheContentTypeConfig[]}
@@ -31,6 +32,7 @@ class CachePluginStrategy {
       resetOnStartup = false,
       clearRelatedCache = true,
       maxAge = 3600000,
+      keysPrefix = '',
       contentTypes = [],
       keys = new CacheKeysConfig(),
     } = options;
@@ -41,6 +43,7 @@ class CachePluginStrategy {
     this.resetOnStartup = resetOnStartup;
     this.clearRelatedCache = clearRelatedCache;
     this.maxAge = maxAge;
+    this.keysPrefix = keysPrefix;
     this.contentTypes = contentTypes;
     this.keys = keys;
   }

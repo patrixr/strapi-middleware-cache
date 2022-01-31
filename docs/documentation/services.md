@@ -17,7 +17,6 @@ title: Services
 
 ### `get()`
 ### `set()`
-### `peek()`
 ### `del()`
 ### `keys()`
 ### `reset()`

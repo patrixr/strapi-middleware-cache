@@ -23,6 +23,8 @@ module.exports = ({ strapi }) => {
 
   const pluginConfig = strapi.config.get('plugin.strapi-plugin-rest-cache');
   const { getTimeout } = pluginConfig.provider;
+  const { keysPrefix } = pluginConfig.strategy;
+  const keysPrefixRe = keysPrefix ? new RegExp(`^${keysPrefix}`) : null;
 
   return {
     /**
@@ -48,7 +50,7 @@ module.exports = ({ strapi }) => {
       }
 
       return withTimeout(
-        async () => deserialize(await provider.get(key)),
+        async () => deserialize(await provider.get(`${keysPrefix}${key}`)),
         getTimeout
       ).catch((error) => {
         if (error?.message === 'timeout') {
@@ -80,7 +82,7 @@ module.exports = ({ strapi }) => {
       }
 
       try {
-        return provider.set(key, serialize(val), maxAge);
+        return provider.set(`${keysPrefix}${key}`, serialize(val), maxAge);
       } catch (error) {
         strapi.log.error(`REST Cache provider errored:`);
         strapi.log.error(error);
@@ -104,7 +106,7 @@ module.exports = ({ strapi }) => {
 
       try {
         debug(`${chalk.redBright('[PURGING KEY]')}: ${key}`);
-        return provider.del(key);
+        return provider.del(`${keysPrefix}${key}`);
       } catch (error) {
         strapi.log.error(`REST Cache provider errored:`);
         strapi.log.error(error);
@@ -124,7 +126,15 @@ module.exports = ({ strapi }) => {
       }
 
       try {
-        return provider.keys();
+        return provider.keys().then((keys) => {
+          if (!keysPrefixRe) {
+            return keys;
+          }
+
+          return keys
+            .filter((key) => keysPrefixRe.match(key))
+            .map((key) => key.replace(keysPrefixRe, ''));
+        });
       } catch (error) {
         strapi.log.error(`REST Cache provider errored:`);
         strapi.log.error(error);
@@ -144,7 +154,9 @@ module.exports = ({ strapi }) => {
       }
 
       try {
-        return provider.reset();
+        return this.keys().then((keys) =>
+          Promise.all(keys.map((key) => this.del(key)))
+        );
       } catch (error) {
         strapi.log.error(`REST Cache provider errored:`);
         strapi.log.error(error);

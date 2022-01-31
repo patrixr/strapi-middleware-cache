@@ -37,10 +37,6 @@ class CacheProvider {
     throw new Error("Method 'keys()' must be implemented.");
   }
 
-  async reset() {
-    throw new Error("Method 'reset()' must be implemented.");
-  }
-
   get ready() {
     throw new Error("getter 'ready' must be implemented.");
   }

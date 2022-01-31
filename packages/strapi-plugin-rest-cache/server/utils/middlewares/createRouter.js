@@ -88,10 +88,7 @@ function createRouter(strapi, strategy) {
 
           router.get(
             route.path,
-            createRecvMiddleware(
-              { contentType: cacheConf.contentType, cacheRouteConfig: route },
-              { strapi }
-            )
+            createRecvMiddleware({ cacheRouteConfig: route }, { strapi })
           );
           break;
         }

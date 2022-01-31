@@ -20,6 +20,7 @@ title: Configuration Reference
 #### `enableAdminCTBMiddleware`
 #### `resetOnStartup`
 #### `clearRelatedCache`
+#### `keysPrefix`
 #### `hitpass`
 #### `keys`
 #### `maxAge`
@@ -45,5 +46,5 @@ title: Configuration Reference
 ### CacheKeys
 
 #### `useQueryParams`
-#### `useJeaders`
+#### `useHeaders`
 
