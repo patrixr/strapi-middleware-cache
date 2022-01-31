@@ -46,7 +46,7 @@
   "bugs": {
     "url": "https://github.com/strapi-community/strapi-plugin-rest-cache/issues"
   },
-  "homepage": "https://strapi-community.github.io/strapi-community/",
+  "homepage": "https://strapi-community.github.io/strapi-plugin-rest-cache/",
   "scripts": {
     "lint": "run-s eslint:server:fix eslint:admin:fix prettier:fix",
     "eslint:server": "eslint .",

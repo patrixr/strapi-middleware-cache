@@ -38,7 +38,7 @@
   "bugs": {
     "url": "https://github.com/strapi-community/strapi-plugin-rest-cache/issues"
   },
-  "homepage": "https://github.com/strapi-community/strapi-plugin-rest-cache#readme",
+  "homepage": "https://strapi-community.github.io/strapi-plugin-rest-cache/",
   "main": "./lib",
   "files": [
     "./lib"
