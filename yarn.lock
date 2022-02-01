@@ -2906,10 +2906,10 @@
   resolved "https://registry.yarnpkg.com/@sinonjs/text-encoding/-/text-encoding-0.7.1.tgz#8da5c6530915653f3a1f38fd5f101d8c3f8079c5"
   integrity sha512-+iTbntw2IZPb/anVDbypzfQa+ay64MW0Zo8aJ8gZPWMMK6/OubMVb6lUPMagqjOPnmtauXnFCACVl3O7ogjeqQ==
 
-"@strapi-community/eslint-config-admin@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@strapi-community/eslint-config-admin/-/eslint-config-admin-0.1.0.tgz#ec23b220318a2ff79bb4d154af5b2bce1045b3c7"
-  integrity sha512-nOUuKNpE7w7djr6OFTsnfPAdSmh4YrulZ4sKXzMf6/morXjL1olA8DP0XIp9HAPjxBbcGhOJ+ixynyEoVYpF3w==
+"@strapi-community/eslint-config-admin@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@strapi-community/eslint-config-admin/-/eslint-config-admin-0.1.1.tgz#5cecaa994dfc75526954ca422ec8964c3644cb07"
+  integrity sha512-LUUeL1BLeOJt/oD1/c44AzHn7fzLA2S0/foVRReM6B/qZjujUED+Nr0Pz84iU4wUr+p/QoM12a6T3EPoxquzzw==
   dependencies:
     "@babel/eslint-parser" "^7.5.4"
     "@babel/preset-react" "^7.16.7"
@@ -2924,10 +2924,10 @@
     eslint-plugin-react "^7.21.5"
     eslint-plugin-react-hooks "^4.3.0"
 
-"@strapi-community/eslint-config@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@strapi-community/eslint-config/-/eslint-config-0.1.0.tgz#383d0fc15a715f3567a37317fd376c162e3be62c"
-  integrity sha512-+QXMomZQkJGZQIFxu9OQy9KlJSnMNnP7txgLDZNyIcuWsI1t29K1ia8WfH4xjkOA+lDnS8PC56+WG6Dd2Isiow==
+"@strapi-community/eslint-config@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@strapi-community/eslint-config/-/eslint-config-0.1.1.tgz#af5df32122da009fbcd6f92a053e37e07f200e5a"
+  integrity sha512-wildTY4pIbD1Cijpa51s1BfzrnZnv08EPhSP8w82GdFJID7WoPbQxGZC0RLBQs8YSGZyhlBjFyXNhadLCpCOWg==
   dependencies:
     "@babel/eslint-parser" "^7.5.4"
     eslint-config-airbnb "^19.0.4"
