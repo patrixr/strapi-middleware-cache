@@ -9,7 +9,7 @@ actions:
     link: /getting-started/
     type: primary
   - text: Star on GitHub
-    link: https://github.com/patrixr/strapi-middleware-cache
+    link: https://github.com/strapi-community/strapi-plugin-rest-cache
     type: secondary
 features:
   - title: Respond in ~1ms
