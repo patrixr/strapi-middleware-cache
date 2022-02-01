@@ -5,11 +5,17 @@ const { CacheKeysConfig } = require('./CacheKeysConfig');
 
 class CachePluginStrategy {
   enableEtag = false;
+
   enableXCacheHeaders = false;
+
   enableAdminCTBMiddleware = true;
+
   resetOnStartup = false;
+
   clearRelatedCache = false;
+
   maxAge = 3600000;
+
   keysPrefix = '';
 
   /**

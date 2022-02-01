@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable class-methods-use-this */
+
 /**
  * Abstract Class CacheProvider.
  *

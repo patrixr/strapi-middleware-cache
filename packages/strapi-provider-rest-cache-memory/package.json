@@ -44,13 +44,13 @@
     "./lib"
   ],
   "scripts": {
-    "lint": "run-s eslint:fix eslint:admin:fix prettier:fix",
+    "lint": "run-s eslint:fix prettier:fix",
     "eslint": "eslint .",
     "eslint:fix": "eslint . --fix",
     "prettier": "prettier --check .",
     "prettier:fix": "prettier --write .",
     "test": "run-s test:*",
-    "test:lint": "run-s eslint eslint:admin prettier"
+    "test:lint": "run-s eslint prettier"
   },
   "dependencies": {
     "cache-manager": "^3.6.0"

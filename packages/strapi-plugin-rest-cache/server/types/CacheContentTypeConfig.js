@@ -7,7 +7,9 @@ const { CacheKeysConfig } = require('./CacheKeysConfig');
 
 class CacheContentTypeConfig {
   singleType = false;
+
   injectDefaultRoutes = true;
+
   maxAge = 3600000;
 
   /**
