@@ -2,6 +2,8 @@
 
 A cache middleware for the headless CMS strapi.io
 
+**Strapi V4 users:** https://strapi-community.github.io/strapi-plugin-rest-cache/
+
 ![](https://github.com/patrixr/strapi-middleware-cache/workflows/Tests/badge.svg)
 ![Maintenance](https://img.shields.io/badge/Maintenance%20-Actively%20Maintained-green.svg)
 
