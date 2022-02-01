@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * @typedef {import('@strapi/strapi').Strapi} Strapi
  */

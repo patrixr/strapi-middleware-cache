@@ -1,3 +1,5 @@
+"use strict";
+
 /* eslint-disable class-methods-use-this */
 const cacheManager = require("cache-manager");
 const { CacheProvider } = require("strapi-plugin-rest-cache/server/types");

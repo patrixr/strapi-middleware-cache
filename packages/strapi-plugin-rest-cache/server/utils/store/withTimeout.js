@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Reject promise after timeout
  *

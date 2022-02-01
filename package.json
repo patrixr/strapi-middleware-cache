@@ -22,8 +22,8 @@
     "**/colors": "1.4.0"
   },
   "devDependencies": {
-    "@strapi-community/eslint-config": "^0.1.1",
-    "@strapi-community/eslint-config-admin": "^0.1.1",
+    "@strapi-community/eslint-config": "^0.1.5",
+    "@strapi-community/eslint-config-admin": "^0.1.4",
     "@vuepress/plugin-register-components": "^2.0.0-beta.32",
     "@vuepress/plugin-search": "^2.0.0-beta.32",
     "chai": "^4.2.0",

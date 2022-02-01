@@ -1,3 +1,5 @@
+"use strict";
+
 const cacheManager = require("cache-manager");
 const redisStore = require("cache-manager-ioredis");
 const { CacheProvider } = require("strapi-plugin-rest-cache/server/types");

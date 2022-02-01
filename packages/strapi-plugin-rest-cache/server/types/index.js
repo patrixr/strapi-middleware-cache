@@ -1,3 +1,5 @@
+'use strict';
+
 const { CachePluginStrategy } = require('./CachePluginStrategy');
 const { CacheRouteConfig } = require('./CacheRouteConfig');
 const { CacheProvider } = require('./CacheProvider');

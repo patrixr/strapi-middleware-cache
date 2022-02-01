@@ -1,3 +1,5 @@
+'use strict';
+
 const Router = require('@koa/router');
 const chalk = require('chalk');
 const debug = require('debug')('strapi:strapi-plugin-rest-cache');

@@ -1,3 +1,5 @@
+'use strict';
+
 const register = require('./register');
 const bootstrap = require('./bootstrap');
 const services = require('./services');

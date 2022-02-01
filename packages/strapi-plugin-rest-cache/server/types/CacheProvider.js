@@ -1,5 +1,7 @@
-/* eslint-disable no-unused-vars */
+'use strict';
+
 /* eslint-disable class-methods-use-this */
+/* eslint-disable no-unused-vars */
 
 /**
  * Abstract Class CacheProvider.

@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * @param {any} data
  * @return {string}

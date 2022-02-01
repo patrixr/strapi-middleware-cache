@@ -40,7 +40,7 @@
     semver "^6.3.0"
     source-map "^0.5.0"
 
-"@babel/core@^7.16.0":
+"@babel/core@^7.16.0", "@babel/core@^7.16.12":
   version "7.16.12"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.16.12.tgz#5edc53c1b71e54881315923ae2aedea2522bb784"
   integrity sha512-dK5PtG1uiN2ikk++5OzSYsitZKny4wOCD0nrO4TqnW4BVBTQ2NGS3NgilvT/TEyxTST7LNyWV/T4tXDoD3fOgg==
@@ -2906,10 +2906,10 @@
   resolved "https://registry.yarnpkg.com/@sinonjs/text-encoding/-/text-encoding-0.7.1.tgz#8da5c6530915653f3a1f38fd5f101d8c3f8079c5"
   integrity sha512-+iTbntw2IZPb/anVDbypzfQa+ay64MW0Zo8aJ8gZPWMMK6/OubMVb6lUPMagqjOPnmtauXnFCACVl3O7ogjeqQ==
 
-"@strapi-community/eslint-config-admin@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@strapi-community/eslint-config-admin/-/eslint-config-admin-0.1.1.tgz#5cecaa994dfc75526954ca422ec8964c3644cb07"
-  integrity sha512-LUUeL1BLeOJt/oD1/c44AzHn7fzLA2S0/foVRReM6B/qZjujUED+Nr0Pz84iU4wUr+p/QoM12a6T3EPoxquzzw==
+"@strapi-community/eslint-config-admin@^0.1.4":
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/@strapi-community/eslint-config-admin/-/eslint-config-admin-0.1.4.tgz#b4b5d22986fae9a3d9371f5dc5c0272ea38e45ad"
+  integrity sha512-v9qk7RWa0k//cali+PPsszxrpt9w0T+9ivA6cWGj08AUTAlzNNwbufUoKB5P2IfLeTXT68U8OPv8bBQ+v3iK3A==
   dependencies:
     "@babel/eslint-parser" "^7.5.4"
     "@babel/preset-react" "^7.16.7"
@@ -2924,15 +2924,17 @@
     eslint-plugin-react "^7.21.5"
     eslint-plugin-react-hooks "^4.3.0"
 
-"@strapi-community/eslint-config@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@strapi-community/eslint-config/-/eslint-config-0.1.1.tgz#af5df32122da009fbcd6f92a053e37e07f200e5a"
-  integrity sha512-wildTY4pIbD1Cijpa51s1BfzrnZnv08EPhSP8w82GdFJID7WoPbQxGZC0RLBQs8YSGZyhlBjFyXNhadLCpCOWg==
+"@strapi-community/eslint-config@^0.1.5":
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/@strapi-community/eslint-config/-/eslint-config-0.1.5.tgz#85eb173fcce5ff7f2847fe4921f92c5c0971c13b"
+  integrity sha512-QIB4NIm6v83EFGH0QK+hq5dwdVYFPXHjLLPFlaA0T4vdfjK9Psbq5pxJRyZK5AC1MI9pezXJ9ekouPR+vtQK9Q==
   dependencies:
+    "@babel/core" "^7.16.12"
     "@babel/eslint-parser" "^7.5.4"
-    eslint-config-airbnb "^19.0.4"
+    eslint-config-airbnb-base "^15.0.0"
     eslint-config-prettier "^8.3.0"
     eslint-plugin-babel "^5.3.0"
+    eslint-plugin-import "^2.22.1"
     eslint-plugin-node "^11.1.0"
 
 "@strapi/admin@4.0.5":

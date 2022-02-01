@@ -1,3 +1,5 @@
+'use strict';
+
 const purge = require('./purge');
 const config = require('./config');
 
