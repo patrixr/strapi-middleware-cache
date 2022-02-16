@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * @typedef {import('@strapi/strapi').Strapi} Strapi
  * @typedef {import('koa').Context} Context

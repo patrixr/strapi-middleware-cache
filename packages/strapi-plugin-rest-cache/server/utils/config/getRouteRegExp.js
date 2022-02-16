@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * @typedef {import('../../types').CacheRouteConfig} CacheRouteConfig
  * @typedef {import('koa').Context} Context

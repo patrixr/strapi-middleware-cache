@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * @typedef {import('../types').CachePluginStrategy} CachePluginStrategy
  * @typedef {import('../types').CacheContentTypeConfig} CacheContentTypeConfig

@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * @typedef {(ctx: Context) => boolean} CachePluginHitpass
  */

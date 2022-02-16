@@ -1,3 +1,5 @@
+'use strict';
+
 const configRoutes = require('./config');
 const purgeRoutes = require('./purge');
 

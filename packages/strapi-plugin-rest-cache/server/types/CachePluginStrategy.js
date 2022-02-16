@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * @typedef {import('./CacheContentTypeConfig').CacheContentTypeConfig} CacheContentTypeConfig
  */

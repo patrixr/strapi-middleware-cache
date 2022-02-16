@@ -34,21 +34,17 @@ export default {
   },
   async registerTrads({ locales }) {
     const importedTrads = await Promise.all(
-      locales.map((locale) => {
-        return import(`./translations/${locale}.json`)
-          .then(({ default: data }) => {
-            return {
-              data: prefixPluginTranslations(data, pluginId),
-              locale,
-            };
-          })
-          .catch(() => {
-            return {
-              data: {},
-              locale,
-            };
-          });
-      })
+      locales.map((locale) =>
+        import(`./translations/${locale}.json`)
+          .then(({ default: data }) => ({
+            data: prefixPluginTranslations(data, pluginId),
+            locale,
+          }))
+          .catch(() => ({
+            data: {},
+            locale,
+          }))
+      )
     );
 
     return Promise.resolve(importedTrads);

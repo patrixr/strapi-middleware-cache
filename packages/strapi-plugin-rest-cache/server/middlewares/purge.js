@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * @param {{ contentType: string }} options
  * @param {{ strapi: import('@strapi/strapi').Strapi }} context

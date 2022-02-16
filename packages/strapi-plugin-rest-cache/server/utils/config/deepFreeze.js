@@ -1,3 +1,5 @@
+'use strict';
+
 function deepFreeze(object) {
   // Retrieve the property names defined on object
   const propNames = Object.getOwnPropertyNames(object);

@@ -1,3 +1,5 @@
+'use strict';
+
 const recv = require('./recv');
 const purge = require('./purge');
 const purgeAdmin = require('./purgeAdmin');
