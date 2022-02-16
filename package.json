@@ -13,6 +13,7 @@
     "docs:serve": "vuepress serve docs",
     "dev:memory": "yarn workspace @strapi-plugin-rest-cache/playground-memory develop",
     "dev:redis": "yarn workspace @strapi-plugin-rest-cache/playground-redis develop",
+    "dev:couchbase": "yarn workspace @strapi-plugin-rest-cache/playground-couchbase develop",
     "lint": "lerna run lint --stream",
     "test": "lerna run test --stream"
   },
