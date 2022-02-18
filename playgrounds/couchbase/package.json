@@ -17,7 +17,7 @@
     "mime-types": "^2.1.27",
     "sqlite3": "5.0.2",
     "strapi-plugin-rest-cache": "^4.0.0",
-    "strapi-provider-rest-cache-couchbase": "1.0.0-alpha.1"
+    "strapi-provider-rest-cache-couchbase": "1.0.0-alpha.3"
   },
   "author": {
     "name": "A Strapi developer"

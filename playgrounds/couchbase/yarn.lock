@@ -9350,10 +9350,10 @@ strapi-plugin-rest-cache@^4.0.0:
     lru-cache "^6.0.0"
     redis-lru "^0.6.0"
 
-strapi-provider-rest-cache-couchbase@1.0.0-alpha.1:
-  version "1.0.0-alpha.1"
-  resolved "https://registry.yarnpkg.com/strapi-provider-rest-cache-couchbase/-/strapi-provider-rest-cache-couchbase-1.0.0-alpha.1.tgz#678cd56c8cdb418c6f39cb17296a90bef2d3951d"
-  integrity sha512-wI0ZGh5Vnh1LQSuvoI5mUuOLhefbmd5GIbx421brLEfaP8fEyhXnHSovpOyUFIp6OnqBl/zWir22wNDHfddEbA==
+strapi-provider-rest-cache-couchbase@1.0.0-alpha.3:
+  version "1.0.0-alpha.3"
+  resolved "https://registry.yarnpkg.com/strapi-provider-rest-cache-couchbase/-/strapi-provider-rest-cache-couchbase-1.0.0-alpha.3.tgz#07645a7042212f5e0cd733c38500668206c42c9a"
+  integrity sha512-8Mgv05QF10LDrcvnnBS/DsE3c/tW8ZjFsoJmdWb6kKtAqmuuy2H2fiB88HZZse/OKIljxvJ8uKnS2IfJF/EWQA==
   dependencies:
     cache-manager "^3.6.0"
     cache-manager-couchbase "^0.1.5"
