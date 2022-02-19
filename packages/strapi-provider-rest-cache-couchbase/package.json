@@ -44,7 +44,7 @@
     "./lib"
   ],
   "scripts": {
-    "lint": "run-s eslint:fix eslint:admin:fix prettier:fix",
+    "lint": "run-s eslint:fix prettier:fix",
     "eslint": "eslint .",
     "eslint:fix": "eslint . --fix",
     "prettier": "prettier --check .",
@@ -58,7 +58,6 @@
   },
   "devDependencies": {
     "@strapi/strapi": "^4.0.5",
-    "strapi-plugin-couchbase": "^1.0.0-alpha.1",
     "strapi-plugin-rest-cache": "^4.0.0"
   },
   "peerDependencies": {
