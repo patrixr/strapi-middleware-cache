@@ -5,7 +5,7 @@
   "license": "MIT",
   "strapi": {
     "displayName": "REST Cache",
-    "name": "strapi-plugin-rest-cache",
+    "name": "rest-cache",
     "description": "Speed-up HTTP requests with LRU cache",
     "kind": "plugin"
   },
@@ -18,10 +18,11 @@
     "lru"
   ],
   "files": [
-    "./admin",
-    "./server",
-    "./strapi-admin.js",
-    "./strapi-admin.js"
+    "admin/**/*.js",
+    "admin/**/*.json",
+    "server/**/*.js",
+    "strapi-admin.js",
+    "strapi-admin.js"
   ],
   "author": {
     "name": "Strapi Community",
@@ -67,17 +68,17 @@
     "@koa/router": "^10.1.1",
     "chalk": "^4.1.2",
     "debug": "^4.3.3",
-    "ioredis": "^4.28.2",
+    "ioredis": "^4.28.5",
     "lodash": "^4.17.15",
     "lru-cache": "^6.0.0",
     "redis-lru": "^0.6.0"
   },
   "devDependencies": {
-    "@strapi/strapi": "^4.0.5",
+    "@strapi/strapi": "^4.1.0",
     "koa": "^2.11.0",
     "npm-run-all": "^4.1.5",
     "react": "^17.0.2",
-    "react-intl": "^5.20.12",
+    "react-intl": "^5.24.6",
     "react-redux": "^7.2.2",
     "redux": "^4.0.5",
     "styled-components": "^5.2.3"

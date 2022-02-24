@@ -39,9 +39,9 @@
     "url": "https://github.com/strapi-community/strapi-plugin-rest-cache/issues"
   },
   "homepage": "https://strapi-community.github.io/strapi-plugin-rest-cache/",
-  "main": "./lib",
+  "main": "lib/index.js",
   "files": [
-    "./lib"
+    "lib/**/*.js"
   ],
   "scripts": {
     "lint": "run-s eslint:fix prettier:fix",
@@ -56,7 +56,7 @@
     "cache-manager": "^3.6.0"
   },
   "devDependencies": {
-    "@strapi/strapi": "^4.0.5",
+    "@strapi/strapi": "^4.1.0",
     "strapi-plugin-rest-cache": "^4.0.0"
   },
   "peerDependencies": {

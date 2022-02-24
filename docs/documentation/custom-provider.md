@@ -52,7 +52,7 @@ module.exports = {
 // file: /config/plugins.js
 
 module.exports = {
-  "strapi-plugin-rest-cache": {
+  "rest-cache": {
     config: {
       provider: {
         name: "../custom-rest-cache-provider/index.js",
