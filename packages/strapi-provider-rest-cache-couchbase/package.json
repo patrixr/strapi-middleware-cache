@@ -1,0 +1,71 @@
+{
+  "name": "strapi-provider-rest-cache-couchbase",
+  "version": "1.0.0-alpha.3",
+  "description": "Speed-up HTTP requests with Couchbase database",
+  "license": "MIT",
+  "strapi": {
+    "displayName": "REST Cache (couchbase)",
+    "name": "strapi-provider-rest-cache-couchbase",
+    "description": "Couchbase provider for REST Cache plugin",
+    "kind": "plugin"
+  },
+  "keywords": [
+    "strapi",
+    "provider",
+    "rest-cache",
+    "couchbase"
+  ],
+  "author": {
+    "name": "Strapi Community",
+    "url": "https://github.com/strapi-community/"
+  },
+  "maintainers": [
+    {
+      "name": "Davide Pellegatta",
+      "email": "davide.pellegatta@gmail.com",
+      "url": "https://github.com/davidepellegatta/"
+    },
+    {
+      "name": "Patrick R",
+      "url": "https://github.com/patrixr/"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/strapi-community/strapi-plugin-rest-cache.git",
+    "directory": "packages/strapi-provider-rest-cache-couchbase"
+  },
+  "bugs": {
+    "url": "https://github.com/strapi-community/strapi-plugin-rest-cache/issues"
+  },
+  "homepage": "https://github.com/strapi-community/strapi-plugin-rest-cache#readme",
+  "main": "./lib",
+  "files": [
+    "./lib"
+  ],
+  "scripts": {
+    "lint": "run-s eslint:fix prettier:fix",
+    "eslint": "eslint .",
+    "eslint:fix": "eslint . --fix",
+    "prettier": "prettier --check .",
+    "prettier:fix": "prettier --write .",
+    "test": "run-s test:*",
+    "test:lint": "run-s eslint eslint:admin prettier"
+  },
+  "dependencies": {
+    "cache-manager": "^3.6.0",
+    "cache-manager-couchbase": "^0.1.5"
+  },
+  "devDependencies": {
+    "@strapi/strapi": "^4.0.5",
+    "strapi-plugin-rest-cache": "^4.0.0"
+  },
+  "peerDependencies": {
+    "@strapi/strapi": "^4.0.0",
+    "strapi-plugin-rest-cache": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  }
+}
