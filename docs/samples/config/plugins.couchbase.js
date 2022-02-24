@@ -1,23 +1,19 @@
+// file: /config/plugins.js
+
 module.exports = {
-  // Step 1: Configure the couchbase connection
-  // @see https://github.com/davidepellegatta/node-cache-manager-couchbase
-  couchbase: {
-    connectionString: "couchbase://127.0.0.1:8091",
-    connectionOptions: {
-      username: "Administrator",
-      password: "couchbase",
-    },
-    bucket: "test-bucket",
-    ttl: 2,
-  },
-  // Step 2: Configure the redis cache plugin
   "strapi-plugin-rest-cache": {
     config: {
       provider: {
-        name: "redis",
+        name: "couchbase",
+        max: 32767,
         options: {
-          max: 32767,
-          connection: "default",
+          connectionString: "couchbase://127.0.0.1:8091",
+          connectionOptions: {
+            username: "Administrator",
+            password: "couchbase",
+          },
+          bucket: "test-bucket",
+          ttl: 2,
         },
       },
       strategy: {

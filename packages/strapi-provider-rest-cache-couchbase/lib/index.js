@@ -1,6 +1,5 @@
-/**
- * @typedef {import('@strapi/strapi').Strapi} Strapi
- */
+"use strict";
+
 const { CouchbaseCacheProvider } = require("./CouchbaseCacheProvider");
 
 module.exports = {

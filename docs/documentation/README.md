@@ -115,3 +115,8 @@ Check the [configuration reference](./configuration-reference.html) for all avai
 ### Purging cache programmatically
 
 ### Enable debug mode
+
+This plugins use `debug` module to log messages that can help during development. 
+You can enable debug mode by setting the environment variable `DEBUG=strapi:strapi-plugin-rest-cache` before starting strapi.
+
+eg. `DEBUG=strapi:strapi-plugin-rest-cache yarn strapi start`

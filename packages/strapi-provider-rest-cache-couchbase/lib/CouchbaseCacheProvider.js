@@ -1,3 +1,5 @@
+"use strict";
+
 const cacheManager = require("cache-manager");
 const couchbaseStore = require("cache-manager-couchbase");
 const { CacheProvider } = require("strapi-plugin-rest-cache/server/types");

@@ -1,3 +1,5 @@
+"use strict";
+
 module.exports = [
   "strapi::errors",
   "strapi::security",

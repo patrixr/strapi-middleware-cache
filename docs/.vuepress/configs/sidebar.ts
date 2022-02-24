@@ -11,6 +11,7 @@ export const sidebar: SidebarConfig = {
         "/documentation/configuration-reference.md",
         "/documentation/memory-provider.md",
         "/documentation/redis-provider.md",
+        "/documentation/couchbase-provider.md",
       ],
     },
     {

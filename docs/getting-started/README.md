@@ -32,6 +32,14 @@ This plugin use `strapi-plugin-redis` to handle the connection with Redis.
 [https://github.com/strapi-community/strapi-plugin-redis/](https://github.com/strapi-community/strapi-plugin-redis/)
 :::
 :::
+::: code-group-item Couchbase Cache
+
+```bash
+yarn add \
+  strapi-plugin-rest-cache \
+  strapi-provider-rest-cache-couchbase
+```
+:::
 ::::
 
 
@@ -47,5 +55,8 @@ This plugin use `strapi-plugin-redis` to handle the connection with Redis.
 ::: warning
 Ensure `redis` configuration come before `strapi-plugin-rest-cache`
 :::
+:::
+::: code-group-item Couchbase Cache
+@[code js{4-29}](../samples/config/plugins.couchbase.js)
 :::
 ::::

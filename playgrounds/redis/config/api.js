@@ -1,3 +1,5 @@
+"use strict";
+
 module.exports = {
   rest: {
     defaultLimit: 25,
