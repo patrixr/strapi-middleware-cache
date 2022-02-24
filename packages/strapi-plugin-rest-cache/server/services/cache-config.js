@@ -107,12 +107,10 @@ module.exports = ({ strapi }) => ({
     const { strategy } = strapi.config.get('plugin.strapi-plugin-rest-cache');
 
     const cacheConfigService = strapi
-      .plugin('strapi-plugin-rest-cache')
+      .plugin('rest-cache')
       .service('cacheConfig');
 
-    const storeService = strapi
-      .plugin('strapi-plugin-rest-cache')
-      .service('cacheStore');
+    const storeService = strapi.plugin('rest-cache').service('cacheStore');
 
     const cacheConf = cacheConfigService.get(uid);
 

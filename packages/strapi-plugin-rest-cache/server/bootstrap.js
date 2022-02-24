@@ -65,10 +65,7 @@ module.exports = async ({ strapi }) => {
 
   // register cache provider
   const provider = await createProvider(pluginOption.provider, { strapi });
-  strapi
-    .plugin('strapi-plugin-rest-cache')
-    .service('cacheStore')
-    .init(provider);
+  strapi.plugin('rest-cache').service('cacheStore').init(provider);
 
   // boostrap plugin permissions
   await strapi.admin.services.permission.actionProvider.registerMany(
@@ -87,9 +84,6 @@ module.exports = async ({ strapi }) => {
 
   if (strategy.resetOnStartup) {
     strapi.log.warn('Reset cache on startup is enabled');
-    await strapi
-      .plugin('strapi-plugin-rest-cache')
-      .service('cacheStore')
-      .reset();
+    await strapi.plugin('rest-cache').service('cacheStore').reset();
   }
 };

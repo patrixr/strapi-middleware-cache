@@ -11,9 +11,7 @@ module.exports = (options, { strapi }) => {
     );
   }
 
-  const cacheConf = strapi
-    .plugin('strapi-plugin-rest-cache')
-    .service('cacheConfig');
+  const cacheConf = strapi.plugin('rest-cache').service('cacheConfig');
 
   if (!cacheConf.isCached(options.contentType)) {
     throw new Error(

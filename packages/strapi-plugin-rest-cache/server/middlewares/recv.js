@@ -22,7 +22,7 @@ module.exports = (options, { strapi }) => {
     );
   }
 
-  const store = strapi.plugin('strapi-plugin-rest-cache').service('cacheStore');
+  const store = strapi.plugin('rest-cache').service('cacheStore');
   const { strategy } = strapi.config.get('plugin.strapi-plugin-rest-cache');
 
   return async (ctx, next) => {

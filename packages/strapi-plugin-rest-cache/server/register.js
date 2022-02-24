@@ -9,7 +9,7 @@
  */
 module.exports = ({ strapi }) => {
   // @todo: use cache provider instead of hard-coded LRU
-  const store = strapi.plugin('strapi-plugin-rest-cache').service('cacheStore');
+  const store = strapi.plugin('rest-cache').service('cacheStore');
 
   // watch for changes in any roles -> clear all cache
   // need to be done before lifecycles are registered

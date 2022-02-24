@@ -36,14 +36,10 @@ const adminRoutes = {
 function createRouter(strapi, strategy) {
   const router = new Router();
 
-  const createRecvMiddleware = strapi
-    .plugin('strapi-plugin-rest-cache')
-    .middleware('recv');
-  const createPurgeMiddleware = strapi
-    .plugin('strapi-plugin-rest-cache')
-    .middleware('purge');
+  const createRecvMiddleware = strapi.plugin('rest-cache').middleware('recv');
+  const createPurgeMiddleware = strapi.plugin('rest-cache').middleware('purge');
   const createPurgeAdminMiddleware = strapi
-    .plugin('strapi-plugin-rest-cache')
+    .plugin('rest-cache')
     .middleware('purgeAdmin');
   const purgeAdminMiddleware = createPurgeAdminMiddleware({}, { strapi });
 

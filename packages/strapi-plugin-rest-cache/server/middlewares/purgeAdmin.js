@@ -5,9 +5,7 @@
  * @param {{ strapi: import('@strapi/strapi').Strapi }} context
  */
 module.exports = (options, { strapi }) => {
-  const cacheConfig = strapi
-    .plugin('strapi-plugin-rest-cache')
-    .service('cacheConfig');
+  const cacheConfig = strapi.plugin('rest-cache').service('cacheConfig');
 
   return async (ctx, next) => {
     // uid:

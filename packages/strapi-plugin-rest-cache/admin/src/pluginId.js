@@ -2,4 +2,4 @@ import pluginPkg from '../../package.json';
 
 // const pluginId = pluginPkg.name.replace(/^strapi-plugin-/i, '');
 
-export default pluginPkg.name;
+export default pluginPkg.strapi.name;
