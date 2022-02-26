@@ -101,7 +101,7 @@ function resolveUserStrategy(strapi, userOptions) {
     const contentType = strapi.contentType(cacheConfig.contentType);
     if (!contentType) {
       throw new Error(
-        `Unable to resolve strapi-plugin-rest-cache options: contentType uid "${cacheConfig.contentType}" not found`
+        `Unable to resolve rest-cache options: contentType uid "${cacheConfig.contentType}" not found`
       );
     }
 
@@ -211,7 +211,7 @@ function resolveUserStrategy(strapi, userOptions) {
     for (const route of cacheConfig.routes) {
       if (!routeExists(strapi, route)) {
         throw new Error(
-          `Unable to resolve strapi-plugin-rest-cache options: ${route.method} ${route.path} has no matching endpoint`
+          `Unable to resolve rest-cache options: ${route.method} ${route.path} has no matching endpoint`
         );
       }
     }

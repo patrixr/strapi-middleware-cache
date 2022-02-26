@@ -22,7 +22,7 @@ module.exports = ({ strapi }) => ({
    * @return {string[]}
    */
   getUids() {
-    const { strategy } = strapi.config.get('plugin.strapi-plugin-rest-cache');
+    const { strategy } = strapi.config.get('plugin.rest-cache');
     return strategy.contentTypes.map((cacheConf) => cacheConf.contentType);
   },
 
@@ -58,7 +58,7 @@ module.exports = ({ strapi }) => ({
    * @return {CacheContentTypeConfig | undefined}
    */
   get(uid) {
-    const { strategy } = strapi.config.get('plugin.strapi-plugin-rest-cache');
+    const { strategy } = strapi.config.get('plugin.rest-cache');
     return strategy.contentTypes.find(
       (cacheConf) => cacheConf.contentType === uid
     );
@@ -104,7 +104,7 @@ module.exports = ({ strapi }) => ({
   },
 
   async clearCache(uid, params = {}, wildcard = false) {
-    const { strategy } = strapi.config.get('plugin.strapi-plugin-rest-cache');
+    const { strategy } = strapi.config.get('plugin.rest-cache');
 
     const cacheConfigService = strapi
       .plugin('rest-cache')

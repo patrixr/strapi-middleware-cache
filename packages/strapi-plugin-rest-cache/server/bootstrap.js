@@ -54,9 +54,9 @@ const createProvider = async (providerConfig, { strapi }) => {
  */
 module.exports = async ({ strapi }) => {
   // resolve user configuration, check for missing or invalid options
-  const pluginOption = strapi.config.get('plugin.strapi-plugin-rest-cache');
+  const pluginOption = strapi.config.get('plugin.rest-cache');
   const strategy = resolveUserStrategy(strapi, pluginOption.strategy);
-  strapi.config.set('plugin.strapi-plugin-rest-cache', {
+  strapi.config.set('plugin.rest-cache', {
     ...pluginOption,
     strategy,
   });
