@@ -1,0 +1,31 @@
+name: release
+
+on:
+  # trigger release on every tag push
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      # extract tag from the github ref (e.g. refs/tags/v1.2.3)
+      - name: Set up tag meta
+        id: meta
+        run: |
+          echo ::set-output name=tag::${GITHUB_REF#refs/tags/}
+
+      # create a new release on github with discussion
+      - name: Create release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.meta.outputs.tag }}
+          name: Release ${{ steps.meta.outputs.tag }}
+          body: View [CHANGELOG.md](https://github.com/strapi-community/strapi-plugin-rest-cache/blob/main/CHANGELOG.md) for details
+          draft: false
+          prerelease: false
+          discussion_category_name: announcements
