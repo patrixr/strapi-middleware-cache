@@ -208,13 +208,9 @@ function resolveUserStrategy(strapi, userOptions) {
   }
 
   for (const cacheConfig of cacheConfigs) {
-    for (const route of cacheConfig.routes) {
-      if (!routeExists(strapi, route)) {
-        throw new Error(
-          `Unable to resolve rest-cache options: ${route.method} ${route.path} has no matching endpoint`
-        );
-      }
-    }
+    cacheConfig.routes = cacheConfig.routes.filter((route) =>
+      routeExists(strapi, route)
+    );
   }
 
   return deepFreeze(
