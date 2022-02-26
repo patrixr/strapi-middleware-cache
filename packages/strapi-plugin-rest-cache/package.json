@@ -22,7 +22,7 @@
     "admin/**/*.json",
     "server/**/*.js",
     "strapi-admin.js",
-    "strapi-admin.js"
+    "strapi-server.js"
   ],
   "author": {
     "name": "Strapi Community",
