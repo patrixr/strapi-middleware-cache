@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.4](https://github.com/strapi-community/strapi-plugin-rest-cache/compare/v4.0.3...v4.0.4) (2022-02-26)
+
+
+### Bug Fixes
+
+* add missing server entrypoint ([820c967](https://github.com/strapi-community/strapi-plugin-rest-cache/commit/820c967b414c29b19bf4ba483e15692ba613a4d6))
+* ignore unexisting routes instead of throwing ([7f06c9d](https://github.com/strapi-community/strapi-plugin-rest-cache/commit/7f06c9d9633d6a07b741f480352bac6ad86b6678))
+
+
+
+
+
 ## [4.0.3](https://github.com/strapi-community/strapi-plugin-rest-cache/compare/v4.0.2...v4.0.3) (2022-02-26)
 
 
