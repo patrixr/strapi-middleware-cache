@@ -55,6 +55,7 @@ const createProvider = async (providerConfig, { strapi }) => {
 module.exports = async ({ strapi }) => {
   // resolve user configuration, check for missing or invalid options
   const pluginOption = strapi.config.get('plugin.rest-cache');
+  const cacheStore = strapi.plugin('rest-cache').service('cacheStore');
   const strategy = resolveUserStrategy(strapi, pluginOption.strategy);
   strapi.config.set('plugin.rest-cache', {
     ...pluginOption,
@@ -62,6 +63,17 @@ module.exports = async ({ strapi }) => {
   });
 
   debug('[STRATEGY]: %o', strategy);
+
+  // watch for changes in any roles -> clear all cache
+  // need to be done before lifecycles are registered
+  if (strapi.plugin('users-permissions')) {
+    strapi.db.lifecycles.subscribe({
+      models: ['plugin::users-permissions.role'],
+      async beforeDelete() {
+        await cacheStore.reset();
+      },
+    });
+  }
 
   // register cache provider
   const provider = await createProvider(pluginOption.provider, { strapi });
