@@ -1,6 +1,6 @@
 {
   "name": "strapi-provider-rest-cache-couchbase",
-  "version": "4.0.5",
+  "version": "4.0.6",
   "description": "Speed-up HTTP requests with Couchbase database",
   "license": "MIT",
   "strapi": {
@@ -58,7 +58,7 @@
   },
   "devDependencies": {
     "@strapi/strapi": "^4.1.0",
-    "strapi-plugin-rest-cache": "^4.0.5"
+    "strapi-plugin-rest-cache": "^4.0.6"
   },
   "peerDependencies": {
     "@strapi/strapi": "^4.0.0",

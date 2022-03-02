@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.6](https://github.com/strapi-community/strapi-plugin-rest-cache/compare/v4.0.5...v4.0.6) (2022-03-02)
+
+
+### Bug Fixes
+
+* only use boostrap lifecycle to register the plugin ([46eaf0b](https://github.com/strapi-community/strapi-plugin-rest-cache/commit/46eaf0bbf60f67c06cf1d8d0ad95f087f68a58b1))
+
+
+
+
+
 ## [4.0.5](https://github.com/strapi-community/strapi-plugin-rest-cache/compare/v4.0.4...v4.0.5) (2022-03-02)
 
 
