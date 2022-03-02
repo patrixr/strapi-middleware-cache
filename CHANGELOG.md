@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.5](https://github.com/strapi-community/strapi-plugin-rest-cache/compare/v4.0.4...v4.0.5) (2022-03-02)
+
+
+### Bug Fixes
+
+* pluginId used to register permissions actions ([3376b4a](https://github.com/strapi-community/strapi-plugin-rest-cache/commit/3376b4a74a53e563d50f520cd02f72be0e6ee89d))
+
+
+
+
+
 ## [4.0.4](https://github.com/strapi-community/strapi-plugin-rest-cache/compare/v4.0.3...v4.0.4) (2022-02-26)
 
 
