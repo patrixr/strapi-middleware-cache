@@ -4,7 +4,7 @@
  * @typedef {import('@strapi/strapi').Strapi} Strapi
  */
 const chalk = require('chalk');
-const debug = require('debug')('strapi:strapi-plugin-rest-cache');
+const debug = require('debug');
 
 const { CacheProvider } = require('./types');
 const { resolveUserStrategy } = require('./utils/config/resolveUserStrategy');
@@ -56,13 +56,18 @@ module.exports = async ({ strapi }) => {
   // resolve user configuration, check for missing or invalid options
   const pluginOption = strapi.config.get('plugin.rest-cache');
   const cacheStore = strapi.plugin('rest-cache').service('cacheStore');
+
+  if (pluginOption.strategy.debug === true) {
+    debug.enable('strapi:strapi-plugin-rest-cache');
+  }
+
   const strategy = resolveUserStrategy(strapi, pluginOption.strategy);
   strapi.config.set('plugin.rest-cache', {
     ...pluginOption,
     strategy,
   });
 
-  debug('[STRATEGY]: %o', strategy);
+  debug('strapi:strapi-plugin-rest-cache')('[STRATEGY]: %O', strategy);
 
   // watch for changes in any roles -> clear all cache
   // need to be done before lifecycles are registered

@@ -5,6 +5,7 @@
  * @typedef {import('@strapi/strapi').Strapi} Strapi
  */
 
+const debug = require('debug')('strapi:strapi-plugin-rest-cache');
 const { getRelatedModelsUid } = require('./getRelatedModelsUid');
 const { deepFreeze } = require('./deepFreeze');
 const { routeExists } = require('./routeExists');
@@ -208,9 +209,19 @@ function resolveUserStrategy(strapi, userOptions) {
   }
 
   for (const cacheConfig of cacheConfigs) {
-    cacheConfig.routes = cacheConfig.routes.filter((route) =>
-      routeExists(strapi, route)
-    );
+    cacheConfig.routes = cacheConfig.routes.filter((route) => {
+      const exist = routeExists(strapi, route);
+
+      if (!exist) {
+        debug(
+          '[WARNING] route "[%s] %s" not registered in strapi, ignoring...',
+          route.method,
+          route.path
+        );
+      }
+
+      return exist;
+    });
   }
 
   return deepFreeze(

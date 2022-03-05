@@ -8,6 +8,7 @@ module.exports = {
       options: {},
     },
     strategy: {
+      debug: false,
       enableEtag: false,
       enableXCacheHeaders: false,
       enableAdminCTBMiddleware: true,

@@ -6,6 +6,8 @@
 const { CacheKeysConfig } = require('./CacheKeysConfig');
 
 class CachePluginStrategy {
+  debug = false;
+
   enableEtag = false;
 
   enableXCacheHeaders = false;
@@ -34,6 +36,7 @@ class CachePluginStrategy {
     if (!options) return;
 
     const {
+      debug = false,
       enableEtag = false,
       enableXCacheHeaders = false,
       enableAdminCTBMiddleware = true,
@@ -45,6 +48,7 @@ class CachePluginStrategy {
       keys = new CacheKeysConfig(),
     } = options;
 
+    this.debug = debug;
     this.enableEtag = enableEtag;
     this.enableXCacheHeaders = enableXCacheHeaders;
     this.enableAdminCTBMiddleware = enableAdminCTBMiddleware;

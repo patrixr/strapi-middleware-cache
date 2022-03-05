@@ -19,7 +19,7 @@ function routeExists(strapi, route) {
       routeLayer.path.match(new RegExp(`${route.path}/?`)) // match with optional leading slash
   );
 
-  return match;
+  return Boolean(match);
 }
 
 module.exports = { routeExists };
