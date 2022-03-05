@@ -1,6 +1,6 @@
 {
   "name": "strapi-provider-rest-cache-memory",
-  "version": "4.0.6",
+  "version": "4.1.0",
   "description": "Speed-up HTTP requests with LRU cache",
   "license": "MIT",
   "strapi": {
@@ -57,7 +57,7 @@
   },
   "devDependencies": {
     "@strapi/strapi": "^4.1.0",
-    "strapi-plugin-rest-cache": "^4.0.6"
+    "strapi-plugin-rest-cache": "^4.1.0"
   },
   "peerDependencies": {
     "@strapi/strapi": "^4.0.0",

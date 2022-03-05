@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.1.0](https://github.com/strapi-community/strapi-plugin-rest-cache/compare/v4.0.6...v4.1.0) (2022-03-05)
+
+
+### Bug Fixes
+
+* better path resolution when using custom delimiters ([943393d](https://github.com/strapi-community/strapi-plugin-rest-cache/commit/943393d97fc36e0995884a05bacc9720a7f78fe1))
+
+
+### Features
+
+* add strategy debug option ([0dda260](https://github.com/strapi-community/strapi-plugin-rest-cache/commit/0dda26065d17f5b884b224616ffe07c2b8fbcba8))
+
+
+
+
+
 ## [4.0.6](https://github.com/strapi-community/strapi-plugin-rest-cache/compare/v4.0.5...v4.0.6) (2022-03-02)
 
 ### Bug Fixes
