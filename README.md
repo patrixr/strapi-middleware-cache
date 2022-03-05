@@ -39,6 +39,7 @@ You can set a **strategy** to tell what to cache and how much time responses sho
 Supported Strapi Versions:
 
 - Strapi v4.0.x (recently tested as of January 2022)
+- Strapi v4.1.x (recently tested as of March 2022)
 - Strapi v4.x.x (Assumed, but possibly not tested)
 
 **If you are looking for a plugin for Strapi v3.x, please check the [strapi-middleware-cache](https://github.com/patrixr/strapi-middleware-cache/).**

@@ -69,9 +69,7 @@
     "chalk": "^4.1.2",
     "debug": "^4.3.3",
     "ioredis": "^4.28.5",
-    "lodash": "^4.17.15",
-    "lru-cache": "^6.0.0",
-    "redis-lru": "^0.6.0"
+    "lodash": "^4.17.15"
   },
   "devDependencies": {
     "@strapi/strapi": "^4.1.0",

@@ -1419,10 +1419,10 @@
     esquery "^1.4.0"
     jsdoc-type-pratt-parser "~2.2.2"
 
-"@eslint/eslintrc@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@eslint/eslintrc/-/eslintrc-1.1.0.tgz#583d12dbec5d4f22f333f9669f7d0b7c7815b4d3"
-  integrity sha512-C1DfL7XX4nPqGd6jcP01W9pVM1HYCuUkFk1432D7F0v3JSlUIeOYn9oCoi3eoLZ+iwBSb29BMFxxny0YrrEZqg==
+"@eslint/eslintrc@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@eslint/eslintrc/-/eslintrc-1.2.0.tgz#7ce1547a5c46dfe56e1e45c3c9ed18038c721c6a"
+  integrity sha512-igm9SjJHNEJRiUnecP/1R5T3wKLEJ7pL6e2P+GUSfCd0dGjPYYZve08uzw8L2J8foVHFz+NGu12JxRcU2gGo6w==
   dependencies:
     ajv "^6.12.4"
     debug "^4.3.2"
@@ -2899,10 +2899,10 @@
   resolved "https://registry.yarnpkg.com/@sinonjs/text-encoding/-/text-encoding-0.7.1.tgz#8da5c6530915653f3a1f38fd5f101d8c3f8079c5"
   integrity sha512-+iTbntw2IZPb/anVDbypzfQa+ay64MW0Zo8aJ8gZPWMMK6/OubMVb6lUPMagqjOPnmtauXnFCACVl3O7ogjeqQ==
 
-"@strapi-community/eslint-config-admin@^0.1.4":
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/@strapi-community/eslint-config-admin/-/eslint-config-admin-0.1.4.tgz#b4b5d22986fae9a3d9371f5dc5c0272ea38e45ad"
-  integrity sha512-v9qk7RWa0k//cali+PPsszxrpt9w0T+9ivA6cWGj08AUTAlzNNwbufUoKB5P2IfLeTXT68U8OPv8bBQ+v3iK3A==
+"@strapi-community/eslint-config-admin@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@strapi-community/eslint-config-admin/-/eslint-config-admin-0.2.0.tgz#a407a8409b270418d65eadcbdec9eefc3410425e"
+  integrity sha512-UDcZRKYevAUn++H2NsPsw5jrXHOFb1ryMgoD4ydJZdDBanea0Q/2BG45Qw30q58ywlxGoCSy3j6bkO4uVIDCnA==
   dependencies:
     "@babel/eslint-parser" "^7.5.4"
     "@babel/preset-react" "^7.16.7"
@@ -2917,10 +2917,10 @@
     eslint-plugin-react "^7.21.5"
     eslint-plugin-react-hooks "^4.3.0"
 
-"@strapi-community/eslint-config@^0.1.5":
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/@strapi-community/eslint-config/-/eslint-config-0.1.5.tgz#85eb173fcce5ff7f2847fe4921f92c5c0971c13b"
-  integrity sha512-QIB4NIm6v83EFGH0QK+hq5dwdVYFPXHjLLPFlaA0T4vdfjK9Psbq5pxJRyZK5AC1MI9pezXJ9ekouPR+vtQK9Q==
+"@strapi-community/eslint-config@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@strapi-community/eslint-config/-/eslint-config-0.2.0.tgz#edba6d6f3ed72a8b6f4e0a460f9691ecafde7154"
+  integrity sha512-eVvOmeSGoF1VHCpzdqZE3AXeSgzYuq0hlMrt7VJiIo8SslZ3lO22GGIOa5vcD2EbeCLxYKw6NOP+l/06Zu6vSA==
   dependencies:
     "@babel/core" "^7.16.12"
     "@babel/eslint-parser" "^7.5.4"
@@ -8214,12 +8214,12 @@ eslint-visitor-keys@^3.3.0:
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-3.3.0.tgz#f6480fa6b1f30efe2d1968aa8ac745b862469826"
   integrity sha512-mQ+suqKJVyeuwGYHAdjMFqjCyfl8+Ldnxuyp3ldiMBFKkvytrXUZWaiPCEav8qDHKty44bD+qV1IP4T+w+xXRA==
 
-eslint@^8.9.0:
-  version "8.9.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-8.9.0.tgz#a2a8227a99599adc4342fd9b854cb8d8d6412fdb"
-  integrity sha512-PB09IGwv4F4b0/atrbcMFboF/giawbBLVC7fyDamk5Wtey4Jh2K+rYaBhCAbUyEI4QzB1ly09Uglc9iCtFaG2Q==
+eslint@^8.10.0:
+  version "8.10.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-8.10.0.tgz#931be395eb60f900c01658b278e05b6dae47199d"
+  integrity sha512-tcI1D9lfVec+R4LE1mNDnzoJ/f71Kl/9Cv4nG47jOueCMBrCCKYXr4AUVS7go6mWYGFD4+EoN6+eXSrEbRzXVw==
   dependencies:
-    "@eslint/eslintrc" "^1.1.0"
+    "@eslint/eslintrc" "^1.2.0"
     "@humanwhocodes/config-array" "^0.9.2"
     ajv "^6.10.0"
     chalk "^4.0.0"
@@ -9905,7 +9905,7 @@ ioredis@^4.14.1:
     redis-parser "^3.0.0"
     standard-as-callback "^2.1.0"
 
-ioredis@^4.28.5:
+ioredis@^4.28.2, ioredis@^4.28.5:
   version "4.28.5"
   resolved "https://registry.yarnpkg.com/ioredis/-/ioredis-4.28.5.tgz#5c149e6a8d76a7f8fa8a504ffc85b7d5b6797f9f"
   integrity sha512-3GYo0GJtLqgNXj4YhrisLaNNvWSNwSS2wS4OELGfGxH8I69+XfNdnmV1AyN+ZqMh0i7eX+SWjrwFKDBDgfBC1A==
@@ -11494,10 +11494,10 @@ linkify-it@^3.0.1:
   dependencies:
     uc.micro "^1.0.1"
 
-lint-staged@^12.3.4:
-  version "12.3.4"
-  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-12.3.4.tgz#4b1ff8c394c3e6da436aaec5afd4db18b5dac360"
-  integrity sha512-yv/iK4WwZ7/v0GtVkNb3R82pdL9M+ScpIbJLJNyCXkJ1FGaXvRCOg/SeL59SZtPpqZhE7BD6kPKFLIDUhDx2/w==
+lint-staged@^12.3.5:
+  version "12.3.5"
+  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-12.3.5.tgz#8048ce048c3cac12f57200a06344a54dc91c8fa9"
+  integrity sha512-oOH36RUs1It7b9U/C7Nl/a0sLfoIBcMB8ramiB3nuJ6brBqzsWiUAFSR5DQ3yyP/OR7XKMpijtgKl2DV1lQ3lA==
   dependencies:
     cli-truncate "^3.1.0"
     colorette "^2.0.16"
@@ -14607,11 +14607,6 @@ redis-errors@^1.0.0, redis-errors@^1.2.0:
   resolved "https://registry.yarnpkg.com/redis-errors/-/redis-errors-1.2.0.tgz#eb62d2adb15e4eaf4610c04afe1529384250abad"
   integrity sha1-62LSrbFeTq9GEMBK/hUpOEJQq60=
 
-redis-lru@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/redis-lru/-/redis-lru-0.6.0.tgz#2a820a99011fe1a16a7ad2d67980def9d3336c7a"
-  integrity sha512-nDH+EHcUXp+cJdnkq8Hb+99kr82EDmAiFY40Bb02nB00A4N/dUqw3SCIJSgH8SUP2uee9EFijbMlf5WSul22uw==
-
 redis-parser@3.0.0, redis-parser@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/redis-parser/-/redis-parser-3.0.0.tgz#b66d828cdcafe6b4b8a428a7def4c6bcac31c8b4"
@@ -15832,7 +15827,16 @@ std-env@^2.2.1:
   dependencies:
     ci-info "^3.1.1"
 
-strapi-plugin-redis@1.0.0-alpha.1, strapi-plugin-redis@^1.0.0-alpha.1:
+strapi-plugin-redis@1.0.0-alpha.2:
+  version "1.0.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/strapi-plugin-redis/-/strapi-plugin-redis-1.0.0-alpha.2.tgz#bb1597dfa86c7a5e0fd8f855d910a202e6a73c7f"
+  integrity sha512-PRLOU/bC39ubTOj6zUNsknHG23dq/yqdC32ARY24NgOmmz9rrEnLf0doIrNO039NwOPgNn7V3WJMXPiiBxUr+w==
+  dependencies:
+    chalk "^4.1.2"
+    debug "^4.3.3"
+    ioredis "^4.28.2"
+
+strapi-plugin-redis@^1.0.0-alpha.1:
   version "1.0.0-alpha.1"
   resolved "https://registry.yarnpkg.com/strapi-plugin-redis/-/strapi-plugin-redis-1.0.0-alpha.1.tgz#a2c685127b0eb7c97d613f2025f54c6bf6612dbe"
   integrity sha512-He3PLvGLsR5FpIVgkMZb+Zth7PcHF+jaXjHaXkb8rdSK6ZaGZRrC2hY8EsMhRfgn2JaviXZe9YQHOYcGzQLFOA==
