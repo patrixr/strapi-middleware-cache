@@ -23,7 +23,9 @@ function getRouteRegExp(route, params, wildcard = false) {
   if (wildcard) {
     let pattern = route.path;
     for (const paramName of route.paramNames) {
-      pattern = pattern.replace(`:${paramName}`, '([^/]+)');
+      pattern = pattern
+        .replace(new RegExp(`:${paramName}([^\\/#\\?]*)`, 'g'), '([^\\/#\\?]+)')
+        .replace('//', '/');
     }
 
     return [new RegExp(`^${pattern}\\?`)];
@@ -38,7 +40,9 @@ function getRouteRegExp(route, params, wildcard = false) {
 
   let pattern = route.path;
   for (const paramName of paramNames) {
-    pattern = pattern.replace(`:${paramName}`, params[paramName]);
+    pattern = pattern
+      .replace(new RegExp(`:${paramName}([^\\/#\\?]*)`, 'g'), params[paramName])
+      .replace('//', '/');
   }
 
   // add if pattern does not contain any unresolved params
