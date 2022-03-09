@@ -3,6 +3,7 @@
 module.exports = {
   redis: {
     config: {
+      debug: true,
       connections: {
         default: {
           connection: {
@@ -39,6 +40,7 @@ module.exports = {
         },
       },
       strategy: {
+        debug: true,
         enableEtag: true,
         enableXCacheHeaders: true,
         enableAdminCTBMiddleware: true,

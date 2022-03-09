@@ -24,12 +24,14 @@ module.exports = ({ strapi }) => ({
       .plugin('rest-cache')
       .service('cacheConfig');
 
+    const cacheStoreService = strapi.plugin('rest-cache').service('cacheStore');
+
     if (!cacheConfigService.isCached(contentType)) {
       ctx.badRequest('contentType is not cached', { contentType });
       return;
     }
 
-    await cacheConfigService.clearCache(contentType, params, wildcard);
+    await cacheStoreService.clearByUid(contentType, params, wildcard);
 
     // send no-content status
     // ctx.status = 204;

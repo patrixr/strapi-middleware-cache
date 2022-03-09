@@ -103,51 +103,15 @@ module.exports = ({ strapi }) => ({
     return !!this.get(uid);
   },
 
+  /**
+   * @deprecated use strapi.service('plugin::rest-cache.cacheStore').clearByUid instead
+   */
   async clearCache(uid, params = {}, wildcard = false) {
-    const { strategy } = strapi.config.get('plugin.rest-cache');
-
-    const cacheConfigService = strapi
-      .plugin('rest-cache')
-      .service('cacheConfig');
-
-    const storeService = strapi.plugin('rest-cache').service('cacheStore');
-
-    const cacheConf = cacheConfigService.get(uid);
-
-    if (!cacheConf) {
-      throw new Error(
-        `Unable to clear cache: no configuration found for contentType "${uid}"`
-      );
-    }
-
-    const keys = (await storeService.keys()) || [];
-    const regExps = cacheConfigService.getCacheKeysRegexp(
-      uid,
-      params,
-      wildcard
+    strapi.log.warn(
+      'REST Cache cacheConfig.clearCache is deprecated, use cacheStore.clearByUid instead'
     );
-
-    if (strategy.clearRelatedCache) {
-      for (const relatedUid of cacheConf.relatedContentTypeUid) {
-        if (cacheConfigService.isCached(relatedUid)) {
-          // clear all cache because we can't predict uri params
-          regExps.push(
-            ...cacheConfigService.getCacheKeysRegexp(relatedUid, {}, true)
-          );
-        }
-      }
-    }
-
-    /**
-     * @param {string} key
-     */
-    const shouldDel = (key) => regExps.find((r) => r.test(key));
-
-    /**
-     * @param {string} key
-     */
-    const del = (key) => storeService.del(key);
-
-    await Promise.all(keys.filter(shouldDel).map(del));
+    strapi
+      .service('plugin::rest-cache.cacheStore')
+      .clearByUid(uid, params, wildcard);
   },
 });

@@ -17,6 +17,7 @@ module.exports = {
         },
       },
       strategy: {
+        debug: true,
         enableEtag: true,
         enableXCacheHeaders: true,
         enableAdminCTBMiddleware: true,

@@ -115,7 +115,7 @@ module.exports = ({ env }) => ({
             contentType: "api::pages.pages",
             routes: /* @type {CacheRouteConfig[]} */ [
               {
-                path: '/pages/slug/:slug+',
+                path: '/api/pages/slug/:slug+', // note that we set the /api prefix here
                 method: 'GET', // can be omitted, defaults to GET
                 hitpass: false, // overrides default hitpass for this route
                 keys: /* @type {CacheKeysConfig} */ {

@@ -174,5 +174,64 @@ module.exports = ({ strapi }) => {
 
       return provider.ready;
     },
+
+    /**
+     * @param {RegExp[]} regExps
+     */
+    async clearByRegexp(regExps = []) {
+      const keys = (await this.keys()) || [];
+
+      /**
+       * @param {string} key
+       */
+      const shouldDel = (key) => regExps.find((r) => r.test(key));
+
+      /**
+       * @param {string} key
+       */
+      const del = (key) => this.del(key);
+
+      await Promise.all(keys.filter(shouldDel).map(del));
+    },
+
+    /**
+     * @param {string} uid
+     * @param {any} params
+     * @param {boolean=} wildcard
+     */
+    async clearByUid(uid, params = {}, wildcard = false) {
+      const { strategy } = strapi.config.get('plugin.rest-cache');
+
+      const cacheConfigService = strapi
+        .plugin('rest-cache')
+        .service('cacheConfig');
+
+      const cacheConf = cacheConfigService.get(uid);
+
+      if (!cacheConf) {
+        throw new Error(
+          `Unable to clear cache: no configuration found for contentType "${uid}"`
+        );
+      }
+
+      const regExps = cacheConfigService.getCacheKeysRegexp(
+        uid,
+        params,
+        wildcard
+      );
+
+      if (strategy.clearRelatedCache) {
+        for (const relatedUid of cacheConf.relatedContentTypeUid) {
+          if (cacheConfigService.isCached(relatedUid)) {
+            // clear all cache because we can't predict uri params
+            regExps.push(
+              ...cacheConfigService.getCacheKeysRegexp(relatedUid, {}, true)
+            );
+          }
+        }
+      }
+
+      await this.clearByRegexp(regExps);
+    },
   };
 };

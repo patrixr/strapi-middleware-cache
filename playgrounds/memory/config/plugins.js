@@ -8,6 +8,7 @@ module.exports = {
         max: 32767,
       },
       strategy: {
+        debug: true,
         enableEtag: true,
         enableXCacheHeaders: true,
         enableAdminCTBMiddleware: true,
@@ -32,10 +33,10 @@ module.exports = {
             },
             routes: [
               {
-                path: "/api/categories/slug/:slug",
+                path: "/api/categories/slug/:slug+",
                 keys: {
-                  useQueryParams: false,
-                  useHeaders: ["accept-encoding", "authorization"],
+                  useQueryParams: ["populate", "locale"],
+                  useHeaders: ["accept-encoding"],
                 },
                 maxAge: 18000,
                 method: "GET",

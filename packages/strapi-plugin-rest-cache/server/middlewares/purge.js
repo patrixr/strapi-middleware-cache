@@ -12,6 +12,7 @@ module.exports = (options, { strapi }) => {
   }
 
   const cacheConf = strapi.plugin('rest-cache').service('cacheConfig');
+  const cacheStore = strapi.plugin('rest-cache').service('cacheStore');
 
   if (!cacheConf.isCached(options.contentType)) {
     throw new Error(
@@ -24,6 +25,6 @@ module.exports = (options, { strapi }) => {
 
     if (!(ctx.status >= 200 && ctx.status <= 300)) return;
 
-    await cacheConf.clearCache(options.contentType, ctx.params);
+    await cacheStore.clearByUid(options.contentType, ctx.params);
   };
 };
