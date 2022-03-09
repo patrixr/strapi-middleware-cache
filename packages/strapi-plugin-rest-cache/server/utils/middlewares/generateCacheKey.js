@@ -32,7 +32,7 @@ function generateCacheKey(cacheRouteConfig, ctx) {
       .join(',');
   }
 
-  const headersSuffix = cacheRouteConfig.keys.useHeaders
+  const headersSuffix = [...cacheRouteConfig.keys.useHeaders]
     .sort()
     .filter((k) => ctx.request.header[k.toLowerCase()] !== undefined)
     .map((k) => `${k.toLowerCase()}=${ctx.request.header[k.toLowerCase()]}`) // headers are key insensitive
