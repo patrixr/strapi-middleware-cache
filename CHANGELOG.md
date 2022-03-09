@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.2.0](https://github.com/strapi-community/strapi-plugin-rest-cache/compare/v4.1.0...v4.2.0) (2022-03-09)
+
+
+### Bug Fixes
+
+* configuration header sort ([c0eec8f](https://github.com/strapi-community/strapi-plugin-rest-cache/commit/c0eec8f475b3b25722fbb5de659212e25f263534))
+* route checking should be absolute ([fdf8666](https://github.com/strapi-community/strapi-plugin-rest-cache/commit/fdf866648a98036b8c70500769cf3bcac42671d8))
+
+
+### Features
+
+* expose new clearByUid and clearByRegexp functions in cacheStore service ([c7d67fd](https://github.com/strapi-community/strapi-plugin-rest-cache/commit/c7d67fd532ccca66df90b3621061ba2d65b70fe1))
+
+
+
+
+
 # [4.1.0](https://github.com/strapi-community/strapi-plugin-rest-cache/compare/v4.0.6...v4.1.0) (2022-03-05)
 
 
