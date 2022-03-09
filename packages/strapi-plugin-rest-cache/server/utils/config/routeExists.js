@@ -16,7 +16,7 @@ function routeExists(strapi, route) {
   const match = strapi.server.listRoutes().find(
     (routeLayer) =>
       routeLayer.methods.includes(route.method) &&
-      routeLayer.path.match(new RegExp(`${route.path}/?`)) // match with optional leading slash
+      routeLayer.path.match(new RegExp(`^${route.path}/?`)) // match with optional leading slash
   );
 
   return Boolean(match);
