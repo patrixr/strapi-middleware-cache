@@ -1,28 +1,30 @@
-
 :root {
   --c-brand: #836eef;
   --c-brand-light: #a091ed;
 
   --c-tip: var(--c-brand);
-  --font-family-code: 'Fira Code', monospace;
-
+  --font-family-code: "Fira Code", monospace;
 }
 
 html.dark {
   --c-brand: #836eef;
   --c-brand-light: #a091ed;
   --c-tip: var(--c-brand);
+  --c-warning-bg: #4e4a3d;
+  --c-warning-text: rgba(255, 255, 255, 0.6);
+  --c-warning-text-accent: rgba(255, 255, 255, 0.9);
+  --c-text-quote: rgba(255, 255, 255, 0.6);
 }
 
 .site-name {
   align-items: center;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1.2rem !important;
   font-weight: 700 !important;
 }
 
 #main-title {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 700 !important;
   margin-bottom: 0;
 }
@@ -38,20 +40,19 @@ html.dark {
   display: inline-block;
   background-color: var(--c-brand);
   border-radius: 0.4rem;
-  font-size: .9rem;
+  font-size: 0.9rem;
   line-height: 1;
   vertical-align: middle;
   padding: 0.3rem 0.5rem 0.2rem;
-  margin-left: .5rem; 
-  font-family: 'Fira Code', sans-serif !important;
+  margin-left: 0.5rem;
+  font-family: "Fira Code", sans-serif !important;
   font-weight: 600 !important;
 }
 
 .site-name::after {
-  font-size: .7rem;
+  font-size: 0.7rem;
   vertical-align: 2px;
 }
-
 
 .site-name:hover::after {
   background-color: var(--c-brand-light);
@@ -76,4 +77,3 @@ html.dark {
   font-weight: 600;
   opacity: 1;
 }
-

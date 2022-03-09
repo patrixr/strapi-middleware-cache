@@ -40,7 +40,7 @@ export default defineUserConfig<DefaultThemeOptions>({
   themeConfig: {
     docsRepo: "strapi-community/strapi-plugin-rest-cache",
     docsDir: "docs",
-    docsBranch: "feature/strapi-v4",
+    docsBranch: "main",
     editLinks: true,
     logo: "/icon.png",
     repo: "strapi-community/strapi-plugin-rest-cache",

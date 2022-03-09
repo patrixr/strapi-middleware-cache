@@ -25,8 +25,8 @@
   "devDependencies": {
     "@strapi-community/eslint-config": "^0.2.0",
     "@strapi-community/eslint-config-admin": "^0.2.0",
-    "@vuepress/plugin-register-components": "^2.0.0-beta.32",
-    "@vuepress/plugin-search": "^2.0.0-beta.32",
+    "@vuepress/plugin-register-components": "^2.0.0-beta.36",
+    "@vuepress/plugin-search": "^2.0.0-beta.36",
     "chai": "^4.3.6",
     "codecov": "^3.8.3",
     "eslint": "^8.10.0",
@@ -42,7 +42,7 @@
     "sinon": "^13.0.1",
     "supertest": "^6.2.2",
     "supertest-koa-agent": "^0.3.2",
-    "vuepress": "next",
+    "vuepress": "^2.0.0-beta.36",
     "yorkie": "^2.0.0"
   },
   "gitHooks": {
