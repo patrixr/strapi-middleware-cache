@@ -54,15 +54,14 @@
   "homepage": "https://strapi-community.github.io/strapi-plugin-rest-cache/",
   "scripts": {
     "lint": "run-s eslint:server:fix eslint:admin:fix prettier:fix",
-    "eslint:server": "eslint .",
-    "eslint:server:fix": "eslint . --fix",
+    "eslint:server": "eslint ./server",
+    "eslint:server:fix": "eslint ./server --fix",
     "eslint:admin": "eslint ./admin/src",
     "eslint:admin:fix": "eslint ./admin/src --fix",
-    "prettier": "prettier --check .",
-    "prettier:fix": "prettier --write .",
+    "prettier": "prettier --check ./{admin,server}/**/*",
+    "prettier:fix": "prettier --write ./{admin,server}/**/*",
     "test": "run-s test:*",
-    "test:lint": "run-s eslint:server eslint:admin prettier",
-    "test:mocha": "mocha ./tests/*.test.js --exit"
+    "test:lint": "run-s eslint:server eslint:admin prettier"
   },
   "dependencies": {
     "@koa/router": "^10.1.1",

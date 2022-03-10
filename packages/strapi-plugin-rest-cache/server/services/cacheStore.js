@@ -128,7 +128,7 @@ module.exports = ({ strapi }) => {
       }
 
       try {
-        return provider.keys().then((keys) => {
+        return provider.keys(keysPrefix).then((keys) => {
           if (!keysPrefixRe) {
             return keys;
           }

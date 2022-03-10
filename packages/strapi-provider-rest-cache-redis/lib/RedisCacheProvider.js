@@ -41,8 +41,8 @@ class RedisCacheProvider extends CacheProvider {
     return this.cache.del(key);
   }
 
-  async keys() {
-    return this.cache.keys();
+  async keys(prefix) {
+    return this.cache.keys(`${prefix}*`);
   }
 
   get ready() {
