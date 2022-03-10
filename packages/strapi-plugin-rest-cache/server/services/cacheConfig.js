@@ -102,14 +102,15 @@ module.exports = ({ strapi }) => ({
   },
 
   /**
-   * @deprecated use strapi.service('plugin::rest-cache.cacheStore').clearByUid instead
+   * @deprecated use strapi.plugin('rest-cache').service('cacheStore').clearByUid instead
    */
   async clearCache(uid, params = {}, wildcard = false) {
     strapi.log.warn(
       'REST Cache cacheConfig.clearCache is deprecated, use cacheStore.clearByUid instead'
     );
     strapi
-      .service('plugin::rest-cache.cacheStore')
+      .plugin('rest-cache')
+      .service('cacheStore')
       .clearByUid(uid, params, wildcard);
   },
 });
