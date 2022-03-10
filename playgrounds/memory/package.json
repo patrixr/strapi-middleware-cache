@@ -7,7 +7,9 @@
     "develop": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
-    "strapi": "strapi"
+    "strapi": "strapi",
+    "test": "run-s test:*",
+    "test:e2e": "jest --detectOpenHandles --forceExit"
   },
   "dependencies": {
     "@strapi/plugin-i18n": "4.1.0",
@@ -18,6 +20,11 @@
     "sqlite3": "5.0.2",
     "strapi-plugin-rest-cache": "^4.2.0",
     "strapi-provider-rest-cache-memory": "^4.2.0"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5",
+    "jest": "^27.5.1",
+    "supertest": "^6.2.2"
   },
   "author": {
     "name": "A Strapi developer"

@@ -40,17 +40,8 @@ module.exports = {
         },
       },
       strategy: {
-        debug: true,
         enableEtag: true,
         enableXCacheHeaders: true,
-        enableAdminCTBMiddleware: true,
-        clearRelatedCache: true,
-        resetOnStartup: true,
-        maxAge: 420000,
-        keys: {
-          useQueryParams: true,
-          useHeaders: ["accept-encoding"],
-        },
         contentTypes: [
           "api::article.article",
           "api::global.global",
@@ -65,10 +56,10 @@ module.exports = {
             },
             routes: [
               {
-                path: "/api/categories/slug/:slug",
+                path: "/api/categories/slug/:slug+",
                 keys: {
-                  useQueryParams: false,
-                  useHeaders: ["accept-encoding", "authorization"],
+                  useQueryParams: ["populate", "locale"],
+                  useHeaders: [],
                 },
                 maxAge: 18000,
                 method: "GET",

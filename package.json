@@ -15,7 +15,10 @@
     "dev:redis": "yarn workspace @strapi-plugin-rest-cache/playground-redis develop",
     "dev:couchbase": "yarn workspace @strapi-plugin-rest-cache/playground-couchbase develop",
     "lint": "lerna run lint --stream",
-    "test": "lerna run test --stream"
+    "test:lint": "lerna run test:lint --stream",
+    "test:e2e": "run-s test:e2e:*",
+    "test:e2e:memory": "yarn workspace @strapi-plugin-rest-cache/playground-memory test:e2e",
+    "test:e2e:redis": "yarn workspace @strapi-plugin-rest-cache/playground-redis test:e2e"
   },
   "license": "MIT",
   "dependencies": {},
@@ -25,23 +28,17 @@
   "devDependencies": {
     "@strapi-community/eslint-config": "^0.2.0",
     "@strapi-community/eslint-config-admin": "^0.2.0",
+    "@strapi-community/eslint-config-tests": "^0.2.0",
     "@vuepress/plugin-register-components": "^2.0.0-beta.36",
     "@vuepress/plugin-search": "^2.0.0-beta.36",
-    "chai": "^4.3.6",
-    "codecov": "^3.8.3",
     "eslint": "^8.10.0",
     "jest": "^27.5.1",
-    "jest-cli": "^27.5.1",
-    "jest-styled-components": "^7.0.2",
     "lerna": "^4.0.0",
     "lint-staged": "^12.3.5",
     "mermaid": "^8.14.0",
-    "mocha": "^9.2.1",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.5.1",
-    "sinon": "^13.0.1",
     "supertest": "^6.2.2",
-    "supertest-koa-agent": "^0.3.2",
     "vuepress": "^2.0.0-beta.36",
     "yorkie": "^2.0.0"
   },
@@ -53,12 +50,11 @@
     "npm": ">=6.0.0"
   },
   "lint-staged": {
-    "*.ts": [
+    "{packages,playgrounds}/**/*.{ts,js}": [
       "eslint --fix",
       "prettier --write"
     ],
-    "*.js": [
-      "eslint --fix",
+    "docs/**/*.md": [
       "prettier --write"
     ]
   }

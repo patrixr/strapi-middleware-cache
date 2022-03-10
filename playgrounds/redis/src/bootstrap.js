@@ -175,7 +175,7 @@ async function importSeedData() {
     global: ["find"],
     homepage: ["find"],
     article: ["find", "findOne"],
-    category: ["find", "findOne"],
+    category: ["find", "findBySlug", "findOne"],
     writer: ["find", "findOne"],
   });
 
@@ -192,9 +192,7 @@ module.exports = async () => {
 
   if (shouldImportSeedData) {
     try {
-      console.log("Setting up the template...");
       await importSeedData();
-      console.log("Ready to go");
     } catch (error) {
       console.log("Could not import seed data");
       console.error(error);

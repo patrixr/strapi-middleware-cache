@@ -8,17 +8,8 @@ module.exports = {
         max: 32767,
       },
       strategy: {
-        debug: true,
         enableEtag: true,
         enableXCacheHeaders: true,
-        enableAdminCTBMiddleware: true,
-        clearRelatedCache: true,
-        resetOnStartup: true,
-        maxAge: 420000,
-        keys: {
-          useQueryParams: true,
-          useHeaders: ["accept-encoding"],
-        },
         contentTypes: [
           "api::article.article",
           "api::global.global",
@@ -36,7 +27,7 @@ module.exports = {
                 path: "/api/categories/slug/:slug+",
                 keys: {
                   useQueryParams: ["populate", "locale"],
-                  useHeaders: ["accept-encoding"],
+                  useHeaders: [],
                 },
                 maxAge: 18000,
                 method: "GET",

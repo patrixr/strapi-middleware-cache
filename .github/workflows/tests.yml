@@ -1,0 +1,111 @@
+name: tests
+
+on:
+  # allow to be triggered by another workflow
+  workflow_call:
+  # trigger test on every push to main branch if packages/ is updated
+  push:
+    branches: [main]
+    paths:
+      - "packages/**"
+  # trigger test on every PR if packages/ is updated
+  pull_request:
+    branches: [main]
+    paths:
+      - "packages/**"
+
+jobs:
+  linters:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+
+      # cache node_modules
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      # install dependencies if the cache did not hit
+      - name: Install dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn --frozen-lockfile
+
+      - name: Run linters check
+        run: yarn test:lint
+
+  e2e_memory:
+    runs-on: ubuntu-latest
+    needs: [linters]
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+
+      # cache node_modules
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      # install dependencies if the cache did not hit
+      - name: Install dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn --frozen-lockfile
+
+      - name: Run e2e tests with memory provider
+        run: yarn test:e2e:memory
+
+  e2e_redis:
+    runs-on: ubuntu-latest
+    needs: [linters]
+
+    services:
+      redis:
+        image: bitnami/redis:latest
+        env:
+          ALLOW_EMPTY_PASSWORD: yes
+        ports:
+          # Opens tcp port 6379 on the host and service container
+          - 6379:6379
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+
+      # cache node_modules
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      # install dependencies if the cache did not hit
+      - name: Install dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn --frozen-lockfile
+
+      - name: Run e2e tests with memory provider
+        run: yarn test:e2e:memory

@@ -6,4 +6,10 @@
 
 const { createCoreController } = require("@strapi/strapi").factories;
 
-module.exports = createCoreController("api::homepage.homepage");
+module.exports = createCoreController("api::homepage.homepage", {
+  config: {
+    find: {
+      auth: false,
+    },
+  },
+});
