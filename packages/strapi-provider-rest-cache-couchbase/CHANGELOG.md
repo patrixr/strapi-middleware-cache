@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.2.1](https://github.com/strapi-community/strapi-plugin-rest-cache/compare/v4.2.0...v4.2.1) (2022-03-11)
+
+
+### Bug Fixes
+
+* empty keys returned by providers ([fb5c79c](https://github.com/strapi-community/strapi-plugin-rest-cache/commit/fb5c79c490309e8bd4458726fe8aedacbfae503b))
+
+
+
+
+
 # [4.2.0](https://github.com/strapi-community/strapi-plugin-rest-cache/compare/v4.1.0...v4.2.0) (2022-03-09)
 
 **Note:** Version bump only for package strapi-provider-rest-cache-couchbase
