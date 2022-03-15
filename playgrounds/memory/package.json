@@ -1,7 +1,7 @@
 {
   "name": "@strapi-plugin-rest-cache/playground-memory",
   "private": true,
-  "version": "4.2.1",
+  "version": "4.2.2",
   "description": "A Strapi application",
   "scripts": {
     "develop": "strapi develop",
@@ -18,8 +18,8 @@
     "lodash.set": "^4.3.2",
     "mime-types": "^2.1.27",
     "sqlite3": "5.0.2",
-    "strapi-plugin-rest-cache": "^4.2.1",
-    "strapi-provider-rest-cache-memory": "^4.2.1"
+    "strapi-plugin-rest-cache": "^4.2.2",
+    "strapi-provider-rest-cache-memory": "^4.2.2"
   },
   "devDependencies": {
     "jest": "^27.5.1",

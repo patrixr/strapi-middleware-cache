@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.2.2](https://github.com/strapi-community/strapi-plugin-rest-cache/compare/v4.2.1...v4.2.2) (2022-03-15)
+
+
+### Bug Fixes
+
+* ensure keyprefix is not undefined ([9134f52](https://github.com/strapi-community/strapi-plugin-rest-cache/commit/9134f52a0ea8a8399db4af59a5dc689742104739))
+
+
+
+
+
 ## [4.2.1](https://github.com/strapi-community/strapi-plugin-rest-cache/compare/v4.2.0...v4.2.1) (2022-03-11)
 
 
