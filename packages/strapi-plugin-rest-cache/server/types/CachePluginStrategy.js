@@ -32,9 +32,7 @@ class CachePluginStrategy {
    */
   keys;
 
-  constructor(options) {
-    if (!options) return;
-
+  constructor(options = {}) {
     const {
       debug = false,
       enableEtag = false,

@@ -11,9 +11,7 @@ class CacheKeysConfig {
    */
   useQueryParams = true;
 
-  constructor(options) {
-    if (!options) return;
-
+  constructor(options = {}) {
     const { useHeaders = [], useQueryParams = true } = options;
     this.useHeaders = useHeaders;
     this.useQueryParams = useQueryParams;

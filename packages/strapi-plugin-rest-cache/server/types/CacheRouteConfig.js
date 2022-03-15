@@ -33,9 +33,7 @@ class CacheRouteConfig {
    */
   hitpass = false;
 
-  constructor(options) {
-    if (!options) return;
-
+  constructor(options = {}) {
     const {
       path,
       method = 'GET',

@@ -44,9 +44,7 @@ class CacheContentTypeConfig {
    */
   relatedContentTypeUid = [];
 
-  constructor(options) {
-    if (!options) return;
-
+  constructor(options = {}) {
     const {
       singleType = false,
       injectDefaultRoutes = true,
