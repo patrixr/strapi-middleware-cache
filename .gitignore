@@ -105,3 +105,4 @@ dist
 
 # vuepress
 .temp
+.profile

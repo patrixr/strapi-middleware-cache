@@ -14,6 +14,7 @@
     "dev:memory": "yarn workspace @strapi-plugin-rest-cache/playground-memory develop",
     "dev:redis": "yarn workspace @strapi-plugin-rest-cache/playground-redis develop",
     "dev:couchbase": "yarn workspace @strapi-plugin-rest-cache/playground-couchbase develop",
+    "profile": "0x -o -D .profile -P 'autocannon -c 100 -p 10 -d 40 http://localhost:1337/api/homepage?populate=*' ./playgrounds/memory/start-profiler.js",
     "lint": "lerna run lint --stream",
     "test:lint": "lerna run test:lint --stream",
     "test:e2e": "run-s test:e2e:*",
@@ -26,11 +27,13 @@
     "**/colors": "1.4.0"
   },
   "devDependencies": {
+    "0x": "^5.2.1",
     "@strapi-community/eslint-config": "^0.2.0",
     "@strapi-community/eslint-config-admin": "^0.2.0",
     "@strapi-community/eslint-config-tests": "^0.2.0",
     "@vuepress/plugin-register-components": "^2.0.0-beta.36",
     "@vuepress/plugin-search": "^2.0.0-beta.36",
+    "autocannon": "^7.7.0",
     "eslint": "^8.10.0",
     "jest": "^27.5.1",
     "lerna": "^4.0.0",
