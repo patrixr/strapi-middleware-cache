@@ -1,7 +1,6 @@
 'use strict';
 
 /**
- * @typedef {import('../../types').CacheRouteConfig} CacheRouteConfig
  * @typedef {import('koa').Context} Context
  */
 
@@ -14,6 +13,7 @@
  */
 function generateCacheKey(cacheRouteConfig, ctx) {
   let querySuffix = '';
+  let headersSuffix = '';
 
   if (cacheRouteConfig.keys.useQueryParams !== false) {
     let keys = [];
@@ -28,15 +28,23 @@ function generateCacheKey(cacheRouteConfig, ctx) {
 
     querySuffix = keys
       .sort()
-      .map((k) => `${k}=${JSON.stringify(ctx.query[k])}`) // query strings are key sensitive
+      .map(
+        (k) =>
+          `${k}=${
+            typeof ctx.query[k] === 'object'
+              ? JSON.stringify(ctx.query[k])
+              : ctx.query[k]
+          }`
+      ) // query strings are key sensitive
       .join(',');
   }
 
-  const headersSuffix = [...cacheRouteConfig.keys.useHeaders]
-    .sort()
-    .filter((k) => ctx.request.header[k.toLowerCase()] !== undefined)
-    .map((k) => `${k.toLowerCase()}=${ctx.request.header[k.toLowerCase()]}`) // headers are key insensitive
-    .join(',');
+  if (cacheRouteConfig.keys.useHeaders.length > 0) {
+    headersSuffix = cacheRouteConfig.keys.useHeaders
+      .filter((k) => ctx.request.header[k] !== undefined)
+      .map((k) => `${k.toLowerCase()}=${ctx.request.header[k.toLowerCase()]}`) // headers are key insensitive
+      .join(',');
+  }
 
   return `${querySuffix}&${headersSuffix}`;
 }

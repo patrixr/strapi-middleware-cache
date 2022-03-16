@@ -15,6 +15,8 @@ class CacheKeysConfig {
     const { useHeaders = [], useQueryParams = true } = options;
     this.useHeaders = useHeaders;
     this.useQueryParams = useQueryParams;
+
+    this.useHeaders.sort();
   }
 }
 
