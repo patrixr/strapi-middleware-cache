@@ -14,7 +14,7 @@
     "dev:memory": "yarn workspace @strapi-plugin-rest-cache/playground-memory develop",
     "dev:redis": "yarn workspace @strapi-plugin-rest-cache/playground-redis develop",
     "dev:couchbase": "yarn workspace @strapi-plugin-rest-cache/playground-couchbase develop",
-    "profile": "0x -o -D .profile -P 'autocannon -c 100 -p 10 -d 40 http://localhost:1337/api/homepage?populate=*' ./playgrounds/memory/start-profiler.js",
+    "profile": "0x -o -D .profile -P 'autocannon --warmup [ -c 1 -d 3 ] -c 100 -p 10 -d 120 http://localhost:1337/api/homepage?populate=*' ./playgrounds/memory/start-profiler.js",
     "lint": "lerna run lint --stream",
     "test:lint": "lerna run test:lint --stream",
     "test:e2e": "run-s test:e2e:*",

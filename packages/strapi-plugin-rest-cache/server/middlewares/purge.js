@@ -20,7 +20,7 @@ module.exports = (options, { strapi }) => {
     );
   }
 
-  return async (ctx, next) => {
+  return async function purge(ctx, next) {
     await next();
 
     if (!(ctx.status >= 200 && ctx.status <= 300)) return;

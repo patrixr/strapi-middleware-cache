@@ -8,7 +8,7 @@ module.exports = (options, { strapi }) => {
   const cacheConfig = strapi.plugin('rest-cache').service('cacheConfig');
   const cacheStore = strapi.plugin('rest-cache').service('cacheStore');
 
-  return async (ctx, next) => {
+  return async function purgeAdmin(ctx, next) {
     // uid:
     // - application::sport.sport
     // - plugins::users-permissions.user

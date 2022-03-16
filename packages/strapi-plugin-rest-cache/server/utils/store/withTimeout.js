@@ -8,10 +8,15 @@
  * @return {Promise<never>}
  */
 function withTimeout(callback, ms) {
+  let timeout;
+
   return Promise.race([
-    callback(),
+    callback().then((result) => {
+      clearTimeout(timeout);
+      return result;
+    }),
     new Promise((_, reject) => {
-      setTimeout(() => {
+      timeout = setTimeout(() => {
         reject(new Error('timeout'));
       }, ms);
     }),

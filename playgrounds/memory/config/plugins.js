@@ -1,15 +1,16 @@
 "use strict";
 
-module.exports = {
+module.exports = ({ env }) => ({
   "rest-cache": {
+    enabled: env.bool("ENABLE_CACHE", true),
     config: {
       provider: {
         name: "memory",
         max: 32767,
       },
       strategy: {
-        enableEtag: true,
-        enableXCacheHeaders: true,
+        enableEtag: env.bool("ENABLE_ETAG", true),
+        enableXCacheHeaders: env.bool("ENABLE_XCACHE_HEADERS", true),
         contentTypes: [
           "api::article.article",
           "api::global.global",
@@ -38,4 +39,4 @@ module.exports = {
       },
     },
   },
-};
+});

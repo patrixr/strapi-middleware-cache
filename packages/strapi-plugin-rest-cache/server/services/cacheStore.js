@@ -24,8 +24,8 @@ module.exports = ({ strapi }) => {
   let initialized = false;
 
   const pluginConfig = strapi.config.get('plugin.rest-cache');
-  const { getTimeout } = pluginConfig.provider;
-  const { keysPrefix } = pluginConfig.strategy;
+  const { getTimeout = 500 } = pluginConfig.provider;
+  const { keysPrefix = '' } = pluginConfig.strategy;
   const keysPrefixRe = keysPrefix ? new RegExp(`^${keysPrefix}`) : null;
 
   return {

@@ -85,6 +85,18 @@ describe("single-type with default settings", () => {
       expect(second.status).toBe(304);
       expect(second.get("x-cache")).toBe("HIT");
     });
+    it("should send a 304 (Not Modified) when valid If-None-Match header contains multiple values", async () => {
+      expect.assertions(3);
+
+      const first = await agent().get("/api/homepage");
+      const second = await agent()
+        .get("/api/homepage")
+        .set("If-None-Match", `"invalid-etag", ${first.get("etag")}`);
+
+      expect(first.status).toBe(200);
+      expect(second.status).toBe(304);
+      expect(second.get("x-cache")).toBe("HIT");
+    });
     it("should send fresh content when invalid If-None-Match header is set", async () => {
       expect.assertions(3);
 
