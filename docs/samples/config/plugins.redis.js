@@ -17,6 +17,8 @@ module.exports = {
         },
       },
       strategy: {
+        // if you are using keyPrefix for your Redis, please add <keysPrefix>
+        keysPrefix: '<redis_keyPrefix>',
         contentTypes: [
           // list of Content-Types UID to cache
           "api::category.category",

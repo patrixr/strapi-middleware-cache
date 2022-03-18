@@ -24,8 +24,8 @@ module.exports = ({ strapi }) => {
   let initialized = false;
 
   const pluginConfig = strapi.config.get('plugin.rest-cache');
-  const { getTimeout = 500 } = pluginConfig.provider;
-  const { keysPrefix = '' } = pluginConfig.strategy;
+  const { getTimeout } = pluginConfig.provider;
+  const { keysPrefix } = pluginConfig.strategy;
   const keysPrefixRe = keysPrefix ? new RegExp(`^${keysPrefix}`) : null;
 
   return {
@@ -108,7 +108,7 @@ module.exports = ({ strapi }) => {
 
       try {
         debug(`${chalk.redBright('[PURGING KEY]')}: ${key}`);
-        return provider.del(`${keysPrefix}${key}`);
+        return provider.del(key)
       } catch (error) {
         strapi.log.error(`REST Cache provider errored:`);
         strapi.log.error(error);
@@ -134,7 +134,7 @@ module.exports = ({ strapi }) => {
           }
 
           return keys
-            .filter((key) => keysPrefixRe.match(key))
+            .filter((key) => keysPrefixRe.test(key))
             .map((key) => key.replace(keysPrefixRe, ''));
         });
       } catch (error) {
@@ -184,7 +184,7 @@ module.exports = ({ strapi }) => {
       /**
        * @param {string} key
        */
-      const shouldDel = (key) => regExps.find((r) => r.test(key));
+      const shouldDel = (key) => regExps.find((r) => r.test(key.replace(keysPrefix, '')));
 
       /**
        * @param {string} key
