@@ -3,16 +3,18 @@ name: tests
 on:
   # allow to be triggered by another workflow
   workflow_call:
-  # trigger test on every push to main branch if packages/ is updated
+  # trigger test on every push to main branch if packages/ or workflow is updated
   push:
     branches: [main]
     paths:
       - "packages/**"
-  # trigger test on every PR if packages/ is updated
+      - ".github/**"
+  # trigger test on every PR if packages/ or workflow is updated
   pull_request:
     branches: [main]
     paths:
       - "packages/**"
+      - ".github/**"
 
 jobs:
   linters:
