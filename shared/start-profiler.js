@@ -1,5 +1,7 @@
 "use strict";
 
+process.env.NODE_ENV = 'test';
+
 const Strapi = require("@strapi/strapi");
 
 async function setup() {
