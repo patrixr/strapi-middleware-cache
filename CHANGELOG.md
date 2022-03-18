@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.2.3](https://github.com/strapi-community/strapi-plugin-rest-cache/compare/v4.2.2...v4.2.3) (2022-03-18)
+
+
+### Bug Fixes
+
+* **etag:** send a 304 (Not Modified) when valid If-None-Match header contains multiple values ([ccf936a](https://github.com/strapi-community/strapi-plugin-rest-cache/commit/ccf936a02fbbb04a13bcf8143dd6009a3d1148c5))
+* **purge-rest-cache:** cannot purge with redis ([aa1da6d](https://github.com/strapi-community/strapi-plugin-rest-cache/commit/aa1da6da1b2165cabf4de5894eb6179e02ebe633))
+
+
+
+
+
 ## [4.2.2](https://github.com/strapi-community/strapi-plugin-rest-cache/compare/v4.2.1...v4.2.2) (2022-03-15)
 
 

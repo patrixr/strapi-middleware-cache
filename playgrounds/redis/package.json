@@ -1,7 +1,7 @@
 {
   "name": "@strapi-plugin-rest-cache/playground-redis",
   "private": true,
-  "version": "4.2.2",
+  "version": "4.2.3",
   "description": "A Strapi application",
   "scripts": {
     "develop": "strapi develop",
@@ -19,8 +19,8 @@
     "mime-types": "^2.1.35",
     "sqlite3": "5.0.2",
     "strapi-plugin-redis": "1.0.0-alpha.2",
-    "strapi-plugin-rest-cache": "^4.2.2",
-    "strapi-provider-rest-cache-redis": "^4.2.2"
+    "strapi-plugin-rest-cache": "^4.2.3",
+    "strapi-provider-rest-cache-redis": "^4.2.3"
   },
   "devDependencies": {
     "jest": "^27.5.1",
