@@ -1,6 +1,6 @@
 "use strict";
 
-module.exports = {
+module.exports = ({ env }) => ({
   redis: {
     config: {
       debug: true,
@@ -31,6 +31,7 @@ module.exports = {
     },
   },
   "rest-cache": {
+    enabled: env.bool("ENABLE_CACHE", true),
     config: {
       provider: {
         name: "redis",
@@ -39,35 +40,8 @@ module.exports = {
           connection: "default",
         },
       },
-      strategy: {
-        enableEtag: true,
-        enableXCacheHeaders: true,
-        contentTypes: [
-          "api::article.article",
-          "api::global.global",
-          "api::homepage.homepage",
-          {
-            contentType: "api::category.category",
-            maxAge: 3600000,
-            hitpass: false,
-            keys: {
-              useQueryParams: false,
-              useHeaders: ["accept-encoding"],
-            },
-            routes: [
-              {
-                path: "/api/categories/slug/:slug+",
-                keys: {
-                  useQueryParams: ["populate", "locale"],
-                  useHeaders: [],
-                },
-                maxAge: 18000,
-                method: "GET",
-              },
-            ],
-          },
-        ],
-      },
+      // loads shared config (from /shared folder)
+      strategy: require("./cache-strategy")({ env }),
     },
   },
-};
+});

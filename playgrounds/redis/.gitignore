@@ -112,3 +112,15 @@ exports
 *.cache
 build
 .strapi-updater.json
+
+############################
+# Shared files copied from the project root
+############################
+config
+!config/plugins.js
+data
+src
+!src/.gitkeep
+tests
+!tests/.gitkeep
+start-profiler.js
