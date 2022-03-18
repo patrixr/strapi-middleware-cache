@@ -108,7 +108,7 @@ module.exports = ({ strapi }) => {
 
       try {
         debug(`${chalk.redBright('[PURGING KEY]')}: ${key}`);
-        return provider.del(key)
+        return provider.del(key);
       } catch (error) {
         strapi.log.error(`REST Cache provider errored:`);
         strapi.log.error(error);
@@ -184,7 +184,8 @@ module.exports = ({ strapi }) => {
       /**
        * @param {string} key
        */
-      const shouldDel = (key) => regExps.find((r) => r.test(key.replace(keysPrefix, '')));
+      const shouldDel = (key) =>
+        regExps.find((r) => r.test(key.replace(keysPrefix, '')));
 
       /**
        * @param {string} key
