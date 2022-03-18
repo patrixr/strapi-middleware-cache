@@ -3,6 +3,7 @@
 /**
  * Reject promise after timeout
  *
+ * @todo this is slow, we should find a way to do this in a faster way
  * @param {Promise<any>} callback
  * @param {number} ms
  * @return {Promise<never>}

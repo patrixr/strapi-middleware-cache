@@ -67,7 +67,8 @@
     "@koa/router": "^10.1.1",
     "chalk": "^4.1.2",
     "debug": "^4.3.4",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.15",
+    "ohash": "^0.1.0"
   },
   "devDependencies": {
     "@strapi/strapi": "^4.1.5",

@@ -2,6 +2,7 @@
 
 module.exports = ({ env }) => ({
   "rest-cache": {
+    enabled: env.bool("ENABLE_CACHE", true),
     config: {
       provider: {
         name: "memory",

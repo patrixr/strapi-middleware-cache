@@ -1,52 +1,27 @@
 'use strict';
 
-/**
- * @typedef {import('koa').Context} Context
- */
+const generateHeadersKey = require('./generateHeadersKey');
+const generateQueryParamsKey = require('./generateQueryParamsKey');
 
-/**
- * Generates a cache key for the current request
- *
- * @param {CacheRouteConfig} cacheRouteConfig
- * @param {Context} ctx
- * @return {string}
- */
-function generateCacheKey(cacheRouteConfig, ctx) {
+function generateCacheKey(
+  ctx,
+  keys = {
+    useQueryParams: false, // @todo: array or boolean => can be optimized
+    useHeaders: [],
+  }
+) {
   let querySuffix = '';
   let headersSuffix = '';
 
-  if (cacheRouteConfig.keys.useQueryParams !== false) {
-    let keys = [];
-
-    if (cacheRouteConfig.keys.useQueryParams === true) {
-      keys = Object.keys(ctx.query);
-    } else if (cacheRouteConfig.keys.useQueryParams.length > 0) {
-      keys = Object.keys(ctx.query).filter((key) =>
-        cacheRouteConfig.keys.useQueryParams.includes(key)
-      );
-    }
-
-    querySuffix = keys
-      .sort()
-      .map(
-        (k) =>
-          `${k}=${
-            typeof ctx.query[k] === 'object'
-              ? JSON.stringify(ctx.query[k])
-              : ctx.query[k]
-          }`
-      ) // query strings are key sensitive
-      .join(',');
+  if (keys.useQueryParams !== false) {
+    querySuffix = generateQueryParamsKey(ctx, keys.useQueryParams);
   }
 
-  if (cacheRouteConfig.keys.useHeaders.length > 0) {
-    headersSuffix = cacheRouteConfig.keys.useHeaders
-      .filter((k) => ctx.request.header[k] !== undefined)
-      .map((k) => `${k.toLowerCase()}=${ctx.request.header[k.toLowerCase()]}`) // headers are key insensitive
-      .join(',');
+  if (keys.useHeaders.length > 0) {
+    headersSuffix = generateHeadersKey(ctx, keys.useHeaders);
   }
 
-  return `${querySuffix}&${headersSuffix}`;
+  return `${ctx.request.path}?${querySuffix}&${headersSuffix}`;
 }
 
 module.exports = generateCacheKey;

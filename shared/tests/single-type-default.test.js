@@ -10,13 +10,14 @@ process.env.STRAPI_TELEMETRY_DISABLED = true;
 
 describe.each([
   ["default settings"],
+  ["empty string keyprefix", { keyprefix: "" }],
   ["custom keyprefix", { keyprefix: "my-custom-keyprefix" }],
 ])('single-type with: %s', (testname = '', env = {}) => {
   beforeAll(async () => {
-    if (env.keyprefix) {
+    process.env.KEYS_PREFIX = undefined;
+
+    if (typeof env.keyprefix !== 'undefined') {
       process.env.KEYS_PREFIX = env.keyprefix;
-    } else {
-      process.env.KEYS_PREFIX = undefined;
     }
 
     await setup()

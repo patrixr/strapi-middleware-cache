@@ -18,27 +18,23 @@ const etagMatch = require('../utils/middlewares/etagMatch');
  * @param {{ strapi: import('@strapi/strapi').Strapi }} context
  */
 module.exports = (options, { strapi }) => {
-  const { cacheRouteConfig } = options;
-
-  if (!cacheRouteConfig) {
+  if (!options?.cacheRouteConfig) {
     throw new Error(
       'REST Cache: unable to initialize recv middleware: options.cacheRouteConfig is required'
     );
   }
-
   const store = strapi.plugin('rest-cache').service('cacheStore');
   const { strategy } = strapi.config.get('plugin.rest-cache');
+  const { cacheRouteConfig } = options;
+  const { hitpass, maxAge, keys } = cacheRouteConfig;
   const { enableEtag = false, enableXCacheHeaders = false } = strategy;
 
   return async function recv(ctx, next) {
     // hash
-    const cacheKey = `${ctx.request.path}?${generateCacheKey(
-      cacheRouteConfig,
-      ctx
-    )}`;
+    const cacheKey = generateCacheKey(ctx, keys);
 
     // hitpass check
-    const lookup = shouldLookup(ctx, cacheRouteConfig);
+    const lookup = shouldLookup(ctx, hitpass);
 
     // keep track of the etag
     let etagCached = null;
@@ -114,19 +110,17 @@ module.exports = (options, { strapi }) => {
         ctx.set('ETag', `"${etag}"`);
 
         // persist etag asynchronously
-        store
-          .set(`${cacheKey}_etag`, etag, cacheRouteConfig.maxAge)
-          .catch(() => {
-            debug(
-              `[RECV] GET ${cacheKey} ${chalk.yellow(
-                'Unable to store ETag in cache'
-              )}`
-            );
-          });
+        store.set(`${cacheKey}_etag`, etag, maxAge).catch(() => {
+          debug(
+            `[RECV] GET ${cacheKey} ${chalk.yellow(
+              'Unable to store ETag in cache'
+            )}`
+          );
+        });
       }
 
       // persist cache asynchronously
-      store.set(cacheKey, ctx.body, cacheRouteConfig.maxAge).catch(() => {
+      store.set(cacheKey, ctx.body, maxAge).catch(() => {
         debug(
           `[RECV] GET ${cacheKey} ${chalk.yellow(
             'Unable to store Content in cache'

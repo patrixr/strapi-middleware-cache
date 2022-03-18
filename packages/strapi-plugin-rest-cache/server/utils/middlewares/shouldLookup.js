@@ -1,14 +1,17 @@
 'use strict';
 
-function shouldLookup(ctx, cacheRouteConfig) {
-  const type = cacheRouteConfig.hitpass;
+function shouldLookup(
+  ctx,
+  hitpass // @todo: function or boolean => can be optimized
+) {
+  const type = typeof hitpass;
 
-  if (typeof type === 'function') {
-    return !cacheRouteConfig.hitpass(ctx);
+  if (type === 'boolean') {
+    return !hitpass;
   }
 
-  if (typeof type === 'boolean') {
-    return !cacheRouteConfig.hitpass;
+  if (type === 'function') {
+    return !hitpass(ctx);
   }
 
   return false;
