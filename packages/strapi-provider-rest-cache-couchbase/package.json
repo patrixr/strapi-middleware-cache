@@ -57,7 +57,7 @@
     "cache-manager-couchbase": "^0.1.5"
   },
   "devDependencies": {
-    "@strapi/strapi": "^4.1.0",
+    "@strapi/strapi": "^4.1.5",
     "strapi-plugin-rest-cache": "^4.2.2"
   },
   "peerDependencies": {

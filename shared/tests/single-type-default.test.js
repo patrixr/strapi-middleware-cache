@@ -3,7 +3,10 @@
 const { setup, teardown, agent, adminAgent } = require("./helpers/strapi");
 
 jest.setTimeout(60000);
+
+process.env.STRAPI_DISABLE_UPDATE_NOTIFICATION = true;
 process.env.STRAPI_HIDE_STARTUP_MESSAGE = true;
+process.env.STRAPI_TELEMETRY_DISABLED = true;
 
 describe.each([
   ["default settings"],
@@ -20,6 +23,7 @@ describe.each([
   });
   afterAll(teardown);
 
+  // @todo: this test rely on assuming the cacheStore.reset() is working
   beforeEach(() => strapi.plugin("rest-cache").service("cacheStore").reset());
 
   describe("basic GET request", () => {

@@ -12,11 +12,11 @@
     "test:e2e": "jest --detectOpenHandles --forceExit"
   },
   "dependencies": {
-    "@strapi/plugin-i18n": "4.1.0",
-    "@strapi/plugin-users-permissions": "4.1.0",
-    "@strapi/strapi": "4.1.0",
+    "@strapi/plugin-i18n": "4.1.5",
+    "@strapi/plugin-users-permissions": "4.1.5",
+    "@strapi/strapi": "4.1.5",
     "lodash.set": "^4.3.2",
-    "mime-types": "^2.1.27",
+    "mime-types": "^2.1.35",
     "sqlite3": "5.0.2",
     "strapi-plugin-redis": "1.0.0-alpha.2",
     "strapi-plugin-rest-cache": "^4.2.2",

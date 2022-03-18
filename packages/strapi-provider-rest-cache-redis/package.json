@@ -57,8 +57,8 @@
     "cache-manager-ioredis": "^2.1.0"
   },
   "devDependencies": {
-    "@strapi/strapi": "^4.1.0",
-    "strapi-plugin-redis": "^1.0.0-alpha.1",
+    "@strapi/strapi": "^4.1.5",
+    "strapi-plugin-redis": "^1.0.0-alpha.2",
     "strapi-plugin-rest-cache": "^4.2.2"
   },
   "peerDependencies": {
