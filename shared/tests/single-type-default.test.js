@@ -5,8 +5,19 @@ const { setup, teardown, agent, adminAgent } = require("./helpers/strapi");
 jest.setTimeout(60000);
 process.env.STRAPI_HIDE_STARTUP_MESSAGE = true;
 
-describe("single-type with default settings", () => {
-  beforeAll(setup);
+describe.each([
+  ["default settings"],
+  ["custom keyprefix", { keyprefix: "my-custom-keyprefix" }],
+])('single-type with: %s', (testname = '', env = {}) => {
+  beforeAll(async () => {
+    if (env.keyprefix) {
+      process.env.KEYS_PREFIX = env.keyprefix;
+    } else {
+      process.env.KEYS_PREFIX = undefined;
+    }
+
+    await setup()
+  });
   afterAll(teardown);
 
   beforeEach(() => strapi.plugin("rest-cache").service("cacheStore").reset());

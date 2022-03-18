@@ -3,6 +3,7 @@
 const { existsSync, unlinkSync } = require("fs");
 const Strapi = require("@strapi/strapi");
 const supertest = require("supertest");
+const { join } = require("path");
 
 let adminToken;
 
@@ -16,7 +17,9 @@ function adminAgent() {
 }
 
 async function setup() {
-  Strapi();
+  Strapi({
+    dir: join(__dirname, "../../"),
+  });
   await strapi.start();
 
   // create first admin

@@ -69,8 +69,8 @@ jobs:
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn --frozen-lockfile
 
-      - name: Run e2e tests with memory provider
-        run: yarn test:e2e:memory
+      - run: yarn postinstall:memory
+      - run: yarn test:e2e:memory
 
   e2e_redis:
     runs-on: ubuntu-latest
@@ -107,5 +107,5 @@ jobs:
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn --frozen-lockfile
 
-      - name: Run e2e tests with memory provider
-        run: yarn test:e2e:memory
+      - run: yarn postinstall:redis
+      - run: yarn test:e2e:redis

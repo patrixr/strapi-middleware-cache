@@ -1,6 +1,6 @@
 "use strict";
 
-const boostrap = require("./bootstrap");
+const bootstrap = require("./bootstrap");
 
 module.exports = {
   /**
@@ -18,5 +18,5 @@ module.exports = {
    * This gives you an opportunity to set up your data model,
    * run jobs, or perform some special logic.
    */
-  boostrap,
+   bootstrap
 };

@@ -1,16 +1,22 @@
-/* eslint-disable */
+// this was copied from https://github.com/strapi/starters-and-templates/blob/main/packages/templates/ecommerce/template/src/bootstrap.js
+
+/* eslint-disable */ 
 "use strict";
 
 const fs = require("fs");
+const { join } = require("path");
 const mime = require("mime-types");
 const set = require("lodash.set");
+
+// this file will be copied to playgrounds/** by postinstall script
+const dataPath = '../../../data'
 const {
   categories,
   homepage,
   writers,
   articles,
   global,
-} = require("../../../data/data.json"); // point to /data/data.json, but this would be copied to playgrounds/**
+} = require(join(__dirname, dataPath, "data.json"));
 
 async function isFirstRun() {
   const pluginStore = strapi.store({
@@ -57,7 +63,7 @@ function getFileSizeInBytes(filePath) {
 }
 
 function getFileData(fileName) {
-  const filePath = `./data/uploads/${fileName}`;
+  const filePath = join(__dirname, dataPath, "uploads", fileName);
 
   // Parse the file metadata
   const size = getFileSizeInBytes(filePath);
