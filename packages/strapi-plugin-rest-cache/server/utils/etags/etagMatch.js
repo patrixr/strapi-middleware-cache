@@ -10,4 +10,4 @@ function etagMatch(ctx, etagCached) {
   return ifNoneMatch.indexOf(`"${etagCached}"`) !== -1;
 }
 
-module.exports = etagMatch;
+module.exports = { etagMatch };

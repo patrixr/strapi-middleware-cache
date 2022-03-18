@@ -52,7 +52,7 @@ const createProvider = async (providerConfig, { strapi }) => {
 /**
  * @param {{ strapi: Strapi }} strapi
  */
-module.exports = async ({ strapi }) => {
+async function bootstrap({ strapi }) {
   // resolve user configuration, check for missing or invalid options
   const pluginOption = strapi.config.get('plugin.rest-cache');
   const cacheStore = strapi.plugin('rest-cache').service('cacheStore');
@@ -103,4 +103,8 @@ module.exports = async ({ strapi }) => {
     strapi.log.warn('Reset cache on startup is enabled');
     await strapi.plugin('rest-cache').service('cacheStore').reset();
   }
+}
+
+module.exports = {
+  bootstrap,
 };

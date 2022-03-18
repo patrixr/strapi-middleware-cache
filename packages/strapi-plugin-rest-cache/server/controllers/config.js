@@ -8,19 +8,24 @@
 /**
  * @param {{ strapi: Strapi }} strapi
  */
-module.exports = ({ strapi }) => ({
-  /**
-   * @param {Context} ctx
-   */
-  async strategy(ctx) {
-    const { strategy } = strapi.config.get('plugin.rest-cache');
-    ctx.body = { strategy };
-  },
-  /**
-   * @param {Context} ctx
-   */
-  async provider(ctx) {
-    const { provider } = strapi.config.get('plugin.rest-cache');
-    ctx.body = { provider };
-  },
-});
+function createConfigController({ strapi }) {
+  return {
+    /**
+     * @param {Context} ctx
+     */
+    async strategy(ctx) {
+      const { strategy } = strapi.config.get('plugin.rest-cache');
+      ctx.body = { strategy };
+    },
+    /**
+     * @param {Context} ctx
+     */
+    async provider(ctx) {
+      const { provider } = strapi.config.get('plugin.rest-cache');
+      ctx.body = { provider };
+    },
+  };
+}
+module.exports = {
+  createConfigController,
+};

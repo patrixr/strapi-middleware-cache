@@ -2,6 +2,10 @@
 
 const admin = require('./admin');
 
-module.exports = {
+const routes = {
   admin,
+};
+
+module.exports = {
+  routes,
 };

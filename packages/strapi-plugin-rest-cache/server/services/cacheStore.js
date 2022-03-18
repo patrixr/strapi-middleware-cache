@@ -16,7 +16,7 @@ const { withTimeout } = require('../utils/store/withTimeout');
 /**
  * @param {{ strapi: Strapi }} strapi
  */
-module.exports = ({ strapi }) => {
+function createCacheStoreService({ strapi }) {
   /**
    * @type {CacheProvider}
    */
@@ -235,4 +235,8 @@ module.exports = ({ strapi }) => {
       await this.clearByRegexp(regExps);
     },
   };
+}
+
+module.exports = {
+  createCacheStoreService,
 };

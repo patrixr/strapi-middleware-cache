@@ -1,9 +1,11 @@
 'use strict';
 
-const cacheConfig = require('./cacheConfig');
-const cacheStore = require('./cacheStore');
+const { createCacheConfigService: cacheConfig } = require('./cacheConfig');
+const { createCacheStoreService: cacheStore } = require('./cacheStore');
 
-module.exports = {
+const services = {
   cacheConfig,
   cacheStore,
 };
+
+module.exports = { services };

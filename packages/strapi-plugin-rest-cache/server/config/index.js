@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = {
+const config = {
   default: () => ({
     provider: {
       name: 'memory',
@@ -28,4 +28,8 @@ module.exports = {
     },
   }),
   validator() {},
+};
+
+module.exports = {
+  config,
 };

@@ -17,4 +17,6 @@ function shouldLookup(
   return false;
 }
 
-module.exports = shouldLookup;
+module.exports = {
+  shouldLookup,
+};

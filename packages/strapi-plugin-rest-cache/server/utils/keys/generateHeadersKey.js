@@ -7,4 +7,4 @@ function generateHeadersKey(ctx, useHeaders = []) {
     .join(',');
 }
 
-module.exports = generateHeadersKey;
+module.exports = { generateHeadersKey };

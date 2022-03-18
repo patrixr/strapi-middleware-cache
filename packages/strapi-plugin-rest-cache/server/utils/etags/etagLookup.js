@@ -11,4 +11,4 @@ async function etagLookup(cacheKey) {
   return null;
 }
 
-module.exports = etagLookup;
+module.exports = { etagLookup };

@@ -4,7 +4,8 @@
  * @param {{ contentType: string }} options
  * @param {{ strapi: import('@strapi/strapi').Strapi }} context
  */
-module.exports = (options, { strapi }) => {
+
+function createPurge(options, { strapi }) {
   if (!options.contentType) {
     throw new Error(
       'REST Cache: unable to initialize purge middleware: options.contentType is required'
@@ -27,4 +28,8 @@ module.exports = (options, { strapi }) => {
 
     await cacheStore.clearByUid(options.contentType, ctx.params);
   };
+}
+
+module.exports = {
+  createPurge,
 };

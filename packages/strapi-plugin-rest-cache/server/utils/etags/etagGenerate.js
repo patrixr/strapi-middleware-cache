@@ -11,4 +11,6 @@ function etagGenerate(ctx) {
 
   return etag;
 }
-module.exports = etagGenerate;
+module.exports = {
+  etagGenerate,
+};

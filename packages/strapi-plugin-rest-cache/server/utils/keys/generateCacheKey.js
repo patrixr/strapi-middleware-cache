@@ -1,7 +1,7 @@
 'use strict';
 
-const generateHeadersKey = require('./generateHeadersKey');
-const generateQueryParamsKey = require('./generateQueryParamsKey');
+const { generateHeadersKey } = require('./generateHeadersKey');
+const { generateQueryParamsKey } = require('./generateQueryParamsKey');
 
 function generateCacheKey(
   ctx,
@@ -24,4 +24,4 @@ function generateCacheKey(
   return `${ctx.request.path}?${querySuffix}&${headersSuffix}`;
 }
 
-module.exports = generateCacheKey;
+module.exports = { generateCacheKey };

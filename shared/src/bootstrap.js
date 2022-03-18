@@ -193,7 +193,7 @@ async function importSeedData() {
   await importGlobal();
 }
 
-module.exports = async () => {
+async function bootstrap() {
   const shouldImportSeedData = await isFirstRun();
 
   if (shouldImportSeedData) {
@@ -205,3 +205,7 @@ module.exports = async () => {
     }
   }
 };
+
+module.exports = {
+  bootstrap
+}

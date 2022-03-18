@@ -7,17 +7,17 @@
 const chalk = require('chalk');
 const debug = require('debug')('strapi:strapi-plugin-rest-cache');
 
-const generateCacheKey = require('../utils/middlewares/generateCacheKey');
-const shouldLookup = require('../utils/middlewares/shouldLookup');
-const etagGenerate = require('../utils/middlewares/etagGenerate');
-const etagLookup = require('../utils/middlewares/etagLookup');
-const etagMatch = require('../utils/middlewares/etagMatch');
+const { generateCacheKey } = require('../utils/keys/generateCacheKey');
+const { shouldLookup } = require('../utils/middlewares/shouldLookup');
+const { etagGenerate } = require('../utils/etags/etagGenerate');
+const { etagLookup } = require('../utils/etags/etagLookup');
+const { etagMatch } = require('../utils/etags/etagMatch');
 
 /**
  * @param {{ cacheRouteConfig: CacheRouteConfig }} options
  * @param {{ strapi: import('@strapi/strapi').Strapi }} context
  */
-module.exports = (options, { strapi }) => {
+function createRecv(options, { strapi }) {
   if (!options?.cacheRouteConfig) {
     throw new Error(
       'REST Cache: unable to initialize recv middleware: options.cacheRouteConfig is required'
@@ -129,4 +129,8 @@ module.exports = (options, { strapi }) => {
       });
     }
   };
+}
+
+module.exports = {
+  createRecv,
 };

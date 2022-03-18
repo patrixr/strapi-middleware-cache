@@ -30,4 +30,4 @@ function generateQueryParamsKey(
     .join(',');
 }
 
-module.exports = generateQueryParamsKey;
+module.exports = { generateQueryParamsKey };

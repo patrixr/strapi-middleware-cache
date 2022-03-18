@@ -8,33 +8,41 @@
 /**
  * @param {{ strapi: Strapi }} strapi
  */
-module.exports = ({ strapi }) => ({
-  /**
-   * @param {Context} ctx
-   */
-  async index(ctx) {
-    const { contentType, params, wildcard } = ctx.request.body;
+function createPurgeController({ strapi }) {
+  return {
+    /**
+     * @param {Context} ctx
+     */
+    async index(ctx) {
+      const { contentType, params, wildcard } = ctx.request.body;
 
-    if (!contentType) {
-      ctx.badRequest('contentType is required');
-      return;
-    }
+      if (!contentType) {
+        ctx.badRequest('contentType is required');
+        return;
+      }
 
-    const cacheConfigService = strapi
-      .plugin('rest-cache')
-      .service('cacheConfig');
+      const cacheConfigService = strapi
+        .plugin('rest-cache')
+        .service('cacheConfig');
 
-    const cacheStoreService = strapi.plugin('rest-cache').service('cacheStore');
+      const cacheStoreService = strapi
+        .plugin('rest-cache')
+        .service('cacheStore');
 
-    if (!cacheConfigService.isCached(contentType)) {
-      ctx.badRequest('contentType is not cached', { contentType });
-      return;
-    }
+      if (!cacheConfigService.isCached(contentType)) {
+        ctx.badRequest('contentType is not cached', { contentType });
+        return;
+      }
 
-    await cacheStoreService.clearByUid(contentType, params, wildcard);
+      await cacheStoreService.clearByUid(contentType, params, wildcard);
 
-    // send no-content status
-    // ctx.status = 204;
-    ctx.body = {};
-  },
-});
+      // send no-content status
+      // ctx.status = 204;
+      ctx.body = {};
+    },
+  };
+}
+
+module.exports = {
+  createPurgeController,
+};
