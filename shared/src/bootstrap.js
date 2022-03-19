@@ -6,7 +6,6 @@
 const fs = require("fs");
 const { join } = require("path");
 const mime = require("mime-types");
-const set = require("lodash.set");
 
 // this file will be copied to playgrounds/** by postinstall script
 const dataPath = '../../../data'

@@ -2,7 +2,6 @@ import React from 'react';
 // import { useIntl } from 'react-intl';
 // import { Button } from '@strapi/design-system/Button';
 // import Refresh from '@strapi/icons/Refresh';
-// import get from 'lodash/get';
 import {
   // ConfirmDialog,
   // useNotification,

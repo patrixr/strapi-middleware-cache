@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import get from 'lodash.get';
 import { useIntl } from 'react-intl';
 import { Button } from '@strapi/design-system/Button';
 import Refresh from '@strapi/icons/Refresh';
@@ -58,7 +57,7 @@ function PurgeCacheButton({ contentType, params, wildcard }) {
 
       toggleConfirmModal();
     } catch (err) {
-      const errorMessage = get(err, 'response.payload.error.message');
+      const errorMessage = err?.response?.payload?.error?.message;
       setIsModalConfirmButtonLoading(false);
       toggleConfirmModal();
 
