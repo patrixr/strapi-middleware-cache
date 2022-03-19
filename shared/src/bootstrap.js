@@ -100,7 +100,7 @@ async function createEntry({ model, entry, files }) {
           });
 
         // Attach each file to its entry
-        set(entry, key, uploadedFile[0].id);
+        entry[key] = uploadedFile[0].id
       }
     }
 
