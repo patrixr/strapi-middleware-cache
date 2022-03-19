@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.2.4](https://github.com/strapi-community/strapi-plugin-rest-cache/compare/v4.2.3...v4.2.4) (2022-03-19)
+
+
+### Bug Fixes
+
+* **perfs:** split keys computation into smaller functions ([5aba888](https://github.com/strapi-community/strapi-plugin-rest-cache/commit/5aba8888cf132be241ef8a1ced7a83bfb1a626cb))
+
+
+
+
+
 ## [4.2.3](https://github.com/strapi-community/strapi-plugin-rest-cache/compare/v4.2.2...v4.2.3) (2022-03-18)
 
 

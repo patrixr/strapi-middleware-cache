@@ -1,7 +1,7 @@
 {
   "name": "@strapi-plugin-rest-cache/playground-couchbase",
   "private": true,
-  "version": "4.2.3",
+  "version": "4.2.4",
   "description": "A Strapi application",
   "scripts": {
     "develop": "strapi develop",
@@ -16,8 +16,8 @@
     "@strapi/plugin-users-permissions": "4.1.5",
     "@strapi/strapi": "4.1.5",
     "sqlite3": "5.0.2",
-    "strapi-plugin-rest-cache": "^4.2.3",
-    "strapi-provider-rest-cache-couchbase": "^4.2.3"
+    "strapi-plugin-rest-cache": "^4.2.4",
+    "strapi-provider-rest-cache-couchbase": "^4.2.4"
   },
   "author": {
     "name": "A Strapi developer"
