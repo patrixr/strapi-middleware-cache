@@ -1,0 +1,30 @@
+{
+  "name": "strapi-middleware-cache-mem-adapter",
+  "version": "0.0.1",
+  "description": "Memory adapter to cache strapi requests",
+  "main": "./lib",
+  "keywords": [
+    "cache",
+    "adapter",
+    "strapi",
+    "requests",
+    "redis",
+    "memcache"
+  ],
+  "directories": {
+    "lib": "./lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patrixr/strapi-middleware-cache.git"
+  },
+  "author": "Patrick R",
+  "license": "MIT",
+  "dependencies": {
+    "lru-cache": "^5.1.1"
+  },
+  "devDependencies": {
+    "@types/lru-cache": "^5.1.1"
+  },
+  "peerDependencies": {}
+}
