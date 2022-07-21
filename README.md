@@ -16,7 +16,9 @@ THIS PROJECT IS DEPRECATED
 
 ![](https://github.com/patrixr/strapi-middleware-cache/workflows/Tests/badge.svg)
 
-- [Strapi LRU Caching middleware](#strapi-lru-caching-middleware)
+- [Strapi LRU Caching middleware - Legacy](#strapi-lru-caching-middleware---legacy)
+  - [NO LONGER MAINTAINED](#no-longer-maintained)
+  - [TOC](#toc)
   - [How it works](#how-it-works)
   - [Installing](#installing)
   - [Version 1 compatibility](#version-1-compatibility)
@@ -25,6 +27,8 @@ THIS PROJECT IS DEPRECATED
   - [Configure models](#configure-models)
   - [Configure the storage engine](#configure-the-storage-engine)
     - [Example](#example)
+      - [With Redis Sentinels](#with-redis-sentinels)
+      - [With Redis Cluster](#with-redis-cluster)
   - [Per-Model Configuration](#per-model-configuration)
   - [Single types](#single-types)
   - [Authentication](#authentication)
@@ -149,6 +153,8 @@ The module's configuration object supports the following properties
 
 ### Example
 
+
+#### With Redis Sentinels
 ```javascript
 // config/middleware.js
 
@@ -172,6 +178,35 @@ module.exports = ({ env }) => ({
           { host: '192.168.10.43', port: 26379 },
         ],
         name: 'redis-primary',
+      },
+    },
+  },
+});
+```
+
+#### With Redis Cluster
+```javascript
+// config/middleware.js
+
+/**
+ * @typedef {import('strapi-middleware-cache').UserMiddlewareCacheConfig} UserMiddlewareCacheConfig
+ */
+
+module.exports = ({ env }) => ({
+  settings: {
+    /**
+     * @type {UserMiddlewareCacheConfig}
+     */
+    cache: {
+      enabled: true,
+      type: 'redis',
+      models: ['review'],
+      redisConfig: {
+        cluster: [
+          { host: '192.168.10.41', port: 6379 },
+          { host: '192.168.10.42', port: 6379 },
+          { host: '192.168.10.43', port: 6379 },
+        ],
       },
     },
   },
