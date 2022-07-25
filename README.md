@@ -9,7 +9,6 @@ THIS PROJECT IS DEPRECATED
 > Since the release of Strapi v4, this project has been parked in favor of the new [Strapi Plugin Rest Cache](https://github.com/strapi-community/strapi-plugin-rest-cache) which was forked from this repository. Maintainers have now moved there, and we recommend you switch to the new and improved plugin.
 > A big thank you to all those that contributed to this middleware, it has served many.
 
-
 ## TOC
 
 **Strapi V4 users:** https://strapi-community.github.io/strapi-plugin-rest-cache/
@@ -153,8 +152,8 @@ The module's configuration object supports the following properties
 
 ### Example
 
-
 #### With Redis Sentinels
+
 ```javascript
 // config/middleware.js
 
@@ -185,6 +184,7 @@ module.exports = ({ env }) => ({
 ```
 
 #### With Redis Cluster
+
 ```javascript
 // config/middleware.js
 
