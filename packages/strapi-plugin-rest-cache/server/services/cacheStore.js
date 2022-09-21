@@ -107,7 +107,7 @@ function createCacheStoreService({ strapi }) {
       }
 
       try {
-        debug(`${chalk.redBright('[PURGING KEY]')}: ${keysPrefix}${key}`);
+        debug(`${chalk.redBright('[PURGING KEY]')}: ${key}`);
         return provider.del(`${keysPrefix}${key}`);
       } catch (error) {
         strapi.log.error(`REST Cache provider errored:`);
