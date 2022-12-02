@@ -118,9 +118,18 @@ function createRecv(options, { strapi }) {
           );
         });
       }
+      let data = ctx.body;
+      const transformer = strapi.service(
+        'plugin::transformer.transformService'
+      );
 
+      // Transformer plugin is installed, transform data before storing in cache
+      if (transformer) {
+        const transformerConfig = strapi.config.get('plugin.transformer');
+        data = transformer.response(transformerConfig, ctx.body);
+      }
       // persist cache asynchronously
-      store.set(cacheKey, ctx.body, maxAge).catch(() => {
+      store.set(cacheKey, data, maxAge).catch(() => {
         debug(
           `[RECV] GET ${cacheKey} ${chalk.yellow(
             'Unable to store Content in cache'
