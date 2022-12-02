@@ -29,9 +29,6 @@
     "test:e2e:couchbase": "yarn workspace @strapi-plugin-rest-cache/playground-couchbase test:e2e"
   },
   "license": "MIT",
-  "dependencies": {
-    "strapi-provider-rest-cache-memory": "^4.2.4"
-  },
   "resolutions": {
     "**/colors": "1.4.0"
   },

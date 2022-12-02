@@ -16,8 +16,7 @@
     "@strapi/plugin-users-permissions": "4.1.5",
     "@strapi/strapi": "4.1.5",
     "sqlite3": "5.0.2",
-    "strapi-plugin-rest-cache": "^4.2.4",
-    "strapi-provider-rest-cache-memory": "^4.2.4"
+    "strapi-plugin-rest-cache": "^4.2.4"
   },
   "devDependencies": {
     "jest": "^27.5.1",
