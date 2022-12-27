@@ -123,10 +123,13 @@ function resolveUserStrategy(strapi, userOptions) {
       continue;
     }
 
+    // get strapi api prefix
+    const apiPrefix = strapi.config.get('api.rest.prefix');
+
     // https://docs.strapi.io/developer-docs/latest/developer-resources/database-apis-reference/rest-api.html#api-endpoints
     // https://github.com/strapi/strapi/blob/master/packages/core/strapi/lib/core-api/routes/index.js
     if (cacheConfig.singleType) {
-      const base = `/api/${contentType.info.singularName}`;
+      const base = `${apiPrefix}/${contentType.info.singularName}`;
 
       // delete
       cacheConfig.routes.push(
@@ -155,7 +158,7 @@ function resolveUserStrategy(strapi, userOptions) {
         })
       );
     } else {
-      const base = `/api/${contentType.info.pluralName}`;
+      const base = `${apiPrefix}/${contentType.info.pluralName}`;
 
       // create
       cacheConfig.routes.push(
