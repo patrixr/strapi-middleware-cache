@@ -58,7 +58,7 @@
   },
   "devDependencies": {
     "@strapi/strapi": "^4.1.5",
-    "strapi-plugin-redis": "^1.0.0-alpha.2",
+    "strapi-plugin-redis": "^1.0.1",
     "strapi-plugin-rest-cache": "^4.2.5"
   },
   "peerDependencies": {
