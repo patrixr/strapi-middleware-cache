@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "0x": "^5.2.1",
+    "@giscus/vue": "^2.2.6",
     "@strapi-community/eslint-config": "^0.2.0",
     "@strapi-community/eslint-config-admin": "^0.2.0",
     "@strapi-community/eslint-config-tests": "^0.2.0",

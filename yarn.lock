@@ -1906,6 +1906,13 @@
   resolved "https://registry.yarnpkg.com/@gar/promisify/-/promisify-1.1.2.tgz#30aa825f11d438671d585bd44e7fd564535fc210"
   integrity sha512-82cpyJyKRoQoRi+14ibCeGPu0CwypgtBAdBhq1WfvagpCZNKqwXbKwXllYSMG91DhmG4jt9gN8eP6lGOtozuaw==
 
+"@giscus/vue@^2.2.6":
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/@giscus/vue/-/vue-2.2.6.tgz#abc6dd90e35536e29e5805f8e587607f70165e95"
+  integrity sha512-UHPCzj/D8SMndtyd2iDEeGi7iRFy/43J7OOLi7I6qbQZVtYnhHg024CyufC9nuoRmjGoRFN2QodY3rrEAMiETg==
+  dependencies:
+    giscus "^1.2.6"
+
 "@humanwhocodes/config-array@^0.9.2":
   version "0.9.2"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.9.2.tgz#68be55c737023009dfc5fe245d51181bb6476914"
@@ -2810,6 +2817,11 @@
   dependencies:
     npmlog "^4.1.2"
     write-file-atomic "^3.0.3"
+
+"@lit/reactive-element@^1.3.0", "@lit/reactive-element@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@lit/reactive-element/-/reactive-element-1.5.0.tgz#344cc33f2d1491d094b8ef824a9fe31d150d2375"
+  integrity sha512-fQh9FDK0LPTwDk+0HhSZEtb8K0LTN1wXerwpGrWA+a8tWulYRDLI4vQDWp4GOIsewn0572KYV/oZ3+492D7osA==
 
 "@node-redis/client@^1.0.1":
   version "1.0.1"
@@ -4022,6 +4034,11 @@
   integrity sha512-FvnCJljyxhPM3gkRgWmxmDZyAQSiBQQWLI0A0VFL0K7W1oRUrPJSqNO0NvTnLkBcotdlp3lKvaT0JrnyRDkzOg==
   dependencies:
     "@types/node" "*"
+
+"@types/trusted-types@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@types/trusted-types/-/trusted-types-2.0.2.tgz#fc25ad9943bcac11cceb8168db4f275e0e72e756"
+  integrity sha512-F5DIZ36YVLE+PN+Zwws4kJogq47hNgX3Nx6WyDJ3kcplxyke3XIzB8uK5n/Lpm1HBsbGzd6nmGehL8cPekP+Tg==
 
 "@types/web-bluetooth@^0.0.16":
   version "0.0.16"
@@ -10017,6 +10034,13 @@ getpass@^0.1.1:
   dependencies:
     assert-plus "^1.0.0"
 
+giscus@^1.2.6:
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/giscus/-/giscus-1.2.6.tgz#0ccdf3bd4e936da95d2e2708446850c1e5ec4496"
+  integrity sha512-VqMWmCdlUk9krX2M3oMgn9/Y6XEbRXRHtfhNTuRn/AdeGOeko54OFEIsizQ/nYWymuUNGZR48KGptCtYL77rtA==
+  dependencies:
+    lit "^2.5.0"
+
 git-raw-commits@^2.0.8:
   version "2.0.11"
   resolved "https://registry.yarnpkg.com/git-raw-commits/-/git-raw-commits-2.0.11.tgz#bc3576638071d18655e1cc60d7f524920008d723"
@@ -12623,6 +12647,30 @@ listr2@^4.0.1:
     rxjs "^7.5.4"
     through "^2.3.8"
     wrap-ansi "^7.0.0"
+
+lit-element@^3.2.0:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/lit-element/-/lit-element-3.2.2.tgz#d148ab6bf4c53a33f707a5168e087725499e5f2b"
+  integrity sha512-6ZgxBR9KNroqKb6+htkyBwD90XGRiqKDHVrW/Eh0EZ+l+iC+u+v+w3/BA5NGi4nizAVHGYvQBHUDuSmLjPp7NQ==
+  dependencies:
+    "@lit/reactive-element" "^1.3.0"
+    lit-html "^2.2.0"
+
+lit-html@^2.2.0, lit-html@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-2.5.0.tgz#9d4c0bb3652a6b10bc4ccdb627dfa9eff1215474"
+  integrity sha512-bLHosg1XL3JRUcKdSVI0sLCs0y1wWrj2sqqAN3cZ7bDDPNgmDHH29RV48x6Wz3ZmkxIupaE+z7uXSZ/pXWAO1g==
+  dependencies:
+    "@types/trusted-types" "^2.0.2"
+
+lit@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/lit/-/lit-2.5.0.tgz#3a425d69ff8483effb2026957b86ae45de0bc51a"
+  integrity sha512-DtnUP6vR3l4Q8nRPPNBD+UxbAhwJPeky+OVbi3pdgMqm0g57xFSl1Sj64D1rIB+nVNdiVVg8YxB0hqKjvdadZA==
+  dependencies:
+    "@lit/reactive-element" "^1.5.0"
+    lit-element "^3.2.0"
+    lit-html "^2.5.0"
 
 load-json-file@^4.0.0:
   version "4.0.0"
