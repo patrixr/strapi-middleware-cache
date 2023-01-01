@@ -7,6 +7,7 @@ const pkg = require('strapi-plugin-rest-cache/package.json')
 export default defineConfig({
   title: "REST Cache",
   description: "Speed-up HTTP requests with LRU cache",
+  base: "/strapi-plugin-rest-cache/",
   lastUpdated: true,
   themeConfig: {
     socialLinks: [
