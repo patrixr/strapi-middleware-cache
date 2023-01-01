@@ -42,7 +42,7 @@ jobs:
         run: yarn --frozen-lockfile
 
       # run build script
-      - name: Build VuePress site
+      - name: Build VitePress site
         run: yarn docs:build
 
       # please check out the docs of the workflow for more details
@@ -52,8 +52,8 @@ jobs:
         with:
           # deploy to gh-pages branch
           target_branch: gh-pages
-          # deploy the default output dir of VuePress
-          build_dir: docs/.vuepress/dist
+          # deploy the default output dir of VitePress
+          build_dir: docs/.vitepress/dist
         env:
           # @see https://docs.github.com/en/actions/reference/authentication-in-a-workflow#about-the-github_token-secret
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

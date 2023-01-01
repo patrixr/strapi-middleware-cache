@@ -1,5 +1,20 @@
-// file: /config/plugins.js
+---
+title: Couchbase provider
+---
 
+# Couchbase provider
+
+## Installation
+
+```bash
+yarn add \
+  strapi-plugin-rest-cache \
+  strapi-provider-rest-cache-couchbase
+```
+
+## Configuration
+
+```js
 module.exports = {
   "rest-cache": {
     config: {
@@ -28,3 +43,8 @@ module.exports = {
     },
   },
 };
+```
+
+::: warning
+Ensure `redis` plugin configuration come before `strapi-plugin-rest-cache`
+:::

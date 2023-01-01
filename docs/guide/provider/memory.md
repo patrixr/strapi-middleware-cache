@@ -8,9 +8,9 @@ The memory provider allow you to store cached content in memory. It use a simple
 
 ## Installation
 
-```bash
-yarn add strapi-provider-rest-cache-memory
-```
+::: info
+This provider is already installed with the plugin.
+:::
 
 ## Configuration
 
@@ -42,7 +42,3 @@ module.exports = ({ env }) => ({
 ::: tip
 View full options available on [`lru-cache`](https://github.com/isaacs/node-lru-cache/tree/v6.0.0#options) documentation.
 :::
-
-## Implementation
-
-@[code{7-46}](../../packages/strapi-provider-rest-cache-memory/lib/MemoryCacheProvider.js)
