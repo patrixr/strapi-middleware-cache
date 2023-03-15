@@ -1,7 +1,7 @@
 {
   "name": "@strapi-plugin-rest-cache/playground-memory",
   "private": true,
-  "version": "4.2.6",
+  "version": "4.2.7",
   "description": "A Strapi application",
   "scripts": {
     "develop": "strapi develop",
@@ -16,7 +16,7 @@
     "@strapi/plugin-users-permissions": "4.1.5",
     "@strapi/strapi": "4.1.5",
     "sqlite3": "5.0.2",
-    "strapi-plugin-rest-cache": "^4.2.6"
+    "strapi-plugin-rest-cache": "^4.2.7"
   },
   "devDependencies": {
     "jest": "^27.5.1",
