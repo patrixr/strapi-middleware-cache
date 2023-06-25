@@ -19,7 +19,7 @@ This provider is already installed with the plugin.
 
 module.exports = ({ env }) => ({
   'rest-cache': {
-    config: {,
+    config: {
       provider: {
         name: 'memory',
         getTimeout: 500,
