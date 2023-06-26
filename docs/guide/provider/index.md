@@ -21,7 +21,7 @@ You can also set the provider `getTimeout` which is the time in milliseconds to 
 
 module.exports = ({ env }) => ({
   'rest-cache': {
-    config: {,
+    config: {
       provider: /* @type {Provider} */ {
         // name can be an alias:
         name: "my-provider", // try to require 'strapi-provider-rest-cache-my-provider'
