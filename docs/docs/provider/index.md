@@ -1,15 +1,16 @@
 ---
-title: Cache provider configuration
+sidebar_label: Cache Provider Configuration
+sidebar_position: 1
 ---
 
-# Cache provider configuration
+# Cache Provider configuration
 
 By default, the **strapi-plugin-rest-cache** use **strapi-provider-rest-cache-memory** which is an in-memory provider. It's not persisted and will be lost when the server restarts.
 
 Alternatively, you can use:
 
 - **strapi-provider-rest-cache-redis** which is a bridge between the cache plugin and the [strapi-plugin-redis](https://github.com/strapi-community/strapi-plugin-redis)
-- **strapi-provider-rest-cache-couchbase** which connect to a couchbase cluster and store the cache in a bucket
+- **strapi-provider-rest-cache-couchbase** which connect to a Couchbase cluster and store the cache in a bucket
 - Your custom provider
 
 You have to set the provider name in the plugin configuration so it will be initialized once the plugin is bootstrapped. At this time only one provider can be used at a time.
@@ -20,7 +21,7 @@ You can also set the provider `getTimeout` which is the time in milliseconds to 
 // file: /config/plugins.js
 
 module.exports = ({ env }) => ({
-  'rest-cache': {
+  "rest-cache": {
     config: {
       provider: /* @type {Provider} */ {
         // name can be an alias:
@@ -45,7 +46,7 @@ module.exports = ({ env }) => ({
 Note that each provider has its own configuration, so you will have to refer to the provider documentation to know how to configure it.
 
 ::: tip
-Check the [memory](./memory.md), [redis](./redis.md) or [couchbase](./couchbase.md) documentation for more details for advanced provider configuration.
+Check the [memory](/provider/memory.md), [redis](/provider/redis.md) or [couchbase](/provider/couchbase.md) documentation for more details for advanced provider configuration.
 :::
 
 ## `Provider` reference

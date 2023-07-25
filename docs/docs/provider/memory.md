@@ -1,5 +1,6 @@
 ---
-title: Memory provider
+sidebar_label: Memory Provider
+sidebar_position: 2
 ---
 
 # Memory provider
@@ -18,10 +19,10 @@ This provider is already installed with the plugin.
 // file: /config/plugins.js
 
 module.exports = ({ env }) => ({
-  'rest-cache': {
+  "rest-cache": {
     config: {
       provider: {
-        name: 'memory',
+        name: "memory",
         getTimeout: 500,
         options: {
           // The maximum size of the cache
